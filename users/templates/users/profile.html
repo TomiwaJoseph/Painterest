@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Painterest | Profile{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-6 mx-auto my-auto text-center">
+        {% if user.profile.image.name == 'dp.jpg' %}
+            <div class="badge mb-3">{{ user.username.0 }}</div>
+        {% else %}
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        {% endif %}
+        <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+        <h5>{{ user.email }}</h5>
+        <h6>30 followers * 24 following</h6><hr>
+        <h4 class="text-danger">About</h4><hr>
+        <h5>{{ user.profile.about }}</h5><hr>
+        <h5 class="mb-5">
+            <a href="https://github.com/TomiwaJoseph/" target="blank" 
+            class="text-danger">{{ user.profile.website_url }}</a>
+        </h5>
+        <a href="{% url 'settings' %}" class="category">Edit your profile here</a>
+    </div>
+</div>
+
+{% endblock %}
+
