@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Painterest | Settings{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="settings">
+            <button class="btn btn-info active" id="profile">Edit profile</button>
+            <button class="btn btn-info" id="feed">Home feed tuner</button>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div id="profile-edit">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- {{ profile_update_form | crispy }} -->
+                {{ user_update_form | crispy }}
+                <div class="form-group">
+                    <button class="btn btn-outline-info log" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+        <div id="home-feed">
+            <h1>Home Feed</h1>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
