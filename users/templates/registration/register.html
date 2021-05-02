@@ -1,0 +1,35 @@
+{% extends "main/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Painterest | Register{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4 mx-auto my-auto text-center">
+        <h2>Sign Up</h2>
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-5 mx-auto my-auto">
+        <div class="content-section mt-1 bg-light">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class="form-group">
+                    <button class="btn btn-outline-info log" type="submit">Sign Up</button>
+                </div>
+            </form>
+            <div class="mb-2">
+                <small class="text-muted">
+                    Already Have An Account? <a class="ml-2 category" href="{% url 'login' %}">Sign In</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
