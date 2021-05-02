@@ -1,0 +1,164 @@
+body{
+    font-family: 'poppins'!important;
+}
+a:hover{
+    text-decoration: none;
+}
+
+/* <------- Navbar Start ---------> */
+
+.navbar .dropdown-menu {
+    font-size: 14px;
+    border-radius: 0px;
+    border: none;
+    -webkit-box-shadow: 0 2px 30px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 30px 0px rgba(0, 0, 0, 0.2);
+    min-width: 13em;
+    margin-top: -10px;
+}
+.drop:hover{
+    color: #fff;
+    background: lightgray;
+}
+nav .nav-item:last-child{
+    padding-right: 7em;
+}
+nav .nav-item{
+    padding: 0.5em;
+}
+.navbar-brand{
+    font-size: 30px;
+    color: red!important;
+    padding-left: 5em; }
+    @media (max-width: 995px){
+        .navbar-brand{
+            padding-left: 0px;
+    }
+}
+.navbar-nav > .active > a,
+.nav-item > a:hover{
+    color: red!important;
+}
+/* <-------- Navbar End -------> */
+
+/* <--------- Home -----------> */
+.paint-item {
+    background: #fcfcfc;
+    margin-bottom: 20px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0 3px 0 rgba(12,12,12,0.03);
+    -webkit-box-shadow: 0 3px 0 rgba(12,12,12,0.03);
+    box-shadow: 0 3px 0 rgba(12,12,12,0.03);
+    position: relative;
+}
+.paint-img img {
+    -moz-border-radius: 3px 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+    border-radius: 2%;
+}
+.paint-img img:hover{
+    cursor: zoom-in;
+}
+.add{
+    position: fixed;
+    bottom: 20%;
+    right: 7%;
+    font-size: 45px;
+    cursor: pointer;
+}
+.add i,
+.quest i{
+    color: #000;
+}
+.add i:hover,
+.quest i:hover{
+    color: rgb(99, 99, 99);
+}
+.quest{
+    position: fixed;
+    bottom: 10%;
+    right: 7%;
+    font-size: 45px;
+    cursor: pointer;
+}
+
+
+/* <--------- Register and Login Forms ----------> */
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.log:hover{
+    color: #fff;
+    background: red;
+    border: 1px solid red;
+}
+.log{
+    background: none;
+    color: red;
+    outline: none;
+    border: 1px solid red;
+    width: 100%;
+}
+.form-control:focus{
+    -webkit-box-shadow: 0 3px 10px -2px red!important;
+    box-shadow: 0 3px 10px -2px red!important;
+    color: #000;
+    border: 1px none;
+}
+
+.badge{
+    width: 70px;
+    height: 70px;
+    /* vertical-align: middle; */
+    border-radius: 50%;
+    font-size: 30px;
+    /* display: table-cell; */
+    background: rgb(36, 36, 36);
+    color: #fff;
+}
+.settings button{
+    background: none;
+    color: #000;
+    outline: none;
+    border: none;
+    margin-bottom: 10px;
+    display: block;
+}
+.settings button:hover{
+    color: red;
+    background: none;
+}
+
+.settings .active{
+    background: red!important;
+    color: #fff!important;
+    border: none;
+}
+
+.account-img {
+    height: 100px;
+    width: 100px;
+    /* margin-right: 20px; */
+    margin-bottom: 16px;
+}
+
+.category {
+    display: inline-block;
+    background: #1072f2;
+    padding: 2px 8px;
+    line-height: 1.5;
+    font-size: 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    color: #fff !important;
+    margin-right: 10px;
+    letter-spacing: .2em;
+    text-decoration: none;
+}
