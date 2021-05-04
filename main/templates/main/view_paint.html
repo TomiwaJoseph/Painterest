@@ -1,0 +1,95 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="paint_det">
+            <img class="img-fluid" src="{{ object.painting.url }}" alt="">
+        </div>
+        <div class="my-4">
+            {% if object.adder.profile.image.name == 'dp.jpg' %}
+                <div class="pna d-inline-block mb-3">{{ object.adder.username.0 }}</div>
+                <a href=""><span class="author mr-2 text-secondary">
+                    {{ object.adder }}</span>
+                </a>
+            {% else %}
+                <a href=""><span class="author mr-2 text-secondary"><img
+                    src="{{ object.adder.profile.image.url }}" alt="" class="img-fluid">
+                    {{ object.adder }}
+                </span></a>
+                
+            {% endif %}
+        </div>
+        <h4>{{ object.title }}</h4>
+    </div>
+    <div class="col-md-6">
+        <div class="col-12">
+            <div class="my-3">
+                <a href=""><i class="fa fa-download text-danger d-icon"></i></a>
+                <button class="btn btn-outline-danger utils" id="show_inp">Comment</button>
+                <a href="" class="btn btn-outline-danger utils">Save</a>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="details mt-5">
+                <button class="btn btn-info" id="tried">3 photos</button>
+                <button class="btn btn-info ml-3" id="paint_comments">7 comments</button>
+            </div>
+        </div>
+        <div class="col-12">
+            <div id="tries">
+                <div class="row">
+                    <div class="col-md-3 mt-4">
+                        <img src="/media/paintings/0fbce2b110e848b2971311368f191457.jpg" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-md-3 mt-4">
+                        <img src="/media/paintings/7f6ebd82420b4c2cb14c2b0265811502.jpg" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-md-3 mt-4">
+                        <img src="/media/paintings/9d92b813e633415db5c46d795760da94.png" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-md-3 mt-4">
+                        <img src="/media/paintings/fe55fe56ef5b466d94a67e222a803aad.jpg" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="mt-4" id="comments">
+                <h6>Comment 1</h6>
+                <h6>Comment 2</h6>
+                <h6>Comment 3</h6>
+                <h6>Comment 4</h6>
+                <h6>Comment 5</h6>
+                <h6>Comment 6</h6>
+                <h6>Comment 7</h6>
+                <hr>
+            </div>
+            <div class="mt-4" id="add_comment">
+                <form method="POST">
+                    {% csrf_token %}
+                    <label for="">Add comments...</label>
+                    <input type="text" class="form-control">
+                </form>
+                <hr>
+            </div>
+        </div>
+        <div class="col-12 my-4">
+            <div class="d-flex justify-content-between">
+                <div class="d-inline-block">
+                    <h5 class="encourage">Tried this painting?</h5>
+                    <h5 class="encourage">Add a photo to show how it went</h5>
+                </div>
+                <div class="d-inline-block">
+                    <button class="btn btn-outline-info add_pho">Add photo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
