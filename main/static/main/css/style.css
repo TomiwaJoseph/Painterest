@@ -5,7 +5,7 @@ a:hover{
     text-decoration: none;
 }
 
-/* <------- Navbar Start ---------> */
+/* <------- Navbar ---------> */
 
 .navbar .dropdown-menu {
     font-size: 14px;
@@ -39,19 +39,42 @@ nav .nav-item{
 .nav-item > a:hover{
     color: red!important;
 }
-/* <-------- Navbar End -------> */
+.nav-link i.fa{
+    font-size: 20px;
+}
+.nav-link{
+    margin-right: 20px;
+}
+.notificate{
+    position: absolute;
+    font-size: 15px;
+    margin-left: -5px;
+    margin-top: -10px;
+    /* background-color: red;
+    color: #fff; */
+}
+.profile_badge{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 180%;
+    border-radius: 50%;
+    font-size: 16px;
+    background: rgb(36, 36, 36);
+    color: #fff;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+.badge-account-img{
+    height: 30px;
+    width: 30px;
+    margin-bottom: 15px;
+}
+
 
 /* <--------- Home -----------> */
-.paint-item {
-    background: #fcfcfc;
+.paint-img {
     margin-bottom: 20px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    -moz-box-shadow: 0 3px 0 rgba(12,12,12,0.03);
-    -webkit-box-shadow: 0 3px 0 rgba(12,12,12,0.03);
-    box-shadow: 0 3px 0 rgba(12,12,12,0.03);
-    position: relative;
 }
 .paint-img img {
     -moz-border-radius: 3px 3px 0 0;
@@ -65,7 +88,7 @@ nav .nav-item{
     position: fixed;
     bottom: 20%;
     right: 7%;
-    font-size: 45px;
+    font-size: 35px;
     cursor: pointer;
 }
 .add i,
@@ -80,7 +103,7 @@ nav .nav-item{
     position: fixed;
     bottom: 10%;
     right: 7%;
-    font-size: 45px;
+    font-size: 35px;
     cursor: pointer;
 }
 
@@ -93,7 +116,6 @@ nav .nav-item{
     border-radius: 3px;
     margin-bottom: 20px;
 }
-
 .log:hover{
     color: #fff;
     background: red;
@@ -113,42 +135,12 @@ nav .nav-item{
     border: 1px none;
 }
 
-.badge{
-    width: 70px;
-    height: 70px;
-    /* vertical-align: middle; */
-    border-radius: 50%;
-    font-size: 30px;
-    /* display: table-cell; */
-    background: rgb(36, 36, 36);
-    color: #fff;
-}
-.settings button{
-    background: none;
-    color: #000;
-    outline: none;
-    border: none;
-    margin-bottom: 10px;
-    display: block;
-}
-.settings button:hover{
-    color: red;
-    background: none;
-}
-
-.settings .active{
-    background: red!important;
-    color: #fff!important;
-    border: none;
-}
-
+/* <---------- General things -----------> */
 .account-img {
     height: 100px;
     width: 100px;
-    /* margin-right: 20px; */
     margin-bottom: 16px;
 }
-
 .category {
     display: inline-block;
     background: #1072f2;
@@ -161,4 +153,81 @@ nav .nav-item{
     margin-right: 10px;
     letter-spacing: .2em;
     text-decoration: none;
+}
+
+
+/* <----------------- Detail View -----------> */
+.paint_det img{
+    -moz-border-radius: 3px 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+    border-radius: 1%;
+}
+.author img {
+    width: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+}
+.utils{
+    background: none;
+    color: #000;
+    outline: none;
+    border: none;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.settings button{
+    display: block;
+}
+.utils:hover{
+    color: #fff;
+    background: rgb(22, 202, 202);
+}
+.details .active,
+.settings .active{
+    background: rgb(12, 170, 170)!important;
+    color: #fff!important;
+    border: none;
+}
+.encourage{
+    font-size: 13px;
+}
+.add_pho{
+    font-size: 14px ;
+}
+.pna{
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 200%;
+    border-radius: 50%;
+    font-size: 20px;
+    background: rgb(36, 36, 36);
+    color: #fff;
+    margin-right: 10px;
+}
+.details a i.fa{
+    color: #000;
+    font-size: 25px;
+}
+.details a i.fa:hover{
+    color: red;
+}
+
+/* <---------- Profile stuff --------> */
+
+.change_badge{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 200%;
+    border-radius: 50%;
+    font-size: 50px;
+    background: rgb(36, 36, 36);
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+.follow{
+    font-size: 14px;
 }
