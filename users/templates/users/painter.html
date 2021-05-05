@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Painterest | {{ painter.username }}'s Profile{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-6 mx-auto my-auto text-center">
+        {% if painter.profile.image.name == 'dp.jpg' %}
+            <div class="change_badge mx-auto">{{ painter.username.0 }}</div>
+        {% else %}
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        {% endif %}
+        <h1>{{ painter.first_name }} {{ painter.last_name }}</h1>
+        <a href="{% url 'following_and_follower' painter%}" class="category follow mt-2">Followers
+            <span class="badge bg-dark text-light">{{ painter.followers.all.count }}</span>
+        </a>
+        <a href="{% url 'following_and_follower' painter%}" class="category follow mt-2">Following
+            <span class="badge bg-dark text-light">{{ painter.following.all.count }}</span>
+        </a>
+        {% if painter in user.followers.all %}
+            | <span class="text-danger category ml-2">Follows you</span>
+        {% endif %}
+        <hr>
+        {% if painter.profile.about != 'Write a little bit about yourself here' %}
+            <h4 class="text-danger">About</h4><hr>
+            <h5>{{ painter.profile.about }}</h5><hr>
+        {% endif %}
+        {% if painter.profile.website %}
+            <h5 class="mb-5">
+                <a href="{{ painter.profile.website_url }}" target="blank" 
+                class="text-danger">{{ painter.profile.website_url }}</a>
+            </h5>
+        {% endif %}
+        {% if user != painter %}
+            {% if user not in painter.followers.all %}
+                <a href="{% url 'follow' painter %}" class="category">Follow</a>
+            {% else %}
+                <a href="{% url 'unfollow' painter %}" class="category">Unfollow</a>
+            {% endif %}
+            <a href="{% url 'messages' %}" class="category">Message</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
