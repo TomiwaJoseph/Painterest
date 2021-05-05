@@ -27,7 +27,7 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="mr-auto"></div>
-                <ul class="navbar-nav">
+                <ul class="navbar-nav d-flex justify-content-between align-items-center">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'index' %}">Home <span
                             class="sr-only">(current)</span></a>
@@ -39,29 +39,29 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">Login</a>
                     </li>
-                    <!-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">In/Up</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown09">
-                            <a class="dropdown-item drop" href="">Log In</a>
-                            <a class="dropdown-item drop" href="">Sign Up</a>
-                        </div>
-                    </li> -->
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'notifications' %}" tabindex="-1" aria-disabled="true">
-                            <i class="fa fa-bell"></i>
+                            <i class="fa fa-bell">
+                                <span class="notificate badge-pill badge-danger">23</span>
+                            </i>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'messages' %}" tabindex="-1" aria-disabled="true">
-                            <i class="fa fa-envelope-open"></i>
+                            <i class="fa fa-envelope-open">
+                                <span class="notificate badge-pill badge-danger">8</span>
+                            </i>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown09"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user"></i>
+                            {% if user.profile.image.name == 'dp.jpg' %}
+                                <div class="profile_badge">{{ user.username.0 }}</div>
+                            {% else %}
+                                <img class="rounded-circle badge-account-img" src="{{ user.profile.image.url }}">
+                            {% endif %}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdown09">
                             <a class="dropdown-item drop" href="{% url 'profile' %}">Profile</a>
@@ -78,7 +78,7 @@
         <div class="col-md-5 mx-auto my-auto">
             {% if messages %}
                 {% for message in messages %}
-                <div class="alert alert-danger alert-dismissible">
+                <div class="alert alert-{{ message.tags }} alert-dismissible text-center">
                 {{ message }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="close">
                     <span aria-hidden="true" class="text-"><small>x</small></span>
@@ -90,10 +90,10 @@
         {% block content %} {% endblock %}
         {% if user.is_authenticated %}
         <div class="add">
-            <i class=" fa fa-plus-circle"></i>
+            <a href="{% url 'add_paint' %}"><i class=" fa fa-plus-circle"></i></a>
         </div>
         <div class="quest">
-            <i class="fa fa-question-circle"></i>
+            <a href=""><i class="fa fa-question-circle"></i></a>
         </div>
         {% endif %}
     </div>
