@@ -9,6 +9,18 @@ from django.contrib import messages
 
 
 # Create your views here.
+def following_and_follower(request, painter):
+    all_follower = UserFollowing.objects.filter(user_to=CustomUser.objects.filter(
+        username=painter).first())
+    all_following = UserFollowing.objects.filter(user_from=CustomUser.objects.filter(
+        username=painter).first())
+    context = {
+        'painter_followers': all_follower,
+        'painter_following': all_following,
+    }
+    return render(request, 'users/following_and_follower.html',context)
+
+
 class LoginView(auth_views.LoginView):
     form_class = LoginForm
     template_name = 'registration/login.html'
@@ -20,17 +32,17 @@ class RegisterView(generic.CreateView):
     success_url = reverse_lazy('login')
 
 
-def following_and_follower(request, painter):
-    return render(request, 'users/following_and_follower.html')
+# class FollowersView(generic.ListView):
+#     model = UserFollowing
+#     template_name = 'users/following_and_follower.html'
+
 
 def follow(request, to_follow):
     user_to_follow = CustomUser.objects.filter(username=to_follow).first()
     if request.user in user_to_follow.followers.all():
         messages.info(request, "You are already following this user.")
-        return redirect('painter_profile', painter=to_follow)
     elif request.user.username == to_follow:
         messages.info(request, "You can't follow yourself.")
-        return redirect('painter_profile', painter=to_follow)
     else:
         UserFollowing.objects.create(user_from=request.user, user_to=user_to_follow)
     
@@ -40,12 +52,10 @@ def unfollow(request, to_unfollow):
     user_to_unfollow = CustomUser.objects.filter(username=to_unfollow).first()
     if request.user.username == to_unfollow:
         messages.info(request, "You can't unfollow yourself.")
-        return redirect('painter_profile', painter=to_unfollow)
-    elif request.user not in user_to_unfollow.following.all():
+    elif request.user not in user_to_unfollow.followers.all():
         messages.info(request, "You are not following this user.")
-        return redirect('painter_profile', painter=to_unfollow)
     else:
-        UserFollowing.objects.delete(user_from=request.user, user_to=user_to_unfollow)
+        UserFollowing.objects.filter(user_from=request.user, user_to=user_to_unfollow).delete()
     
     return redirect('painter_profile', painter=to_unfollow)
 
@@ -56,7 +66,7 @@ def painter_profile_view(request, painter):
     context = {
         'painter': CustomUser.objects.filter(username=painter).first()
     }
-    return render(request, 'users/painter.html', context)
+    return render(request, 'users/painter_profile.html', context)
 
 def logout_view(request):
     logout(request)
@@ -80,3 +90,4 @@ def settings_view(request):
         'profile_update_form': profile_update_form,
     }
     return render(request, 'users/settings.html', context)
+
