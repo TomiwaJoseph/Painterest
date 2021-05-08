@@ -3,7 +3,40 @@
 
 {% block content %}
 
-<h1>Follow and Follow</h1>
+<div class="row">
+    <div class="col-md-8 mx-auto d-flex justify-content-between">
+        <button id="followers" class="btn btn-outline-info foll">Followers</button>
+        <button id="followings" class="btn btn-outline-info foll">Following</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 pr-5">
+        <div id="flwr_div" class="my-2">
+            {% for users in painter_followers %}
+            <a href="{% url 'painter_profile' users.user_from %}" class="red_to_profile">
+                <div class="d-flex justify-content-end">
+                    <div class="chip d-block mb-2 text-right">
+                        <img src="{{ users.user_from.profile.image.url }}" alt="">{{ users.user_from }}
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-6 pl-5">
+        <div id="flwng_div" class="my-2">
+            {% for users in painter_following %}
+            <a href="{% url 'painter_profile' users.user_to %}" class="red_to_profile">
+                <div class="d-flex">
+                    <div class="chip d-block mb-2 text-right">
+                        <img src="{{ users.user_to.profile.image.url }}" alt="">{{ users.user_to }}
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
