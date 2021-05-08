@@ -43,15 +43,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'notifications' %}" tabindex="-1" aria-disabled="true">
                             <i class="fa fa-bell">
-                                <span class="notificate badge-pill badge-danger">23</span>
+                                <span class="notificate badge-pill badge-info">23</span>
                             </i>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'messages' %}" tabindex="-1" aria-disabled="true">
-                            <i class="fa fa-envelope-open">
-                                <span class="notificate badge-pill badge-danger">8</span>
-                            </i>
+                            {% if unread_count %}
+                                <i class="fa fa-envelope">
+                                    <span class="notificate badge-pill badge-info">{{ unread_count }}</span>
+                                </i>
+                            {% else %}
+                                <i class="fa fa-envelope-open">
+                                    <span class="notificate badge-pill badge-info"></span>
+                                </i>
+                            {% endif %}
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -92,8 +98,15 @@
         <div class="add">
             <a href="{% url 'add_paint' %}"><i class=" fa fa-plus-circle"></i></a>
         </div>
-        <div class="quest">
-            <a href=""><i class="fa fa-question-circle"></i></a>
+        <div>
+            <label for="crazy" class="quest">
+                <i class="fa fa-question-circle"></i>
+            </label>
+            <input type="checkbox" id="crazy">
+            <ul class="sub-quest">
+                <li><a href="{% url 'profile' %}" class="the_a">About</a></li>
+                <li><a href="{% url 'settings' %}" class="the_a">Contact us</a></li>
+            </ul>
         </div>
         {% endif %}
     </div>
