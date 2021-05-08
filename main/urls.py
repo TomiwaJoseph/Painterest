@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     # path('', views.index, name='index'),
     path('notifications/', views.notifications, name='notifications'),
-    path('messages/', views.messages, name='messages'),
+    path('messages/', views.view_messages, name='messages'),
     path('paint/', views.paint, name='paint'),
     path('', views.IndexListView.as_view(), name='index'),
     path('add_paint/', views.AddPaintingView.as_view(), name='add_paint'),
