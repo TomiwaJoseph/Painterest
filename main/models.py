@@ -10,14 +10,16 @@ class Paintings(models.Model):
         on_delete=models.CASCADE, related_name='painter')
     painting = models.ImageField(upload_to='paintings')
     title = models.CharField(max_length=50, blank=True)
-    feel = models.CharField(max_length=255, blank=True)
+    description = models.CharField(max_length=255, blank=True)
     slug = models.SlugField(default='slug', max_length=250)
+    # date_painted = models.DateTimeField(auto_now_add=True, db_index=True)
 
     def __str__(self):
         return '{} added {}'.format(self.adder, self.title)
     
     class Meta:
         verbose_name_plural = 'Paintings'
+        # ordering = ('-date_painted')
 
     def get_absolute_url(self):
         return reverse('view_paint', args=[self.pk, self.slug])
@@ -33,6 +35,19 @@ class Paintings(models.Model):
         self.painting = new_path
         self.slug = the_hex
         super(Paintings, self).save(*args, **kwargs)
+
+
+class Message(models.Model):
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, related_name='message_sender')
+    recepient = models.ForeignKey(settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, related_name='message_recepient')
+    message = models.TextField(blank=False)
+    read_or_not = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    def __str__(self):
+        return '{} sent {} a message'.format(self.sender, self.recepient)
 
 
 
