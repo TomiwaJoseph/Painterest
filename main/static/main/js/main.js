@@ -65,5 +65,60 @@ $(document).ready(function (){
         $('#add_comment').show()
     });
 
+
+    $('#followers').addClass('active');
+    $('#flwng_div').hide()
+
+    $('#followers').click(function(){
+        $('#followers').addClass('active')
+        $('#followings').removeClass('active')
+        $('#flwr_div').show()
+        $('#flwng_div').hide()
+    })
+    $('#followings').click(function(){
+        $('#followings').addClass('active')
+        $('#followers').removeClass('active')
+        $('#flwng_div').show()
+        $('#flwr_div').hide()
+    });
+
+    $('#message_div').hide()
+
+    $('#send_button').click(function(){
+        $('#message_div').show()
+    })
+
 });
 
+// Some other JS
+
+// document.getElementById('clickme').onclick=function(){
+//     var el =  document.getElementById('another');
+//     if(el.style.display == ''){
+//         el.style.display = 'none';
+//     }else{
+//         el.style.display = '';
+//     }
+// };
+
+
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+// function myFunction() {
+//     document.getElementById("myDropdown").classList.toggle("show");
+//   }
+  
+//   // Close the dropdown menu if the user clicks outside of it
+//   window.onclick = function(event) {
+//     if (!event.target.matches('.dropbtn')) {
+//       var dropdowns = document.getElementsByClassName("dropdown-content");
+//       var i;
+//       for (i = 0; i < dropdowns.length; i++) {
+//         var openDropdown = dropdowns[i];
+//         if (openDropdown.classList.contains('show')) {
+//           openDropdown.classList.remove('show');
+//         }
+//       }
+//     }
+//   }
