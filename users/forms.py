@@ -23,4 +23,9 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('image','about', 'website_url')
-
+        widgets = {
+            'website_url': forms.TextInput(
+                attrs={'placeholder': 'Write your website url here...'}),
+            # 'image': forms.ImageField(
+            #     attrs={'class': 'form-control'}),
+        }
