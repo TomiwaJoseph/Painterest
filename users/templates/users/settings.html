@@ -17,7 +17,7 @@
             <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <!-- {{ profile_update_form | crispy }} -->
+                {{ profile_update_form | crispy }}
                 {{ user_update_form | crispy }}
                 <div class="form-group">
                     <button class="btn btn-outline-info log" type="submit">Save</button>
