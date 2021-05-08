@@ -4,6 +4,10 @@ body{
 a:hover{
     text-decoration: none;
 }
+button:focus, button:active{
+    outline: none!important;
+    border: none!important;
+}
 
 /* <------- Navbar ---------> */
 
@@ -179,12 +183,14 @@ nav .nav-item{
 .settings button{
     display: block;
 }
-.utils:hover{
+.utils:hover,
+.foll:hover{
     color: #fff;
     background: rgb(22, 202, 202);
 }
 .details .active,
-.settings .active{
+.settings .active,
+.foll .active{
     background: rgb(12, 170, 170)!important;
     color: #fff!important;
     border: none;
@@ -230,4 +236,146 @@ nav .nav-item{
 }
 .follow{
     font-size: 14px;
+}
+
+
+/* <---------- Follower and Following -----------> */
+.foll{
+    width: 45%;
+    margin-bottom: 10px;
+}
+.chip{
+    width: 60%;
+}
+
+
+/* <-------------- Other CSS Tricks -------------> */
+.chip{
+    display: inline-block;
+    padding: 0 25px;
+    height: 50px;
+    font-size: 16px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+}
+.chip img{
+    float: left;
+    margin: 0 10px 0 -25px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.closebtn{
+    padding-left: 10px;
+    color: #888;
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+.closebtn:hover{
+    color: #000;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    /* float: right;
+    right: 0; */
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}
+
+
+
+.container ul{
+    display: none;
+}
+#checkbox{
+    opacity: 0;
+}
+#checkbox:checked + ul{
+    display: block;
+}
+
+#crazy{
+    opacity: 0;
+}
+#crazy:checked + ul{
+    display: block;
+}
+
+/* <------------- Base Stuff --------------> */
+.sub-quest{
+    position: fixed;
+    bottom: 8%;
+    right: 9%;
+    cursor: pointer;
+    text-align: right;
+}
+.sub-quest li{
+    list-style: none;
+    margin-bottom: 20px;
+}
+.the_a{
+    display: inline-block;
+    background: #1072f2;
+    padding: 2px 8px;
+    line-height: 1.5;
+    font-size: 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-right: 10px;
+    letter-spacing: .2em;
+    text-decoration: none;
+}
+.the_a:hover{
+    background: rgb(22, 202, 202);
+    color: #fff;
+}
+.red_to_profile{
+    color: #000;
+}
+.red_to_profile:hover{
+    color: red;
 }
