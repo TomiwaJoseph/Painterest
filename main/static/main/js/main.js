@@ -37,6 +37,7 @@ $(document).ready(function (){
     $('#tries').show()
     $('#comments').hide()
     $('#add_comment').hide()
+    $('#add_try').hide()
     
     $('#tried').click(function(){
         $('#tried').addClass('active')
@@ -45,6 +46,7 @@ $(document).ready(function (){
         $('#tries').show()
         $('#comments').hide()
         $('#add_comment').hide()
+        $('#add_try').hide()
     });
     
     $('#paint_comments').click(function(){
@@ -54,6 +56,7 @@ $(document).ready(function (){
         $('#comments').show()
         $('#tries').hide()
         $('#add_comment').hide()
+        $('#add_try').hide()
     });
     
     $('#show_inp').click(function(){
@@ -63,8 +66,18 @@ $(document).ready(function (){
         $('#comments').hide()
         $('#tries').hide()
         $('#add_comment').show()
+        $('#add_try').hide()
     });
 
+    $('.add_pho').click(function(){
+        $('#add_try').show()
+        $('#show_inp').removeClass('active')
+        $('#tried').removeClass('active')
+        $('#paint_comments').removeClass('active')
+        $('#comments').hide()
+        $('#tries').hide()
+        $('#add_comment').hide()
+    })
 
     $('#followers').addClass('active');
     $('#flwng_div').hide()
@@ -88,7 +101,41 @@ $(document).ready(function (){
         $('#message_div').show()
     })
 
+    $('#unread_but').addClass('active')
+    $('#unread_filter_section').show()
+    $('#all_filter_section').hide()
+    $('#read_filter_section').hide()
+
+
 });
+
+
+const filter = document.querySelector('.all_filter_but'),
+    all_filter_buttons = filter.querySelectorAll('button'),
+    totalButtons = all_filter_buttons.length;
+
+for(let i=0; i<totalButtons; i++){
+    const a = all_filter_buttons[i];
+    a.addEventListener('click', function(){
+        for(let j=0; j<totalButtons; j++){
+            all_filter_buttons[j].classList.remove('active');            
+        }
+        this.classList.add('active');
+        if(this.innerHTML == 'Read'){
+            $('#read_filter_section').show()
+            $('#unread_filter_section').hide()
+            $('#all_filter_section').hide()
+        }else if(this.innerHTML == 'Unread'){
+            $('#unread_filter_section').show()
+            $('#all_filter_section').hide()
+            $('#read_filter_section').hide()
+        }else{
+            $('#all_filter_section').show()
+            $('#unread_filter_section').hide()
+            $('#read_filter_section').hide()
+        }
+    })
+}
 
 // Some other JS
 
