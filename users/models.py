@@ -7,7 +7,7 @@ from PIL import Image
 alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
 
 class CustomUser(AbstractUser):
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, max_length=60)
     username = models.CharField(max_length=50, unique=True, validators=[alphanumeric])
 
     USERNAME_FIELD = 'email'
