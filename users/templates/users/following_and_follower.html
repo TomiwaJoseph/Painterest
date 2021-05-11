@@ -15,7 +15,7 @@
             {% for users in painter_followers %}
             <a href="{% url 'painter_profile' users.user_from %}" class="red_to_profile">
                 <div class="d-flex justify-content-end">
-                    <div class="chip d-block mb-2 text-right">
+                    <div class="chip-left mb-2">
                         <img src="{{ users.user_from.profile.image.url }}" alt="">{{ users.user_from }}
                     </div>
                 </div>
@@ -28,7 +28,7 @@
             {% for users in painter_following %}
             <a href="{% url 'painter_profile' users.user_to %}" class="red_to_profile">
                 <div class="d-flex">
-                    <div class="chip d-block mb-2 text-right">
+                    <div class="chip-right mb-2">
                         <img src="{{ users.user_to.profile.image.url }}" alt="">{{ users.user_to }}
                     </div>
                 </div>
