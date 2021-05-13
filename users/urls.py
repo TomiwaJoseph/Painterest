@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . views import (LoginView, RegisterView, profile_view, 
+from . views import (LoginView, RegisterView, profile_view,
     logout_view, settings_view, painter_profile_view, follow,
     unfollow, following_and_follower)
 
