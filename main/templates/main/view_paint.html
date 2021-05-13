@@ -1,5 +1,5 @@
 {% extends 'main/base.html' %}
-
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -28,8 +28,12 @@
     </div>
     <div class="col-md-6">
         <div class="details mt-5 d-flex justify-content-between align-items-center">
-            <button class="btn btn-info utils" id="tried">3 photos</button>
-            <button class="btn btn-info utils" id="paint_comments">7 comments</button>
+            {% with object.painted.all.count as total_tries %}
+                <button class="btn btn-info utils" id="tried">{{ total_tries }} photo{{ total_tries|pluralize }}</button>
+            {% endwith %}
+            {% with object.paint_comments.all.count as total_comments %}
+                <button class="btn btn-info utils" id="paint_comments">{{ total_comments }} Comment{{ total_comments|pluralize }}</button>
+            {% endwith %}
             <button class="btn btn-info utils" id="show_inp">Add Comment</button>
             <a href="" class="btn btn-info utils">Save</a>
             <a href=""><i class="fa fa-download"></i></a>
@@ -37,39 +41,60 @@
         <div class="col-12">
             <div id="tries">
                 <div class="row">
-                    <div class="col-md-3 mt-4">
-                        <img src="/media/paintings/0fbce2b110e848b2971311368f191457.jpg" alt="" class="img-fluid">
-                    </div>
-                    <div class="col-md-3 mt-4">
-                        <img src="/media/paintings/7f6ebd82420b4c2cb14c2b0265811502.jpg" alt="" class="img-fluid">
-                    </div>
-                    <div class="col-md-3 mt-4">
-                        <img src="/media/paintings/9d92b813e633415db5c46d795760da94.png" alt="" class="img-fluid">
-                    </div>
-                    <div class="col-md-3 mt-4">
-                        <img src="/media/paintings/fe55fe56ef5b466d94a67e222a803aad.jpg" alt="" class="img-fluid">
-                    </div>
+                    {% for trial in object.painted.all %}
+                        <div class="col-md-3 mt-4">
+                            <img src="{{ trial.tries.url }}" alt="" class="img-fluid">
+                        </div>
+                    {% endfor %}
                 </div>
                 <hr>
             </div>
             <div class="mt-4" id="comments">
-                <h6>Comment 1</h6>
-                <h6>Comment 2</h6>
-                <h6>Comment 3</h6>
-                <h6>Comment 4</h6>
-                <h6>Comment 5</h6>
-                <h6>Comment 6</h6>
-                <h6>Comment 7</h6>
+                {% for comment in object.paint_comments.all %}
+                    <div class="each_message content-section mb-3">
+                        {% if comment.commenter.profile.image.name == 'dp.jpg' %}
+                            <div class="pna d-inline-block">{{ comment.commenter.username.0 }}</div>
+                            <span class="author mr-2 text-secondary">
+                            {{ comment.commenter.username }}</span>
+                            <span class="text-danger">{{ comment.created }}</span>
+                            <p class="my-2 ml-5">{{ comment.body }}</p>
+                        {% else %}
+                            <span class="author mr-2 text-secondary">
+                                <img src="{{ comment.commenter.profile.image.url }}" alt="" class="img-fluid">
+                            {{ comment.commenter.username }}
+                            </span>
+                            <span class="text-danger">{{ comment.created }}</span>
+                            <p class="my-2 ml-5">{{ comment.body }}</p>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <h4>No comments yet.</h4>
+                {% endfor %}
                 <hr>
             </div>
             <div class="mt-4" id="add_comment">
-                <form method="POST">
+                <form method="POST" action="{% url 'add_comment' %}">
                     {% csrf_token %}
+                    <input type="hidden" name='painting_id' value="{{ object.id }}">
                     <label for="">Add comments...</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="comment">
+                    <button class="btn btn-info my-2">Comment</button>
                 </form>
                 <hr>
             </div>
+        </div>
+        <div class="col-md-12 my-4" id="add_try">
+            <div class="content-section">
+                <form method="POST" enctype="multipart/form-data" action="{% url 'add_paint_try' %}">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <input type="hidden" name="redir" value="{{ object.id }}">
+                    <div class="form-group">
+                        <button class="btn btn-outline-info log" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+            <hr>
         </div>
         <div class="col-12 my-4">
             <div class="d-flex justify-content-between">
