@@ -3,21 +3,45 @@
 
 {% block content %}
 
-<div class="row">
 
-{% for paint in object_list %}
-    <div class="col-xs-6 col-sm-4 col-md-3">
-        <div class="paint-img">
-            <a href="{{ paint.get_absolute_url }}">
-                <img class="img-fluid" src="{{ paint.painting.url }}" alt="">
-            </a>
+<!-- {% for paint in object_list %}
+        <div class="col-xs-6 col-sm-4 col-md-3">
+            <div class="content-encap">
+                <div class="paint-img">
+                    <a href="{{ paint.get_absolute_url }}">
+                        <img class="img-fluid" src="{{ paint.painting.url }}" alt="">
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-{% endfor %}
-        
-<div 
+    {% endfor %} -->
 
-</div>
+    <!-- {% for paint in object_list %}
+        <div class="col-xs-6 col-sm-4 col-md-3">
+                <div class="content-encap">
+                    <div class="card paint-img">
+                        <a href="{{ paint.get_absolute_url }}">
+                            <img class="img-fluid" src="{{ paint.painting.url }}" alt="">
+                        </a>
+                    </div>
+                </div>
+        </div>
+    {% endfor %} -->
+    
+    <div class="card-columns">
+
+        {% for paint in object_list %}
+            <div class="card paint-img">
+                <a href="{{ paint.get_absolute_url }}">
+                    <img class="card-img" src="{{ paint.painting.url }}" alt="Card image cap">
+                </a>
+            </div>
+        {% endfor %}
+
+    </div>
+        
+
+
 
 
 {% endblock %}
