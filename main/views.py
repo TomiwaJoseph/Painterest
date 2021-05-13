@@ -5,6 +5,7 @@ from .models import Paintings, Message, Comment, PaintTries
 from users.models import CustomUser
 from django.urls import reverse
 from django.contrib import messages as django_messages
+import random
 
 
 def current_user(request):
@@ -23,6 +24,11 @@ class IndexListView(ListView):
             context['unread_count'] = Message.objects.filter(recepient=self.request.user, read=False).count()
 
         return context
+
+    def get_queryset(self):
+        painting_list = list(Paintings.objects.all())
+        painting_list = random.sample(painting_list, 10)
+        return painting_list
         
 
 def about(request):
@@ -127,9 +133,15 @@ class PaintingDetailView(DetailView):
         return context
 
 
-def add_paint_try(request, painting_id):
-    redirect_to = Paintings.objects.get(id=painting_id)
-    # save_try = PaintTries.objects.create(painting=redirect_to,
-    #     tryer=request.user, tries=)
+def add_paint_try(request):
+    get_redirect = request.POST.get('redir')
+    redirect_to = Paintings.objects.get(id=get_redirect)
+    form = AddPaintingTry(request.POST, request.FILES)
+    if request.method == 'POST':
+        if form.is_valid():
+            paint = form.save(commit=False)
+            paint.painting = redirect_to
+            paint.tryer = request.user
+            paint.save()
     return redirect('view_paint', pk=redirect_to.id,
         paint=redirect_to.slug)
