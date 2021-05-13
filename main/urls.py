@@ -13,6 +13,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('add_comment/', views.add_comment, name='add_comment'),
     path('add_paint/', views.AddPaintingView.as_view(), name='add_paint'),
-    path('add_paint_try/<int:painting_id>/', views.add_paint_try, name='add_paint_try'),
+    path('add_paint_try/', views.add_paint_try, name='add_paint_try'),
     path('view_paint/<int:pk>/<slug:paint>/', views.PaintingDetailView.as_view(), name='view_paint'),
 ]
