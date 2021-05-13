@@ -77,13 +77,52 @@ nav .nav-item{
 
 
 /* <--------- Home -----------> */
-.paint-img {
-    margin-bottom: 20px;
+/* @media (min-width: 320px){
+    .card-columns{
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+        height: 320px;
+    }
+} */
+
+@media (min-width: 576px){
+    .card-columns{
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
 }
+
+@media (min-width: 768px){
+    .card-columns{
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+    }
+}
+
+@media (min-width: 992px){
+    .card-columns{
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+    }
+}
+
+/* @media (min-width: 1200px){
+    .card-columns{
+        -webkit-column-count: 5;
+        -moz-column-count: 5;
+        column-count: 5;
+    }
+} */
+
 .paint-img img {
     -moz-border-radius: 3px 3px 0 0;
     -webkit-border-radius: 3px 3px 0 0;
     border-radius: 2%;
+    padding: 4px 4px;
 }
 .paint-img img:hover{
     cursor: zoom-in;
@@ -183,14 +222,13 @@ nav .nav-item{
 .settings button{
     display: block;
 }
-.utils:hover,
-.foll:hover{
+.utils:hover{
     color: #fff;
     background: rgb(22, 202, 202);
 }
 .details .active,
 .settings .active,
-.foll .active{
+.foll{
     background: rgb(12, 170, 170)!important;
     color: #fff!important;
     border: none;
@@ -237,6 +275,14 @@ nav .nav-item{
 .follow{
     font-size: 14px;
 }
+.follows_you{
+    background: rgb(247, 133, 133);
+    color: #fff;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    display: block;
+}
 
 
 /* <---------- Follower and Following -----------> */
@@ -244,12 +290,48 @@ nav .nav-item{
     width: 45%;
     margin-bottom: 10px;
 }
-.chip{
-    width: 60%;
+.chip-left,
+.chip-right{
+    display: inline-block;
+    padding: 0 25px;
+    height: 50px;
+    font-size: 16px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+}
+.chip-left img{
+    float: right;
+    margin: 0 -25px 0 20px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.chip-right img{
+    float: left;
+    margin: 0 20px 0 -25px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
 }
 
 
 /* <-------------- Other CSS Tricks -------------> */
+.avatar{
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.div_ava{
+    text-align: center;
+}
+.first{
+    margin-top: -40px;
+    margin-left: 3px;
+    font-size: 20px;
+    color: #fff;
+}
 .chip{
     display: inline-block;
     padding: 0 25px;
@@ -261,7 +343,7 @@ nav .nav-item{
 }
 .chip img{
     float: left;
-    margin: 0 10px 0 -25px;
+    margin: 0 15px 0 -25px;
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -378,4 +460,38 @@ nav .nav-item{
 }
 .red_to_profile:hover{
     color: red;
+}
+
+
+/* <------------ Messages ---------------> */
+.message_{
+    display: block;
+    /* margin-bottom: 20px; */
+}
+.each_message a{
+    color: #000;
+}
+.each_message:hover a{
+    color: #00f;
+}
+.filter_buttons{
+    display: block;
+    margin-bottom: 10px;
+    background: #858585;
+    color: #fff;
+    outline: none;
+    border: none;
+    width: 100%;
+}
+.filter_buttons:hover{
+    color: #fff;
+    background: rgb(22, 202, 202);
+}
+.all_filter_but .active{
+    background: rgb(255, 75, 75)!important;
+    color: #fff!important;
+    border: none;
+}
+.the_message{
+    text-align: justify;
 }
