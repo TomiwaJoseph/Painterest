@@ -79,21 +79,21 @@ $(document).ready(function (){
         $('#add_comment').hide()
     })
 
-    $('#followers').addClass('active');
-    $('#flwng_div').hide()
+    // $('#followers').addClass('active');
+    // $('#flwng_div').hide()
 
-    $('#followers').click(function(){
-        $('#followers').addClass('active')
-        $('#followings').removeClass('active')
-        $('#flwr_div').show()
-        $('#flwng_div').hide()
-    })
-    $('#followings').click(function(){
-        $('#followings').addClass('active')
-        $('#followers').removeClass('active')
-        $('#flwng_div').show()
-        $('#flwr_div').hide()
-    });
+    // $('#followers').click(function(){
+    //     $('#followers').addClass('active')
+    //     $('#followings').removeClass('active')
+    //     $('#flwr_div').show()
+    //     $('#flwng_div').hide()
+    // })
+    // $('#followings').click(function(){
+    //     $('#followings').addClass('active')
+    //     $('#followers').removeClass('active')
+    //     $('#flwng_div').show()
+    //     $('#flwr_div').hide()
+    // });
 
     $('#message_div').hide()
 
