@@ -69,7 +69,7 @@ class Comment(models.Model):
 
 class PaintTries(models.Model):
     painting = models.ForeignKey(Paintings,
-        on_delete=models.CASCADE, related_name='painting-tries+')
+        on_delete=models.CASCADE, related_name='painted')
     tryer = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE)
     tries = models.ImageField(upload_to='painting-tries')
@@ -101,3 +101,4 @@ class PaintTries(models.Model):
 
 
 # Delete paintings in db on delete
+# reduce painting size on upload
