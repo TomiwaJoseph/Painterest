@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
-from .models import CustomUser, Profile, UserFollowing
+from .models import CustomUser, Profile, UserFollowing, Category
 
 
 class CustomUserAdmin(UserAdmin):
@@ -25,3 +25,4 @@ admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.unregister(Group)
 admin.site.register(Profile)
 admin.site.register(UserFollowing)
+admin.site.register(Category)
