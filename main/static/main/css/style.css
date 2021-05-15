@@ -1,12 +1,15 @@
-body{
-    font-family: 'poppins'!important;
+body {
+    font-family: 'poppins' !important;
 }
-a:hover{
+
+a:hover {
     text-decoration: none;
 }
-button:focus, button:active{
-    outline: none!important;
-    border: none!important;
+
+button:focus,
+button:active {
+    outline: none !important;
+    border: none !important;
 }
 
 /* <------- Navbar ---------> */
@@ -20,36 +23,46 @@ button:focus, button:active{
     min-width: 13em;
     margin-top: -10px;
 }
-.drop:hover{
+
+.drop:hover {
     color: #fff;
     background: lightgray;
 }
-nav .nav-item:last-child{
+
+nav .nav-item:last-child {
     padding-right: 7em;
 }
-nav .nav-item{
+
+nav .nav-item {
     padding: 0.5em;
 }
-.navbar-brand{
+
+.navbar-brand {
     font-size: 30px;
-    color: red!important;
-    padding-left: 5em; }
-    @media (max-width: 995px){
-        .navbar-brand{
-            padding-left: 0px;
+    color: red !important;
+    padding-left: 5em;
+}
+
+@media (max-width: 995px) {
+    .navbar-brand {
+        padding-left: 0px;
     }
 }
-.navbar-nav > .active > a,
-.nav-item > a:hover{
-    color: red!important;
+
+.navbar-nav>.active>a,
+.nav-item>a:hover {
+    color: red !important;
 }
-.nav-link i.fa{
+
+.nav-link i.fa {
     font-size: 20px;
 }
-.nav-link{
+
+.nav-link {
     margin-right: 20px;
 }
-.notificate{
+
+.notificate {
     position: absolute;
     font-size: 15px;
     margin-left: -5px;
@@ -57,7 +70,8 @@ nav .nav-item{
     /* background-color: red;
     color: #fff; */
 }
-.profile_badge{
+
+.profile_badge {
     width: 30px;
     height: 30px;
     text-align: center;
@@ -69,7 +83,8 @@ nav .nav-item{
     display: inline-block;
     margin-bottom: 15px;
 }
-.badge-account-img{
+
+.badge-account-img {
     height: 30px;
     width: 30px;
     margin-bottom: 15px;
@@ -86,24 +101,24 @@ nav .nav-item{
     }
 } */
 
-@media (min-width: 576px){
-    .card-columns{
+@media (min-width: 576px) {
+    .card-columns {
         -webkit-column-count: 2;
         -moz-column-count: 2;
         column-count: 2;
     }
 }
 
-@media (min-width: 768px){
-    .card-columns{
+@media (min-width: 768px) {
+    .card-columns {
         -webkit-column-count: 3;
         -moz-column-count: 3;
         column-count: 3;
     }
 }
 
-@media (min-width: 992px){
-    .card-columns{
+@media (min-width: 992px) {
+    .card-columns {
         -webkit-column-count: 4;
         -moz-column-count: 4;
         column-count: 4;
@@ -124,31 +139,11 @@ nav .nav-item{
     border-radius: 2%;
     padding: 4px 4px;
 }
-.paint-img img:hover{
+
+.paint-img img:hover {
     cursor: zoom-in;
 }
-.add{
-    position: fixed;
-    bottom: 20%;
-    right: 7%;
-    font-size: 35px;
-    cursor: pointer;
-}
-.add i,
-.quest i{
-    color: #000;
-}
-.add i:hover,
-.quest i:hover{
-    color: rgb(99, 99, 99);
-}
-.quest{
-    position: fixed;
-    bottom: 10%;
-    right: 7%;
-    font-size: 35px;
-    cursor: pointer;
-}
+
 
 
 /* <--------- Register and Login Forms ----------> */
@@ -159,21 +154,24 @@ nav .nav-item{
     border-radius: 3px;
     margin-bottom: 20px;
 }
-.log:hover{
+
+.log:hover {
     color: #fff;
     background: red;
     border: 1px solid red;
 }
-.log{
+
+.log {
     background: none;
     color: red;
     outline: none;
     border: 1px solid red;
     width: 100%;
 }
-.form-control:focus{
-    -webkit-box-shadow: 0 3px 10px -2px red!important;
-    box-shadow: 0 3px 10px -2px red!important;
+
+.form-control:focus {
+    -webkit-box-shadow: 0 3px 10px -2px red !important;
+    box-shadow: 0 3px 10px -2px red !important;
     color: #000;
     border: 1px none;
 }
@@ -184,6 +182,7 @@ nav .nav-item{
     width: 100px;
     margin-bottom: 16px;
 }
+
 .category {
     display: inline-block;
     background: #1072f2;
@@ -200,18 +199,20 @@ nav .nav-item{
 
 
 /* <----------------- Detail View -----------> */
-.paint_det img{
+.paint_det img {
     -moz-border-radius: 3px 3px 0 0;
     -webkit-border-radius: 3px 3px 0 0;
     border-radius: 1%;
 }
+
 .author img {
     width: 40px;
     border-radius: 50%;
     display: inline-block;
     margin-right: 10px;
 }
-.utils{
+
+.utils {
     background: none;
     color: #000;
     outline: none;
@@ -219,27 +220,34 @@ nav .nav-item{
     margin-bottom: 10px;
     display: inline-block;
 }
-.settings button{
-    display: block;
+
+.settings button {
+    display: inline-block;
+    width: 30%;
 }
-.utils:hover{
+
+.utils:hover {
     color: #fff;
     background: rgb(22, 202, 202);
 }
+
 .details .active,
 .settings .active,
-.foll{
-    background: rgb(12, 170, 170)!important;
-    color: #fff!important;
+.foll {
+    background: rgb(12, 170, 170) !important;
+    color: #fff !important;
     border: none;
 }
-.encourage{
+
+.encourage {
     font-size: 13px;
 }
-.add_pho{
-    font-size: 14px ;
+
+.add_pho {
+    font-size: 14px;
 }
-.pna{
+
+.pna {
     width: 40px;
     height: 40px;
     text-align: center;
@@ -250,17 +258,19 @@ nav .nav-item{
     color: #fff;
     margin-right: 10px;
 }
-.details a i.fa{
+
+.details a i.fa {
     color: #000;
     font-size: 25px;
 }
-.details a i.fa:hover{
+
+.details a i.fa:hover {
     color: red;
 }
 
 /* <---------- Profile stuff --------> */
 
-.change_badge{
+.change_badge {
     width: 100px;
     height: 100px;
     text-align: center;
@@ -272,10 +282,12 @@ nav .nav-item{
     margin-bottom: 20px;
     font-weight: 700;
 }
-.follow{
+
+.follow {
     font-size: 14px;
 }
-.follows_you{
+
+.follows_you {
     background: rgb(247, 133, 133);
     color: #fff;
     padding: 2px 8px;
@@ -286,12 +298,13 @@ nav .nav-item{
 
 
 /* <---------- Follower and Following -----------> */
-.foll{
+.foll {
     width: 45%;
     margin-bottom: 10px;
 }
+
 .chip-left,
-.chip-right{
+.chip-right {
     display: inline-block;
     padding: 0 25px;
     height: 50px;
@@ -300,14 +313,16 @@ nav .nav-item{
     border-radius: 25px;
     background-color: #f1f1f1;
 }
-.chip-left img{
+
+.chip-left img {
     float: right;
     margin: 0 -25px 0 20px;
     height: 50px;
     width: 50px;
     border-radius: 50%;
 }
-.chip-right img{
+
+.chip-right img {
     float: left;
     margin: 0 20px 0 -25px;
     height: 50px;
@@ -317,22 +332,25 @@ nav .nav-item{
 
 
 /* <-------------- Other CSS Tricks -------------> */
-.avatar{
+.avatar {
     vertical-align: middle;
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
-.div_ava{
+
+.div_ava {
     text-align: center;
 }
-.first{
+
+.first {
     margin-top: -40px;
     margin-left: 3px;
     font-size: 20px;
     color: #fff;
 }
-.chip{
+
+.chip {
     display: inline-block;
     padding: 0 25px;
     height: 50px;
@@ -341,14 +359,16 @@ nav .nav-item{
     border-radius: 25px;
     background-color: #f1f1f1;
 }
-.chip img{
+
+.chip img {
     float: left;
     margin: 0 15px 0 -25px;
     height: 50px;
     width: 50px;
     border-radius: 50%;
 }
-.closebtn{
+
+.closebtn {
     padding-left: 10px;
     color: #888;
     font-weight: bold;
@@ -356,7 +376,8 @@ nav .nav-item{
     font-size: 20px;
     cursor: pointer;
 }
-.closebtn:hover{
+
+.closebtn:hover {
     color: #000;
 }
 
@@ -368,77 +389,117 @@ nav .nav-item{
     font-size: 16px;
     border: none;
     cursor: pointer;
-  }
-  
-  /* Dropdown button on hover & focus */
-  .dropbtn:hover, .dropbtn:focus {
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
     background-color: #2980B9;
-  }
-  
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     /* float: right;
     right: 0; */
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #ddd}
-  
-  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-  .show {display:block;}
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+    display: block;
+}
 
 
 
-.container ul{
+.container ul {
     display: none;
 }
-#checkbox{
+
+#checkbox {
     opacity: 0;
 }
-#checkbox:checked + ul{
+
+#checkbox:checked+ul {
     display: block;
 }
 
-#crazy{
-    opacity: 0;
-}
-#crazy:checked + ul{
-    display: block;
-}
+
 
 /* <------------- Base Stuff --------------> */
-.sub-quest{
+.add i,
+.quest i {
+    color: #000;
+}
+
+.add i:hover,
+.quest i:hover {
+    color: rgb(99, 99, 99);
+}
+
+.add {
+    position: fixed;
+    bottom: 20%;
+    right: 7%;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.quest {
+    position: fixed;
+    bottom: 10%;
+    right: 7%;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.sub-quest {
     position: fixed;
     bottom: 8%;
     right: 9%;
     cursor: pointer;
     text-align: right;
 }
-.sub-quest li{
-    list-style: none;
-    margin-bottom: 20px;
+
+.sub-quest li {
+    display: block;
+    /* list-style: none; */
+    margin-bottom: 15px;
 }
-.the_a{
+
+#crazy {
+    /* opacity: 0; */
+    display: none;
+}
+
+#crazy:checked+ul {
+    display: block;
+}
+
+.the_a {
     display: inline-block;
     background: #1072f2;
     padding: 2px 8px;
@@ -451,30 +512,36 @@ nav .nav-item{
     letter-spacing: .2em;
     text-decoration: none;
 }
-.the_a:hover{
+
+.the_a:hover {
     background: rgb(22, 202, 202);
     color: #fff;
 }
-.red_to_profile{
+
+.red_to_profile {
     color: #000;
 }
-.red_to_profile:hover{
+
+.red_to_profile:hover {
     color: red;
 }
 
 
 /* <------------ Messages ---------------> */
-.message_{
+.message_ {
     display: block;
     /* margin-bottom: 20px; */
 }
-.each_message a{
+
+.each_message a {
     color: #000;
 }
-.each_message:hover a{
+
+.each_message:hover a {
     color: #00f;
 }
-.filter_buttons{
+
+.filter_buttons {
     display: block;
     margin-bottom: 10px;
     background: #858585;
@@ -483,15 +550,77 @@ nav .nav-item{
     border: none;
     width: 100%;
 }
-.filter_buttons:hover{
+
+.filter_buttons:hover {
     color: #fff;
     background: rgb(22, 202, 202);
 }
-.all_filter_but .active{
-    background: rgb(255, 75, 75)!important;
-    color: #fff!important;
+
+.all_filter_but .active {
+    background: rgb(255, 75, 75) !important;
+    color: #fff !important;
     border: none;
 }
-.the_message{
+
+.the_message {
     text-align: justify;
+}
+
+
+/* <------------ Home Feed Settings Section ------> */
+input[type='checkbox'][id^='category'] {
+    display: none;
+}
+
+.img-check label {
+    border: 1px solid #fff;
+    padding: 10px;
+    display: block;
+    position: relative;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.img-check label:before {
+    background-color: #fff;
+    color: #fff;
+    content: " ";
+    display: block;
+    border-radius: 50px;
+    border: 1px solid grey;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 28px;
+    transition-duration: 0.4s;
+    transform: scale(0);
+}
+
+.img-check label img {
+    transition-duration: 0.2s;
+    transform-origin: 50% 50%;
+    opacity: 0.7;
+}
+.img-check:hover label img{
+    opacity: 1;
+}
+.img-check :checked+label {
+    border-color: teal;
+}
+
+.img-check :checked+label:before {
+    content: "✔";
+    background-color: #fff;
+    transform: scale(1);
+    color: teal;
+}
+
+.img-check :checked+label img {
+    transform: scale(0.9);
+    box-shadow: 0 0 5px #333;
+    z-index: -1;
+    opacity: 1;
 }
