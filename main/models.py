@@ -1,15 +1,19 @@
 import os
-from django.db import models
 from django.conf import settings
 from uuid import uuid4
 from django.urls import reverse
 from taggit.managers import TaggableManager
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import sys
+from PIL import Image
+from django.db import models
 
 
 class Paintings(models.Model):
     adder = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE, related_name='painter')
-    painting = models.ImageField(upload_to='paintings')
+    painting = models.ImageField(upload_to='paintings', blank=True)
     title = models.CharField(max_length=50, blank=False)
     description = models.CharField(max_length=255, blank=True)
     slug = models.SlugField(default='slug', max_length=250)
@@ -27,16 +31,38 @@ class Paintings(models.Model):
         return reverse('view_paint', args=[self.pk, self.slug])
 
     def save(self, *args, **kwargs):
-        super(Paintings, self).save(*args, **kwargs)
+        img = Image.open(self.painting)
+        output = BytesIO()
 
-        ext = self.painting.name.split('.')[-1]
+        current_file_ext = self.painting.name.split('.')[-1]
+        ext = ''
+        if current_file_ext == 'jpg' or current_file_ext == 'jfif':
+            ext = 'JPEG'
+        else:
+            ext = current_file_ext
+
+        img.save(output, format='{}'.format(ext).upper(), quality=100)
+        output.seek(0)
+
         the_hex = uuid4().hex
-        initial_path = self.painting.path
-        new_path = settings.MEDIA_ROOT + '\paintings\{}.{}'.format(the_hex, ext)
-        os.rename(initial_path, new_path)
-        self.painting = new_path
         self.slug = the_hex
-        super(Paintings, self).save(*args, **kwargs)
+        self.painting = InMemoryUploadedFile(output, "ImageField",
+                f'{the_hex}.jpg', 'image/jpeg',
+                sys.getsizeof(output), None)
+
+
+        super().save(*args, **kwargs)
+
+    #     super(Paintings, self).save(*args, **kwargs)
+
+    #     ext = self.painting.name.split('.')[-1]
+    #     the_hex = uuid4().hex
+    #     initial_path = self.painting.path
+    #     new_path = settings.MEDIA_ROOT + '\paintings\{}.{}'.format(the_hex, ext)
+    #     os.rename(initial_path, new_path)
+    #     self.painting = new_path
+    #     self.slug = the_hex
+    #     super(Paintings, self).save(*args, **kwargs)
 
 
 class Message(models.Model):
