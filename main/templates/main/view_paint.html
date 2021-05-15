@@ -10,7 +10,7 @@
             <img class="img-fluid" src="{{ object.painting.url }}" alt="">
         </div>
         <div class="my-4">
-            {% if object.adder.profile.image.name == 'dp.jpg' %}
+            {% if object.adder.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
                 <a href="{% url 'painter_profile' object.adder %}">
                     <div class="pna d-inline-block mb-3">{{ object.adder.username.0 }}</div>
                     <span class="author mr-2 text-secondary">
@@ -108,7 +108,26 @@
             </div>
         </div>
     </div>
+    
+</div>
+<hr>
 
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="my-4">More like this...</h3>
+        <div class="card-columns">
+
+            {% for paint in similar_paintings %}
+                <div class="card paint-img">
+                    <a href="{{ paint.get_absolute_url }}">
+                        <img class="card-img" src="{{ paint.painting.url }}" alt="Card image cap">
+                    </a>
+                </div>
+            {% endfor %}
+    
+        </div>
+    </div>
+    
 </div>
 
 
