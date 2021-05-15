@@ -25,4 +25,8 @@ admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.unregister(Group)
 admin.site.register(Profile)
 admin.site.register(UserFollowing)
-admin.site.register(Category)
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')
+    prepopulated_fields = {'slug': ('name',)}
