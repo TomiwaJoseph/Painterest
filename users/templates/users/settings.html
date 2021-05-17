@@ -1,33 +1,61 @@
 {% extends 'main/base.html' %}
 {% load crispy_forms_tags %}
+{% load users_tags %}
+
 
 {% block title %}Painterest | Settings{% endblock %}
 
 {% block content %}
 
 <div class="row">
-    <div class="col-md-4 mb-4">
-        <div class="settings">
-            <button class="btn btn-info utils" id="profile">Edit profile</button>
-            <button class="btn btn-info utils" id="feed">Home feed tuner</button>
+
+    <div class="col-md-12 mb-4">
+        <div class="settings mx-auto d-flex justify-content-around">
+            <button class="btn btn-info" id="profile">Edit profile</button>
+            <button class="btn btn-info" id="feed">Home feed tuner</button>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12 mb-4">
         <div id="profile-edit">
-            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-            <form method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-8 mx-auto my-4">
+                    <!-- <img class="rounded-circle account-img" src="{{ user.profile.image.url }}"> -->
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ user_update_form | crispy }}
+                        {{ profile_update_form | crispy }}
+                        <div class="form-group my-3">
+                            <button class="btn btn-outline-info log" type="submit">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div id="home-feed">
+            <h3 class="my-4 text-center">Select your preferences...</h3>
+            <form action="{% url 'feed_tuner' %}" method="POST">
                 {% csrf_token %}
-                {{ profile_update_form | crispy }}
-                {{ user_update_form | crispy }}
-                <div class="form-group">
+                <div class="card-columns">
+                    {% for i in cat_number %}
+                    <div class="card img-check">
+                        <input type="checkbox" id="category{{i}}" value="{{ categories|lookup:i }}" 
+                            name="category" {% if categories|lookup:i in user_categories %} checked {% endif %}>
+                        <label for="category{{i}}">
+                            <img src="{{ cat_pictures|lookup:i }}" class="card-img img-fluid">
+                        </label>
+                        <p class="text-center">{{ categories|lookup:i }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="form-group mb-5 mt-5">
                     <button class="btn btn-outline-info log" type="submit">Save</button>
                 </div>
             </form>
         </div>
-        <div id="home-feed">
-            <h1>Home Feed</h1>
-        </div>
     </div>
+    
 </div>
 
 {% endblock %}
