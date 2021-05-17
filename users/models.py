@@ -24,7 +24,7 @@ class CustomUser(AbstractUser):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, blank=True)
+    name = models.CharField(max_length=100, blank=False)
     slug = models.SlugField(max_length=100)
 
     def __str__(self):
