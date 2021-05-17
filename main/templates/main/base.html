@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="{% static 'main/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'main/fonts/fontawesome/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'main/css/aos.css' %}">
     <title>
         {% block title %} Painterest {% endblock %}
     </title>
 </head>
 
 <body>
+
     <!-- Navigation -->
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
@@ -33,48 +33,49 @@
                             class="sr-only">(current)</span></a>
                     </li>
                     {% if not user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}" tabindex="-1" aria-disabled="true">Sign Up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">Login</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}" tabindex="-1" aria-disabled="true">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">Login</a>
+                        </li>
                     {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'notifications' %}" tabindex="-1" aria-disabled="true">
-                            <i class="fa fa-bell">
-                                <span class="notificate badge-pill badge-info">23</span>
-                            </i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'messages' %}" tabindex="-1" aria-disabled="true">
-                            {% if unread_count %}
-                                <i class="fa fa-envelope">
-                                    <span class="notificate badge-pill badge-info">{{ unread_count }}</span>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'notifications' %}" tabindex="-1" aria-disabled="true">
+                                <i class="fa fa-bell">
+                                    <span class="notificate badge-pill badge-info">23</span>
                                 </i>
-                            {% else %}
-                                <i class="fa fa-envelope-open">
-                                    <span class="notificate badge-pill badge-info"></span>
-                                </i>
-                            {% endif %}
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown09"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {% if user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-                                <div class="profile_badge">{{ user.username.0 }}</div>
-                            {% else %}
-                                <img class="rounded-circle badge-account-img" src="{{ user.profile.image.url }}">
-                            {% endif %}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown09">
-                            <a class="dropdown-item drop" href="{% url 'profile' %}">Profile</a>
-                            <a class="dropdown-item drop" href="{% url 'settings' %}">Settings</a>
-                            <a class="dropdown-item drop" href="{% url 'logout' %}">Log out</a>
-                        </div>
-                    </li>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'view_messages' %}" tabindex="-1" aria-disabled="true">
+                                {% if unread_count %}
+                                    <i class="fa fa-envelope">
+                                        <span class="notificate badge-pill badge-info">{{ unread_count }}</span>
+                                    </i>
+                                {% else %}
+                                    <i class="fa fa-envelope-open">
+                                        <span class="notificate badge-pill badge-info"></span>
+                                    </i>
+                                {% endif %}
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown09"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {% if user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+                                    <div class="profile_badge">{{ user.username.0 }}</div>
+                                {% else %}
+                                    <img class="rounded-circle badge-account-img" src="{{ user.profile.image.url }}">
+                                {% endif %}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown09">
+                                <a class="dropdown-item drop" href="{% url 'profile' %}">Profile</a>
+                                <a class="dropdown-item drop" href="{% url 'settings' %}">Settings</a>
+                                <a class="dropdown-item drop" href="{% url 'view_folders' %}">Saved pins</a>
+                                <a class="dropdown-item drop" href="{% url 'logout' %}">Log out</a>
+                            </div>
+                        </li>
                     {% endif %}
                 </ul>
             </div>
@@ -95,27 +96,25 @@
         </div>
         {% block content %} {% endblock %}
         {% if user.is_authenticated %}
-        <div class="add">
-            <a href="{% url 'add_paint' %}"><i class=" fa fa-plus-circle"></i></a>
-        </div>
-        <div>
-            <label for="crazy" class="quest">
-                <i class="fa fa-question-circle"></i>
-            </label>
-            <input type="checkbox" id="crazy">
-            <ul class="sub-quest">
-                <li><a href="{% url 'about' %}" class="the_a">About</a></li>
-                <li><a href="{% url 'contact' %}" class="the_a">Contact us</a></li>
-            </ul>
-        </div>
+            <div class="add">
+                <a href="{% url 'add_paint' %}"><i class=" fa fa-plus-circle"></i></a>
+            </div>
+            <div>
+                <label for="crazy" class="quest">
+                    <i class="fa fa-question-circle"></i>
+                </label>
+                <input type="checkbox" id="crazy">
+                <ul class="sub-quest">
+                    <li><a href="{% url 'about' %}" class="the_a">About</a></li>
+                    <li><a href="{% url 'contact' %}" class="the_a">Contact us</a></li>
+                </ul>
+            </div>
         {% endif %}
     </div>
 
     <script src="{% static 'main/js/my_jQuery.js' %}"></script>
     <script src="{% static 'main/js/main.js' %}"></script>
-    <script src="{% static 'main/js/aos.js' %}"></script>
     <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
-
 
 </body>
 
