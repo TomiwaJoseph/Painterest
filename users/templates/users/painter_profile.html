@@ -13,7 +13,11 @@
             {% else %}
                 <img class="rounded-circle account-img" src="{{ painter.profile.image.url }}">
             {% endif %}
-            <h1>{{ painter.first_name }} {{ painter.last_name }}</h1>
+            {% if painter.first_name or painter.last_name %}
+                <h1>{{ painter.first_name }} {{ painter.last_name }}</h1>
+            {% else %}
+                <h1>{{ painter.username }}</h1>
+            {% endif %}
             <a href="{% url 'following_and_follower' painter%}" class="category follow mt-2">Followers
                 <span class="badge bg-dark text-light">{{ painter.followers.all.count }}</span>
             </a>
@@ -44,7 +48,7 @@
             {% endif %}
             <div id="message_div" class="mt-4">
                 <hr>
-                <form method="POST" action="{% url 'messages' %}">
+                <form method="POST" action="{% url 'send_message' %}">
                     {% csrf_token %}
                     <input type="hidden" name="painter_name" value="{{ painter }}">
                     <textarea class="form-control" name="message" id="painter_message" cols="10" rows="8" placeholder="Trust me...short and sweet does it😉😂🤣"></textarea>
