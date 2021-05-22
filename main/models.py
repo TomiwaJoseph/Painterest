@@ -130,17 +130,14 @@ class Folder(models.Model):
     name = models.CharField(max_length=50, blank=False, unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name='folder_owner', on_delete=models.CASCADE)
+    saved_painting = models.ManyToManyField(Paintings, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user}'s folder -> {self.name}"
 
-
-class SavedPainting(models.Model):
-    painting = models.ForeignKey(Paintings, on_delete=models.CASCADE)
-    save_to_folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.painting.title}"
+    class Meta:
+        ordering = ('-date_created',)
 
 
 
