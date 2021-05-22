@@ -175,6 +175,9 @@ nav .nav-item {
     color: #000;
     border: 1px none;
 }
+form .alert-block{
+    display: none;
+}
 
 /* <---------- General things -----------> */
 .account-img {
@@ -568,10 +571,15 @@ nav .nav-item {
 
 
 /* <------------ Home Feed Settings Section ------> */
+#feed,
+#profile {
+    color: rgb(22, 202, 202);
+    background: none;
+    border: 1px solid rgb(22, 202, 202);
+}
 input[type='checkbox'][id^='category'] {
     display: none;
 }
-
 .img-check label {
     border: 1px solid #fff;
     padding: 10px;
@@ -580,7 +588,6 @@ input[type='checkbox'][id^='category'] {
     margin: 10px;
     cursor: pointer;
 }
-
 .img-check label:before {
     background-color: #fff;
     color: #fff;
@@ -598,7 +605,6 @@ input[type='checkbox'][id^='category'] {
     transition-duration: 0.4s;
     transform: scale(0);
 }
-
 .img-check label img {
     transition-duration: 0.2s;
     transform-origin: 50% 50%;
@@ -610,17 +616,55 @@ input[type='checkbox'][id^='category'] {
 .img-check :checked+label {
     border-color: teal;
 }
-
 .img-check :checked+label:before {
     content: "✔";
     background-color: #fff;
     transform: scale(1);
     color: teal;
 }
-
 .img-check :checked+label img {
     transform: scale(0.9);
     box-shadow: 0 0 5px #333;
     z-index: -1;
     opacity: 1;
+}
+
+/* <-------------- View folders -----------> */
+.open_folder{
+    color: #303030;
+}
+.open_folder:hover{
+    color: red;
+}
+.folder{
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+.folder:hover{
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+
+
+/* <------- Create or Save Section ------------> */
+
+input.vis{
+    display: none;
+}
+input.vis + label{
+    border: 1px solid grey;
+    background: ghostwhite;
+    padding: 5px 8px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+input.vis:not(:checked) + label:hover{
+    box-shadow: 0px 1px 3px;
+}
+input.vis + label:active,
+input.vis:checked + label{
+    box-shadow: 0px 0px 3px;
+    background: #eee;
 }
