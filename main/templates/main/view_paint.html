@@ -29,14 +29,18 @@
     <div class="col-md-6">
         <div class="details mt-5 d-flex justify-content-between align-items-center">
             {% with object.painted.all.count as total_tries %}
-                <button class="btn btn-info utils" id="tried">{{ total_tries }} photo{{ total_tries|pluralize }}</button>
+                {% if total_tries == 1 %}
+                    <button class="btn btn-info utils" id="tried">{{ total_tries }} Try</button>
+                {% else %}
+                    <button class="btn btn-info utils" id="tried">{{ total_tries }} Tries</button>
+                {% endif %}
             {% endwith %}
             {% with object.paint_comments.all.count as total_comments %}
                 <button class="btn btn-info utils" id="paint_comments">{{ total_comments }} Comment{{ total_comments|pluralize }}</button>
             {% endwith %}
             <button class="btn btn-info utils" id="show_inp">Add Comment</button>
-            <a href="" class="btn btn-info utils">Save</a>
-            <a href=""><i class="fa fa-download"></i></a>
+            <a href="{% url 'save_paint' object.id %}" class="btn btn-info utils">Save</a>
+            <a href="{% url 'download_painting' object.id %}"><i class="fa fa-download"></i></a>
         </div>
         <div class="col-12">
             <div id="tries">
@@ -129,6 +133,5 @@
     </div>
     
 </div>
-
 
 {% endblock %}
