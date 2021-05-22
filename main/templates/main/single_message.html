@@ -33,10 +33,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-danger">Delete Message?</h4>
+                <h4 class="modal-title text-danger">Delete message?</h4>
             </div>
             <div class="modal-body">
-                <form action="{% url 'delete_message' single_message.id %}">
+                <form action="{% url 'delete_message' single_message.id %}" method="POST">
+                    {% csrf_token %}
                     <button class="btn btn-outline-danger w-100" type="submit">Delete</button>
                 </form>
             </div>
