@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="content-section bg-light">
+            <form method="POST" action=".">
+                {% csrf_token %}
+                <!-- {% for folder in folders_list %}
+                    <label class="d-block">
+                        <input type="radio" name="choose" value="{{ folder.name }}">
+                        {{ folder.name }}
+                    </label>
+                {% endfor %} -->
+                <input type="radio" name="test" value="Aliens" class="vis" id="aliens">
+                <label for="aliens">Aliens</label>
+                <input type="radio" name="test" value="Ghosts" class="vis" id="ghosts">
+                <label for="ghosts">Ghosts</label>
+                <input type="radio" name="test" value="Monsters" class="vis" id="monsters">
+                <label for="monsters">Monsters</label>
+                <hr>
+                <button type="submit" class="btn btn-outline-danger">Save</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6 mx-auto">
+        <div class="content-section bg-light">
+            <form method="POST" action="{% url 'create' %}">
+                {% csrf_token %}
+                <input type="hidden" name='paint_id' value="{{ paint_pk }}">
+                <label for="">Create folder...</label>
+                <input type="text" class="form-control my-2" name="name">
+                <button class="btn btn-info my-2 w-100">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
