@@ -1,0 +1,103 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h1>{{ folder_name }}</h1>
+<button type="button" class="btn btn-danger w-25" data-toggle="modal" data-target="#modalDeleteFolder">Delete</button>
+<hr>
+
+<div class="row" id="gallery" data-toggle="modal" data-target="#exampleModal">
+    <div class="card-columns">
+        {% for pics in folder_pics %}
+            <div class="card paint-img">
+                <img src="{{ pics.painting.url }}" 
+                    data-target="#carouselPics" data-slide-to="{{ forloop.counter0 }}" alt="" class="w-100 img-fluid card-img">
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- <--------- Modal and Carousel --------- -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="carouselPics" data-ride="carousel" class="carousel slide" data-interval="false">
+                    <div class="carousel-inner">
+                        {% for pics in folder_pics %}
+                            <div class="carousel-item">
+                                <a href="{{ pics.get_absolute_url }}">
+                                    <img src="{{ pics.painting.url }}" alt="" class="d-block w-100">
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a href="#carouselPics" role="button" data-slide="prev" class="carousel-control-prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a href="#carouselPics" role="button" data-slide="next" class="carousel-control-next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-danger w-50" data-toggle="modal" data-target="#modaledit">Delete</button>
+                <a href="" class="btn btn-info w-50">Download</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <--------------- Delete Paint --------- -->
+
+<div id="modaledit" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-danger">Delete paint?</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'delete_folder_paint' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="folder_to_redirect" value="folder_id">
+                    <button class="btn btn-outline-danger w-100" type="submit">Delete</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <--------------- Delete Folder --------- -->
+
+<div id="modalDeleteFolder" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-danger">Delete folder?</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'delete_folder' folder_id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-danger w-100" type="submit">Delete</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
