@@ -90,6 +90,9 @@ $(document).ready(function (){
     $('#all_filter_section').hide()
     $('#read_filter_section').hide()
 
+    $('.carousel-item').eq(0).addClass('active')
+    // $('div.carousel-inner > div:first-child').addClass('active')
+
 });
 
 
