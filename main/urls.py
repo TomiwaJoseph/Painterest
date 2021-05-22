@@ -17,5 +17,10 @@ urlpatterns = [
     path('view_paint/<int:pk>/<slug:paint>/', views.PaintingDetailView.as_view(), name='view_paint'),
     path('save_to_folder/', views.save_to_folder, name='save_to_folder'),
     path('view_folders/', views.view_folders, name='view_folders'),
-    path('download_painting/', views.download_painting, name='download_painting'),
+    path('delete_folder/<int:folder_pk>/', views.delete_folder, name='delete_folder'),
+    path('delete_folder_paint/', views.delete_folder_paint, name='delete_folder_paint'),
+    path('folder_content/<int:folder>/', views.folder_content, name='folder_content'),
+    path('download_painting/<int:paint_pk>/', views.download_painting, name='download_painting'),
+    path('save_paint/<int:paint_pk>/', views.save_to_folder, name='save_paint'),
+    path('create/', views.create, name='create'),
 ]
