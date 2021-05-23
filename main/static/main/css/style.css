@@ -223,6 +223,15 @@ form .alert-block{
     margin-bottom: 10px;
     display: inline-block;
 }
+.down_but {
+    background: none;
+    color: #f00;
+    outline: none;
+    border: none;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-size: 25px;
+}
 
 .settings button {
     display: inline-block;
@@ -659,6 +668,7 @@ input.vis + label{
     padding: 5px 8px;
     cursor: pointer;
     border-radius: 5px;
+    text-align: center;
 }
 input.vis:not(:checked) + label:hover{
     box-shadow: 0px 1px 3px;
@@ -666,5 +676,31 @@ input.vis:not(:checked) + label:hover{
 input.vis + label:active,
 input.vis:checked + label{
     box-shadow: 0px 0px 3px;
-    background: #eee;
+    background: #17a2b8;
+    color: #fff;
+}
+.vis + label{
+    display: block;
+    margin: 15px 0;
+}
+
+
+/* <--------- Folder Content Section ----------> */
+
+.folder-img img {
+    -moz-border-radius: 3px 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+    border-radius: 2%;
+    padding: 4px 4px;
+}
+.folder-img img:hover {
+    cursor: zoom-in;
+}
+.folder-img:hover .func{
+    display: inline-block;
+}
+.func{
+    display: none;
+    width: 40%;
+    margin: 5px 0;
 }
