@@ -8,8 +8,7 @@ from django.contrib import messages as django_messages
 import random
 from django.db.models import Count
 from taggit.models import Tag
-from django.http import HttpResponse
-
+from django.core.exceptions import PermissionDenied
 
 
 def current_user(request):
@@ -67,16 +66,21 @@ def contact(request):
 
 def delete_message(request, message_id):
     single_message = Message.objects.get(id=message_id)
-    single_message.delete()
+    if single_message.recepient == request.user:
+        single_message.delete()
     return redirect('view_messages')
 
 def show_message(request, message_id):
-    single_message = Message.objects.get(id=message_id)
-    single_message.read = True
-    single_message.save()
+    get_message = Message.objects.get(id=message_id)
+    if request.user == get_message.recepient:
+        get_message = Message.objects.get(id=message_id)
+        get_message.read = True
+        get_message.save()
+    else:
+        raise PermissionDenied
 
     context = {
-        'single_message': single_message,
+        'single_message': get_message,
         'unread_count': Message.objects.filter(recepient=request.user, 
             read=False).count()
     }
@@ -180,9 +184,6 @@ def add_paint_try(request):
     return redirect('view_paint', pk=redirect_to.id,
         paint=redirect_to.slug)
 
-def save_to_folder(request):
-    return HttpResponse(status=204)
-
 def view_folders(request):
     all_folders = Folder.objects.filter(user=request.user)
     context = {
@@ -194,7 +195,12 @@ def view_folders(request):
 
 def download_painting(request, paint_pk):
     redirect_to = Paintings.objects.get(id=paint_pk)
-    # Code to download goes here
+    route_from = request.POST.get('route')
+    if route_from == 'folder':
+        folder_id = request.POST.get('folder_id')
+        # Code to download goes here
+        django_messages.success(request, "Paint has been successfully downloaded!")
+        return redirect('folder_content', folder_id)
 
     django_messages.success(request, "Paint has been successfully downloaded!")
     return redirect('view_paint', pk=redirect_to.id,
@@ -212,19 +218,26 @@ def folder_content(request, folder):
     return render(request, 'main/folder_content.html', context)
 
 def delete_folder(request, folder_pk):
-    folder = Folder.objects.get(id=folder_pk, user=request.user)
-    folder.delete()
+    folder = Folder.objects.get(id=folder_pk)
+    if folder.user == request.user:
+        folder.delete()
     return redirect('view_folders')
 
-def delete_folder_paint(request):
+def delete_folder_paint(request, paint_pk):
     to_redirect = request.POST.get('folder_to_redirect')
+    painting = Paintings.objects.get(id=paint_pk)
+    folder = Folder.objects.get(id=to_redirect, user=request.user)
+    folder.saved_painting.remove(painting)
+
     return redirect('folder_content', to_redirect)
 
 def save_to_folder(request, paint_pk):
     redirect_to = Paintings.objects.get(id=paint_pk)
     if request.method == 'POST':
-        folder = request.POST.get('test')
-        print(folder)
+        folder_name = request.POST.get('folder')
+        folder = Folder.objects.get(name=folder_name, user=request.user)
+        folder.saved_painting.add(redirect_to)
+
         django_messages.success(request, 'Paint saved successfully')
         return redirect('view_paint', pk=redirect_to.id,
             paint=redirect_to.slug)
