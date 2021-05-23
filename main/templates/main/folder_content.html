@@ -4,15 +4,28 @@
 {% block content %}
 
 <h1>{{ folder_name }}</h1>
-<button type="button" class="btn btn-danger w-25" data-toggle="modal" data-target="#modalDeleteFolder">Delete</button>
+<button type="button" class="btn btn-danger w-25" data-toggle="modal" data-target="#modalDeleteFolder">Delete folder</button>
 <hr>
 
 <div class="row" id="gallery" data-toggle="modal" data-target="#exampleModal">
     <div class="card-columns">
         {% for pics in folder_pics %}
-            <div class="card paint-img">
+            <div class="card folder-img">
                 <img src="{{ pics.painting.url }}" 
                     data-target="#carouselPics" data-slide-to="{{ forloop.counter0 }}" alt="" class="w-100 img-fluid card-img">
+                <div class="d-flex justify-content-around">
+                    <form class="func" action="{% url 'delete_folder_paint' pics.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="folder_to_redirect" value="{{ folder_id }}">
+                        <button class="btn btn-danger" onclick="return confirm('Are you sure')">Delete</button>
+                    </form>
+                    <form class="func" action="{% url 'download_painting' pics.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="route" value="folder">
+                        <input type="hidden" name="folder_id" value="{{ folder_id }}">
+                        <button type="submit" class="btn btn-info">Download</button>
+                    </form>
+                </div>
             </div>
         {% endfor %}
     </div>
@@ -36,6 +49,7 @@
                                 <a href="{{ pics.get_absolute_url }}">
                                     <img src="{{ pics.painting.url }}" alt="" class="d-block w-100">
                                 </a>
+                                <hr>
                             </div>
                         {% endfor %}
                     </div>
@@ -49,32 +63,10 @@
                     </a>
                 </div>
             </div>
-            <div class="modal-footer d-flex justify-content-between">
+            <!-- <div class="modal-footer d-flex justify-content-between">
                 <button type="button" class="btn btn-danger w-50" data-toggle="modal" data-target="#modaledit">Delete</button>
                 <a href="" class="btn btn-info w-50">Download</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- <--------------- Delete Paint --------- -->
-
-<div id="modaledit" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title text-danger">Delete paint?</h4>
-            </div>
-            <div class="modal-body">
-                <form action="{% url 'delete_folder_paint' %}" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="folder_to_redirect" value="folder_id">
-                    <button class="btn btn-outline-danger w-100" type="submit">Delete</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
