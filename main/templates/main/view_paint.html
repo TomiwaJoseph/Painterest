@@ -40,7 +40,10 @@
             {% endwith %}
             <button class="btn btn-info utils" id="show_inp">Add Comment</button>
             <a href="{% url 'save_paint' object.id %}" class="btn btn-info utils">Save</a>
-            <a href="{% url 'download_painting' object.id %}"><i class="fa fa-download"></i></a>
+            <form action="{% url 'download_painting' object.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-info down_but"><i class="fa fa-download"></i></button>
+            </form>
         </div>
         <div class="col-12">
             <div id="tries">
