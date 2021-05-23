@@ -6,3 +6,6 @@ register = template.Library()
 def lookup(d, key):
     return d[key]
 
+@register.filter
+def slice_it(d):
+    return d[:3]
