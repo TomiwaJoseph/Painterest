@@ -696,11 +696,6 @@ input.vis:checked + label{
 .folder-img img:hover {
     cursor: zoom-in;
 }
-.folder-img:hover .func{
-    display: inline-block;
-}
-.func{
-    display: none;
-    width: 40%;
-    margin: 5px 0;
+.folder-img:hover img{
+    opacity: 0.8;
 }
