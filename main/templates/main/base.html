@@ -99,17 +99,17 @@
             <div class="add">
                 <a href="{% url 'add_paint' %}"><i class=" fa fa-plus-circle"></i></a>
             </div>
-            <div>
-                <label for="crazy" class="quest">
-                    <i class="fa fa-question-circle"></i>
-                </label>
-                <input type="checkbox" id="crazy">
-                <ul class="sub-quest">
-                    <li><a href="{% url 'about' %}" class="the_a">About</a></li>
-                    <li><a href="{% url 'contact' %}" class="the_a">Contact us</a></li>
-                </ul>
-            </div>
         {% endif %}
+        <div>
+            <label for="crazy" class="quest">
+                <i class="fa fa-question-circle"></i>
+            </label>
+            <input type="checkbox" id="crazy">
+            <ul class="sub-quest">
+                <li><a href="{% url 'about' %}" class="the_a">About</a></li>
+                <li><a href="{% url 'contact' %}" class="the_a">Contact us</a></li>
+            </ul>
+        </div>
     </div>
 
     <script src="{% static 'main/js/my_jQuery.js' %}"></script>
