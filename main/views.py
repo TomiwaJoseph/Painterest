@@ -9,6 +9,10 @@ import random
 from django.db.models import Count
 from taggit.models import Tag
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth.decorators import login_required
+import os
+from django.http import HttpResponse, Http404
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def current_user(request):
@@ -64,12 +68,14 @@ def contact(request):
     }
     return render(request, 'main/contact.html', context)
 
+@login_required
 def delete_message(request, message_id):
     single_message = Message.objects.get(id=message_id)
     if single_message.recepient == request.user:
         single_message.delete()
     return redirect('view_messages')
 
+@login_required
 def show_message(request, message_id):
     get_message = Message.objects.get(id=message_id)
     if request.user == get_message.recepient:
@@ -86,6 +92,7 @@ def show_message(request, message_id):
     }
     return render(request, 'main/single_message.html', context)
 
+@login_required
 def send_message(request):
     receiver = request.POST.get('painter_name')
     message = request.POST.get('message')
@@ -94,6 +101,7 @@ def send_message(request):
     django_messages.success(request, "Message sent successfully.")
     return redirect('painter_profile', painter=receiver)
 
+@login_required
 def notifications(request):
     context = {
         'unread_count': Message.objects.filter(recepient=request.user, 
@@ -101,6 +109,7 @@ def notifications(request):
     }
     return render(request, 'main/notifications.html', context)
 
+@login_required(login_url="/login/")
 def view_messages(request):
     all_messages = Message.objects.filter(recepient=request.user)
     context = {
@@ -113,6 +122,7 @@ def view_messages(request):
 def paint(request):
     return render(request, 'main/paint.html')
 
+@login_required
 def add_comment(request):
     get_painting = Paintings.objects.get(id=request.POST.get('painting_id'))
     get_comment = request.POST.get('comment')
@@ -123,7 +133,7 @@ def add_comment(request):
         paint=get_painting.slug)
 
 
-class AddPaintingView(CreateView):
+class AddPaintingView(LoginRequiredMixin, CreateView):
     model = Paintings
     form_class = AddPainting
     template_name = 'main/add_paint.html'
@@ -163,14 +173,17 @@ class PaintingDetailView(DetailView):
         similar_paintings = list(similar_paintings)
         painting_list = random.sample(similar_paintings, min(len(similar_paintings), 8))
 
-        context['unread_count'] = Message.objects.filter(recepient=current_user(self.request), 
-            read=False).count()
+        if self.request.user.is_authenticated:
+            context['unread_count'] = Message.objects.filter(recepient=current_user(self.request), 
+                read=False).count()
+        
         context['form'] = AddPaintingTry()
         context['similar_paintings'] = painting_list
 
         return context
 
 
+@login_required
 def add_paint_try(request):
     get_redirect = request.POST.get('redir')
     redirect_to = Paintings.objects.get(id=get_redirect)
@@ -184,6 +197,7 @@ def add_paint_try(request):
     return redirect('view_paint', pk=redirect_to.id,
         paint=redirect_to.slug)
 
+@login_required
 def view_folders(request):
     all_folders = Folder.objects.filter(user=request.user)
     context = {
@@ -194,43 +208,51 @@ def view_folders(request):
     return render(request, 'main/view_folders.html', context)
 
 def download_painting(request, paint_pk):
-    redirect_to = Paintings.objects.get(id=paint_pk)
+    paint_image = Paintings.objects.get(id=paint_pk)
     route_from = request.POST.get('route')
-    if route_from == 'folder':
-        folder_id = request.POST.get('folder_id')
-        # Code to download goes here
-        django_messages.success(request, "Paint has been successfully downloaded!")
-        return redirect('folder_content', folder_id)
+    file_path = paint_image.painting.path
 
-    django_messages.success(request, "Paint has been successfully downloaded!")
-    return redirect('view_paint', pk=redirect_to.id,
-        paint=redirect_to.slug)
+    # To view image before download like artstation use this...
+    # response = FileResponse(open(file_path, 'rb'))
+    # return response
 
+    # To download directly to computer
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404
+
+@login_required
 def folder_content(request, folder):
     folder_pics = Folder.objects.get(id=folder, user=request.user)
     context = {
         'unread_count': Message.objects.filter(recepient=request.user, 
             read=False).count(),
-        'folder_pics': folder_pics.saved_painting.all(),
+        'folder_pics': folder_pics.saved_painting.all().order_by('foldermember'),
         'folder_name': folder_pics.name,
         'folder_id': folder_pics.id,
     }
     return render(request, 'main/folder_content.html', context)
 
+@login_required
 def delete_folder(request, folder_pk):
     folder = Folder.objects.get(id=folder_pk)
     if folder.user == request.user:
         folder.delete()
     return redirect('view_folders')
 
-def delete_folder_paint(request, paint_pk):
-    to_redirect = request.POST.get('folder_to_redirect')
+@login_required
+def delete_folder_paint(request, folder_id, paint_pk):
     painting = Paintings.objects.get(id=paint_pk)
-    folder = Folder.objects.get(id=to_redirect, user=request.user)
-    folder.saved_painting.remove(painting)
+    folder = Folder.objects.get(id=folder_id, user=request.user)
+    if folder.user == request.user:
+        folder.saved_painting.remove(painting)
 
-    return redirect('folder_content', to_redirect)
+    return redirect('folder_content', folder_id)
 
+@login_required
 def save_to_folder(request, paint_pk):
     redirect_to = Paintings.objects.get(id=paint_pk)
     if request.method == 'POST':
@@ -250,6 +272,7 @@ def save_to_folder(request, paint_pk):
     }
     return render(request, 'main/create_or_save.html', context)
 
+@login_required
 def create(request):
     paint_pk = request.POST.get('paint_id')
     name = request.POST.get('name')
