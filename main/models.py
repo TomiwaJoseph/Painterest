@@ -130,7 +130,7 @@ class Folder(models.Model):
     name = models.CharField(max_length=50, blank=False, unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name='folder_owner', on_delete=models.CASCADE)
-    saved_painting = models.ManyToManyField(Paintings, blank=True)
+    saved_painting = models.ManyToManyField(Paintings, through="FolderMember", blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -140,6 +140,16 @@ class Folder(models.Model):
         ordering = ('-date_created',)
 
 
+class FolderMember(models.Model):
+    painting = models.ForeignKey(Paintings, on_delete=models.CASCADE)
+    folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.painting.title}"
+
+    class Meta:
+        ordering = ('-date_added',)
+
 
 # Delete paintings in db on delete
-# reduce painting size on upload
