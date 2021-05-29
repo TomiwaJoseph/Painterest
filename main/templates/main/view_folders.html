@@ -1,4 +1,6 @@
 {% extends 'main/base.html' %}
+{% block title %}Painterest | Paint Folders{% endblock %}
+
 {% load crispy_forms_tags %}
 {% load users_tags %}
 
@@ -14,13 +16,13 @@
             <a href="{% url 'folder_content' folder.id %}" class="open_folder">
                 <div class="folder">
                     {% if folder.saved_painting.all.count > 2 %}
-                        {% for paint in folder.saved_painting.all|slice_it %}
+                        {% for paint in folder.saved_painting.all|sort_it|slice_it %}
                             <div>
                                 <img src="{{ paint.painting.url }}" alt="" class="img-fluid">
                             </div>
                         {% endfor %}
                     {% else %}
-                        {% for paint in folder.saved_painting.all %}
+                        {% for paint in folder.saved_painting.all|sort_it %}
                             <div>
                                 <img src="{{ paint.painting.url }}" alt="" class="img-fluid">
                             </div>
