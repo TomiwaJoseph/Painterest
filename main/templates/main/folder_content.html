@@ -1,10 +1,13 @@
 {% extends 'main/base.html' %}
+{% block title %}Painterest | Saved Paints{% endblock %}
 {% load crispy_forms_tags %}
 
 {% block content %}
 
-<h1>{{ folder_name }}</h1>
-<button type="button" class="btn btn-danger w-25" data-toggle="modal" data-target="#modalDeleteFolder">Delete folder</button>
+<div class="d-flex justify-content-between">
+    <h1>{{ folder_name }}</h1>
+    <button type="button" class="btn btn-danger w-25 mt-2" data-toggle="modal" data-target="#modalDeleteFolder">Delete folder</button>
+</div>
 <hr>
 
 <div class="row" id="gallery" data-toggle="modal" data-target="#exampleModal">
@@ -13,19 +16,6 @@
             <div class="card folder-img">
                 <img src="{{ pics.painting.url }}" 
                     data-target="#carouselPics" data-slide-to="{{ forloop.counter0 }}" alt="" class="w-100 img-fluid card-img">
-                <div class="d-flex justify-content-around">
-                    <form class="func" action="{% url 'delete_folder_paint' pics.id %}" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="folder_to_redirect" value="{{ folder_id }}">
-                        <button class="btn btn-danger" onclick="return confirm('Are you sure')">Delete</button>
-                    </form>
-                    <form class="func" action="{% url 'download_painting' pics.id %}" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="route" value="folder">
-                        <input type="hidden" name="folder_id" value="{{ folder_id }}">
-                        <button type="submit" class="btn btn-info">Download</button>
-                    </form>
-                </div>
             </div>
         {% endfor %}
     </div>
@@ -47,9 +37,16 @@
                         {% for pics in folder_pics %}
                             <div class="carousel-item">
                                 <a href="{{ pics.get_absolute_url }}">
-                                    <img src="{{ pics.painting.url }}" alt="" class="d-block w-100">
+                                    <img src="{{ pics.painting.url }}" alt="" class="img-fluid">
                                 </a>
                                 <hr>
+                                <div class="d-flex justify-content-around">
+                                    <a href="{% url 'delete_folder_paint' folder_id pics.id %}" class="btn btn-outline-danger w-25" 
+                                        onclick="return confirm('Are you sure')">Delete</a>
+                                    <a href="{% url 'download_painting' pics.id %}" class="w-25 btn btn-outline-info">
+                                        Download
+                                    </a>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
