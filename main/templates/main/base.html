@@ -43,7 +43,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'notifications' %}" tabindex="-1" aria-disabled="true">
                                 <i class="fa fa-bell">
-                                    <span class="notificate badge-pill badge-info">23</span>
+                                    {% if notify %}
+                                        <span class="notificate badge-pill badge-info">{{ notify }}</span>
+                                    {% endif %}
                                 </i>
                             </a>
                         </li>
