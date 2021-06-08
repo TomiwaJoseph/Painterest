@@ -4,6 +4,32 @@
 
 {% block content %}
 
-<h1>Contact</h1>
+<div class="row">
+    <div class="col-md-4 mx-auto my-auto text-center">
+        <h2>Contact us</h2>
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <form action="{% url 'contact' %}" method="POST" class="mt-4 p-4 bg-light">
+            {% csrf_token %}
+            <div class="form-group">
+                <p>Subject *</p>
+                <input required type="text" class="form-control" name="subject">
+            </div>
+            <div class="form-group">
+                <p>Email *</p>
+                <input required type="email" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <p>Message *</p>
+                <textarea required name="message" rows="8" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-outline-info log my-3">Send message</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
