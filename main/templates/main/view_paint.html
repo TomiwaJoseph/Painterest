@@ -118,22 +118,23 @@
 </div>
 <hr>
 
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="my-4">More like this...</h3>
-        <div class="card-columns">
+{% if similar_paintings %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="my-4">More like this...</h3>
+            <div class="card-columns">
 
-            {% for paint in similar_paintings %}
-                <div class="card paint-img">
-                    <a href="{{ paint.get_absolute_url }}">
-                        <img class="card-img" src="{{ paint.painting.url }}" alt="Card image cap">
-                    </a>
-                </div>
-            {% endfor %}
-    
+                {% for paint in similar_paintings %}
+                    <div class="card paint-img">
+                        <a href="{{ paint.get_absolute_url }}">
+                            <img class="card-img" src="{{ paint.painting.url }}" alt="Card image cap">
+                        </a>
+                    </div>
+                {% endfor %}
+        
+            </div>
         </div>
     </div>
-    
-</div>
+{% endif %}
 
 {% endblock %}
