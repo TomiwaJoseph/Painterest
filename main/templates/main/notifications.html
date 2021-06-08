@@ -4,6 +4,48 @@
 
 {% block content %}
 
-<h1>Notifications</h1>
+<div class="d-flex justify-content-between">
+    <h2>Notifications</h2>
+    {% if actions %}
+        <a href="{% url 'mark_as_read' %}" class="btn btn-danger my-2">Mark all as read</a>
+    {% endif %}
+</div>
+<hr>
 
+{% if actions %}
+{% for action in actions %}
+    {% if action.user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+        <a href="{% url 'painter_profile' action.user %}">
+            <div class="pna d-inline-block">{{ action.user.username.0 }}</div>
+            <span class="author text-secondary">
+            {{ action.user.username }}</span>
+        </a>
+            <span class="text-danger">{{ action.verb }}
+                {% if action.verb == 'started following' %}
+                    <a href="{% url 'painter_profile' action.target %}">{{ action.target }}</a>
+                {% else %}
+                    <a href="{{ action.target.get_absolute_url}}">{{ action.target.title }}</a>
+                {% endif %}
+            </span>
+            <!-- <span class="text-danger">{{ action.created|timesince }} ago</span> -->
+    {% else %}
+        <a href="{% url 'painter_profile' action.user %}">
+            <span class="author text-secondary">
+                <img src="{{ action.user.profile.image.url }}" alt="" class="img-fluid">
+            {{ action.user.username }}
+            </span>
+        </a>
+            <span class="text-danger">{{ action.verb }}
+                {% if action.verb == 'started following' %}
+                    <a href="{% url 'painter_profile' action.target %}">{{ action.target }}</a>
+                {% else %}
+                    <a href="{{ action.target.get_absolute_url}}">{{ action.target.title }}</a>
+                {% endif %}
+            </span>
+            <!-- <span class="text-danger">{{ action.created|timesince }} ago</span> -->
+    {% endif %}
+    <hr>
+{% endfor %}
+{% endif %}
+    
 {% endblock %}
