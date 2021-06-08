@@ -5,25 +5,29 @@
 <div class="row">
     
     <div class="col-md-6 mx-auto">
-        <div class="content-section bg-light mt-5">
-            <form method="POST" action=".">
-                {% csrf_token %}
-                {% for folder in folders_list %}
-                    <input type="radio" name="folder" value="{{ folder.name }}" class="vis" id="{{ folder.name }}">
-                    <label for="{{ folder.name }}">{{ folder.name }}</label>
-                {% endfor %}
-                <hr>
-                <button type="submit" class="btn btn-outline-danger w-100">Save</button>
-            </form>
-        </div>
+        {% if folders_list %}
+            <h4 class="mt-5">Select a folder and click save</h4>
+            <div class="content-section bg-light mt-2">
+                <form method="POST" action=".">
+                    {% csrf_token %}
+                    {% for folder in folders_list %}
+                        <input type="radio" name="folder" value="{{ folder.name }}" class="vis" id="{{ folder.name }}">
+                        <label for="{{ folder.name }}">{{ folder.name }}</label>
+                    {% endfor %}
+                    <hr>
+                    <button type="submit" class="btn btn-outline-danger w-100">Save</button>
+                </form>
+            </div>
+        {% endif %}
     </div>
+
     <div class="col-md-7 mx-auto my-5">
+        <h4>Create a new folder</h4>
         <div class="content-section bg-light">
             <form method="POST" action="{% url 'create' %}">
                 {% csrf_token %}
                 <input type="hidden" name='paint_id' value="{{ paint_pk }}">
-                <label for="">Create folder...</label>
-                <input type="text" class="form-control my-2" name="name">
+                <input type="text" class="form-control my-2" name="name" placeholder="Enter folder name here">
                 <button class="btn btn-info my-2 w-100">Create</button>
             </form>
         </div>
