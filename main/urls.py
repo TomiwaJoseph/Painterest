@@ -12,7 +12,7 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
     path('add_comment/', views.add_comment, name='add_comment'),
-    path('add_paint/', views.AddPaintingView.as_view(), name='add_paint'),
+    path('add_paint/', views.add_painting, name='add_paint'),
     path('add_paint_try/', views.add_paint_try, name='add_paint_try'),
     path('view_paint/<int:pk>/<slug:paint>/', views.PaintingDetailView.as_view(), name='view_paint'),
     path('save_to_folder/', views.save_to_folder, name='save_to_folder'),
@@ -22,5 +22,6 @@ urlpatterns = [
     path('folder_content/<int:folder>/', views.folder_content, name='folder_content'),
     path('download_painting/<int:paint_pk>/', views.download_painting, name='download_painting'),
     path('save_paint/<int:paint_pk>/', views.save_to_folder, name='save_paint'),
-    path('create/', views.create, name='create'),
+    path('create/', views.create_folder, name='create'),
+    path('mark_as_read/', views.mark_as_read, name='mark_as_read'),
 ]
