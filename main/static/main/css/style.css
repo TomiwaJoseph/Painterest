@@ -699,3 +699,16 @@ input.vis:checked + label{
 .folder-img:hover img{
     opacity: 0.8;
 }
+
+/* <--------- About Section ----------> */
+
+.intro{
+    color: red;
+    font-size: 20px;
+}
+.intro-body{
+    font-size: 18px;
+    line-height: 35px;
+}
+
+/* <--------  ----------> */
