@@ -7,13 +7,15 @@ from .forms import (LoginForm, RegisterForm, UserUpdateForm,
 from django.contrib.auth import logout
 from .models import CustomUser, UserFollowing, Category, Profile
 from django.contrib import messages
-from main.views import current_user
 from main.models import Message, Paintings
 import os, random
 from django.conf import settings
 from uuid import uuid4
 from taggit.models import Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
+from actions.models import Action
+from actions.utils import create_action
 
 # Create your views here.
 def following_and_follower(request, painter):
@@ -41,11 +43,15 @@ def following_and_follower(request, painter):
     context = {
         'followers_count': all_follower.count(),
         'following_count': all_following.count(),
-        'unread_count': Message.objects.filter(recepient=request.user, 
-            read=False).count(),
         'users_follower': users_follower,
         'users_following': users_following,
     }
+    if request.user.is_authenticated:
+        context['notify'] = len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
+            flat=True), read=False))
+        context['unread_count'] = Message.objects.filter(recepient=request.user, 
+            read=False).count()
+
     return render(request, 'users/following_and_follower.html',context)
 
 class MyLoginView(auth_views.LoginView):
@@ -59,6 +65,7 @@ class RegisterView(generic.CreateView):
     success_url = reverse_lazy('login')
 
 
+@login_required
 def follow(request, to_follow):
     user_to_follow = CustomUser.objects.filter(username=to_follow).first()
     if request.user in user_to_follow.followers.all():
@@ -67,9 +74,11 @@ def follow(request, to_follow):
         messages.info(request, "You can't follow yourself.")
     else:
         UserFollowing.objects.create(user_from=request.user, user_to=user_to_follow)
+        create_action(request.user, 'started following', user_to_follow)
     
     return redirect('painter_profile', painter=to_follow)
 
+@login_required
 def unfollow(request, to_unfollow):
     user_to_unfollow = CustomUser.objects.filter(username=to_unfollow).first()
     if request.user.username == to_unfollow:
@@ -81,8 +90,11 @@ def unfollow(request, to_unfollow):
     
     return redirect('painter_profile', painter=to_unfollow)
 
+@login_required
 def profile_view(request):
     context = {
+        'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
+            flat=True), read=False)),
         'unread_count': Message.objects.filter(recepient=request.user, 
             read=False).count()
     }
@@ -91,15 +103,19 @@ def profile_view(request):
 def painter_profile_view(request, painter):
     context = {
         'painter': CustomUser.objects.filter(username=painter).first(),
-        'unread_count': Message.objects.filter(recepient=request.user, 
-            read=False).count()
     }
+    if request.user.is_authenticated:
+        context['notify'] = len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
+            flat=True), read=False))
+        context['unread_count'] = Message.objects.filter(recepient=request.user, 
+            read=False).count()
     return render(request, 'users/painter_profile.html', context)
 
 def logout_view(request):
     logout(request)
     return redirect('index')
 
+@login_required
 def settings_view(request):
     if request.method == 'POST':
         user_update_form = UserUpdateForm(request.POST, instance=request.user)
@@ -126,6 +142,8 @@ def settings_view(request):
     all_feed = [i.name for i in user_categories]
     
     context = {
+        'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
+            flat=True), read=False)),
         'user_categories': user_categories,
         'cat_pictures': picture_for_each_category,
         'categories': Category.objects.all(),
@@ -137,6 +155,7 @@ def settings_view(request):
     }
     return render(request, 'users/settings.html', context)
 
+@login_required
 def feed_tuner(request):
     selected = request.POST.getlist('category')
 
@@ -149,6 +168,3 @@ def feed_tuner(request):
         profile_obj.feed_tuner.add(category_obj)
 
     return redirect('profile')
-
-
-# rename and reduce file width and height
