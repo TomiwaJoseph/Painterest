@@ -33,6 +33,7 @@ AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 # Application definition
 
 INSTALLED_APPS = [
+    'actions.apps.ActionsConfig',
     'main.apps.MainConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',
@@ -131,3 +132,11 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'profile'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('MAIL_NAME')
+EMAIL_HOST_PASSWORD = os.environ.get('MAIL_PASS')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
