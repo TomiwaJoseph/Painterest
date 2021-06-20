@@ -1,0 +1,11 @@
+
+
+{% for paint in similar_paintings %}
+    <div class="card paint-img">
+        <a href="{{ paint.get_absolute_url }}">
+            <img class="card-img" src="{{ paint.painting.url }}" alt="Card image cap">
+        </a>
+    </div>
+{% endfor %}
+
+
