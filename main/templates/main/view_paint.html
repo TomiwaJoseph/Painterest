@@ -24,7 +24,7 @@
                 
             {% endif %}
         </div>
-        <h4>{{ object.title }}</h4>
+        <h4 class="text-danger">{{ object.title }}</h4>
     </div>
     <div class="col-md-6">
         <div class="details mt-5 d-flex justify-content-between align-items-center">
@@ -116,25 +116,66 @@
     </div>
     
 </div>
-<hr>
+<hr class="demarcate">
 
 {% if similar_paintings %}
     <div class="row">
         <div class="col-md-12">
             <h3 class="my-4">More like this...</h3>
-            <div class="card-columns">
 
-                {% for paint in similar_paintings %}
-                    <div class="card paint-img">
-                        <a href="{{ paint.get_absolute_url }}">
-                            <img class="card-img" src="{{ paint.painting.url }}" alt="Card image cap">
-                        </a>
-                    </div>
-                {% endfor %}
-        
+            <div class="card-columns" id="similar_paintings">
+
             </div>
         </div>
     </div>
 {% endif %}
+
+{% endblock %}
+
+
+
+{% block script %}
+
+<script>
+    $(document).ready(function(){
+        var each_load = 10;
+        var start_from = 0;
+        var action = 'inactive'
+
+        function load_post_data(each_load, start_from) {
+            $.ajax({
+                url: 'similar_fetch/',
+                method: 'GET',
+                data: {
+                    each_load: each_load,
+                    start_from: start_from
+                },
+                caches: false,
+                success: function (response) {
+                    $('#similar_paintings').append(response);
+                    if (response == "") {
+                        action = 'active';
+                    } else {
+                        action = 'inactive';
+                    }
+                }
+            })
+        }
+        if (action == 'inactive') {
+            action = 'active',
+                load_post_data(each_load, start_from)
+        }
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() > $('#similar_paintings').height() && action ==
+                'inactive') {
+                action = 'active';
+                start_from = start_from + each_load;
+                setTimeout(function () {
+                    load_post_data(each_load, start_from);
+                }, 1000)
+            }
+        })
+    })
+</script>
 
 {% endblock %}
