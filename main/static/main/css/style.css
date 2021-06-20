@@ -280,6 +280,11 @@ form .alert-block{
     color: red;
 }
 
+.demarcate{
+    background-color: red;
+}
+
+
 /* <---------- Profile stuff --------> */
 
 .change_badge {
@@ -711,4 +716,11 @@ input.vis:checked + label{
     line-height: 35px;
 }
 
-/* <--------  ----------> */
+/* <-------- Notifications ----------> */
+
+.notif:hover .content-section{
+    background: rgb(230, 230, 230);
+}
+.notif_read{
+    background: rgb(237, 237, 237);
+}
