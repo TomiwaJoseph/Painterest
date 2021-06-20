@@ -51,7 +51,8 @@
                 <form method="POST" action="{% url 'send_message' %}">
                     {% csrf_token %}
                     <input type="hidden" name="painter_name" value="{{ painter }}">
-                    <textarea class="form-control" name="message" id="painter_message" cols="10" rows="8" placeholder="Trust me...short and sweet does it😉😂🤣"></textarea>
+                    <input required type="text" class="form-control mb-2" name="subject" placeholder="Enter subject here...">
+                    <textarea class="form-control" name="message" cols="10" rows="8" placeholder="Enter message here...short and sweet😉😂🤣"></textarea>
                     <button class="btn btn-outline-info mt-3" type="submit">Send message 
                         <i class="fa fa-arrow-right"></i>
                     </button>
