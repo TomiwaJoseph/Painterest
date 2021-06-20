@@ -15,7 +15,8 @@
                                 <div class="pna d-inline-block">{{ message.sender.username.0 }}</div>
                                 <span class="author mr-2 text-secondary">
                                 {{ message.sender.username }}</span>
-                                <span class="text-danger">{{ message.timestamp }}</span>
+                                <span class="text-info">{{ message.timestamp }}</span>
+                                <h3 class="ml-5 text-danger">{{ message.subject }}</h3>
                                 <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
                             </a>
                         {% else %}
@@ -24,7 +25,8 @@
                                     <img src="{{ message.sender.profile.image.url }}" alt="" class="img-fluid">
                                 {{ message.sender.username }}
                                 </span>
-                                <span class="text-danger">{{ message.timestamp }}</span>
+                                <span class="text-info">{{ message.timestamp }}</span>
+                                <h3 class="ml-5 text-danger">{{ message.subject }}</h3>
                                 <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
                             </a>
                         {% endif %}
@@ -36,12 +38,13 @@
                 {% for message in all_messages %}
                     {% if not message.read %}
                     <div class="each_message content-section mb-3">
-                        {% if message.sender.profile.image.name == 'dp.jpg' %}
+                        {% if message.sender.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
                             <a href="{% url 'show_message' message.id %}" class="message_">
                                 <div class="pna d-inline-block">{{ message.sender.username.0 }}</div>
                                 <span class="author mr-2 text-secondary">
                                 {{ message.sender.username }}</span>
-                                <span class="text-danger">{{ message.timestamp }}</span>
+                                <span class="text-info">{{ message.timestamp }}</span>
+                                <h3 class="ml-5 text-danger">{{ message.subject }}</h3>
                                 <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
                             </a>
                         {% else %}
@@ -50,7 +53,8 @@
                                     <img src="{{ message.sender.profile.image.url }}" alt="" class="img-fluid">
                                 {{ message.sender.username }}
                                 </span>
-                                <span class="text-danger">{{ message.timestamp }}</span>
+                                <span class="text-info">{{ message.timestamp }}</span>
+                                <h3 class="ml-5 text-danger">{{ message.subject }}</h3>
                                 <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
                             </a>
                         {% endif %}
@@ -63,12 +67,13 @@
                 {% for message in all_messages %}
                     {% if message.read %}
                     <div class="each_message content-section mb-3">
-                        {% if message.sender.profile.image.name == 'dp.jpg' %}
+                        {% if message.sender.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
                             <a href="{% url 'show_message' message.id %}" class="message_">
                                 <div class="pna d-inline-block">{{ message.sender.username.0 }}</div>
                                 <span class="author mr-2 text-secondary">
                                 {{ message.sender.username }}</span>
-                                <span class="text-danger">{{ message.timestamp }}</span>
+                                <span class="text-info">{{ message.timestamp }}</span>
+                                <h3 class="ml-5 text-danger">{{ message.subject }}</h3>
                                 <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
                             </a>
                         {% else %}
@@ -77,7 +82,8 @@
                                     <img src="{{ message.sender.profile.image.url }}" alt="" class="img-fluid">
                                 {{ message.sender.username }}
                                 </span>
-                                <span class="text-danger">{{ message.timestamp }}</span>
+                                <span class="text-info">{{ message.timestamp }}</span>
+                                <h3 class="ml-5 text-danger">{{ message.subject }}</h3>
                                 <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
                             </a>
                         {% endif %}
