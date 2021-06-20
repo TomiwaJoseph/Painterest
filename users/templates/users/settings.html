@@ -35,6 +35,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div id="home-feed">
             <h3 class="my-4 text-center">Select your preferences...</h3>
+            <hr class="w-50">
             <form action="{% url 'feed_tuner' %}" method="POST">
                 {% csrf_token %}
                 <div class="card-columns">
