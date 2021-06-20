@@ -6,46 +6,81 @@
 
 <div class="d-flex justify-content-between">
     <h2>Notifications</h2>
-    {% if actions %}
-        <a href="{% url 'mark_as_read' %}" class="btn btn-danger my-2">Mark all as read</a>
+    <!-- Don't know how to implement this yet -->
+    {% if signify %}
+    <button class="btn btn-danger my-2" id="mark_all">
+        Mark all as read
+    </button>
     {% endif %}
 </div>
 <hr>
 
-{% if actions %}
-{% for action in actions %}
-    {% if action.user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-        <a href="{% url 'painter_profile' action.user %}">
-            <div class="pna d-inline-block">{{ action.user.username.0 }}</div>
-            <span class="author text-secondary">
-            {{ action.user.username }}</span>
-        </a>
-            <span class="text-danger">{{ action.verb }}
-                {% if action.verb == 'started following' %}
-                    <a href="{% url 'painter_profile' action.target %}">{{ action.target }}</a>
-                {% else %}
-                    <a href="{{ action.target.get_absolute_url}}">{{ action.target.title }}</a>
-                {% endif %}
-            </span>
-            <!-- <span class="text-danger">{{ action.created|timesince }} ago</span> -->
-    {% else %}
-        <a href="{% url 'painter_profile' action.user %}">
-            <span class="author text-secondary">
-                <img src="{{ action.user.profile.image.url }}" alt="" class="img-fluid">
-            {{ action.user.username }}
-            </span>
-        </a>
-            <span class="text-danger">{{ action.verb }}
-                {% if action.verb == 'started following' %}
-                    <a href="{% url 'painter_profile' action.target %}">{{ action.target }}</a>
-                {% else %}
-                    <a href="{{ action.target.get_absolute_url}}">{{ action.target.title }}</a>
-                {% endif %}
-            </span>
-            <!-- <span class="text-danger">{{ action.created|timesince }} ago</span> -->
-    {% endif %}
-    <hr>
-{% endfor %}
-{% endif %}
-    
+<div id="notification-container">
+</div>
+
+
+
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+    $(document).ready(function () {
+        var each_load = 10;
+        var start_from = 0;
+        var action = 'inactive'
+
+        function load_post_data(each_load, start_from) {
+            $.ajax({
+                url: 'notification_fetch/',
+                method: 'GET',
+                data: {
+                    each_load: each_load,
+                    start_from: start_from
+                },
+                caches: false,
+                success: function (response) {
+                    $('#notification-container').append(response);
+                    if (response == "") {
+                        action = 'active';
+                    } else {
+                        // $('#more-data').html("<i class='fa fa-cog fa-spin'></i>")
+                        action = 'inactive';
+                    }
+                }
+            })
+        }
+
+        if (action == 'inactive') {
+            action = 'active',
+                load_post_data(each_load, start_from)
+        }
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() > $('#notification-container').height() &&
+                action ==
+                'inactive') {
+                action = 'active';
+                start_from = start_from + each_load;
+                setTimeout(function () {
+                    load_post_data(each_load, start_from);
+                }, 1000)
+            }
+        })
+
+
+        $('#mark_all').click(function(){
+            $.ajax({
+                url: 'mark_all_as_read/',
+                method: 'GET',
+                data: {},
+                success: function(response){
+                    console.log('marked all as read')
+                }
+            })
+        })
+
+    })
+</script>
+
 {% endblock %}
