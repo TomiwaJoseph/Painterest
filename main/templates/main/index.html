@@ -3,16 +3,55 @@
 
 {% block content %}
 
-    <div class="card-columns">
-
-        {% for paint in object_list %}
-            <div class="card paint-img">
-                <a href="{{ paint.get_absolute_url }}">
-                    <img class="card-img" src="{{ paint.painting.url }}" alt="Card image cap">
-                </a>
-            </div>
-        {% endfor %}
-
+    <div class="card-columns" id="painting_container">
     </div>
-    
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+    $(document).ready(function () {
+        var each_load = 15;
+        var start_from = 0;
+        var action = 'inactive'
+
+        function load_post_data(each_load, start_from) {
+            $.ajax({
+                url: 'fetch_category/',
+                method: 'GET',
+                data: {
+                    each_load: each_load,
+                    start_from: start_from
+                },
+                caches: false,
+                success: function (response) {
+                    $('#painting_container').append(response);
+                    if (response == "") {
+                        action = 'active';
+                    } else {
+                        // $('#more-data').html("<i class='fa fa-cog fa-spin'></i>")
+                        action = 'inactive';
+                    }
+                }
+            })
+        }
+
+        if (action == 'inactive') {
+            action = 'active',
+                load_post_data(each_load, start_from)
+        }
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() > $('#painting_container').height() && action ==
+                'inactive') {
+                action = 'active';
+                start_from = start_from + each_load;
+                setTimeout(function () {
+                    load_post_data(each_load, start_from);
+                }, 1000)
+            }
+        })
+    })
+</script>
+
 {% endblock %}

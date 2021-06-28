@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<div class="row">
+<div class="row" id="slct_fld">
     
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-7 mx-auto">
         {% if folders_list %}
-            <h4 class="mt-5">Select a folder and click save</h4>
+            <h4 class="mt-5">Select a folder & click Save</h4>
             <div class="content-section bg-light mt-2">
                 <form method="POST" action=".">
                     {% csrf_token %}

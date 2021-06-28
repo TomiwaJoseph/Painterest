@@ -4,9 +4,9 @@
 
 {% block content %}
 
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between" id="notif_justify">
     <h2>{{ folder_name }}</h2>
-    <button type="button" class="btn btn-danger w-25 my-2" data-toggle="modal" data-target="#modalDeleteFolder">Delete folder</button>
+    <button class="btn btn-danger w-25 my-2" data-toggle="modal" data-target="#modalDeleteFolder">Delete folder</button>
 </div>
 <hr>
 
@@ -60,10 +60,6 @@
                     </a>
                 </div>
             </div>
-            <!-- <div class="modal-footer d-flex justify-content-between">
-                <button type="button" class="btn btn-danger w-50" data-toggle="modal" data-target="#modaledit">Delete</button>
-                <a href="" class="btn btn-info w-50">Download</a>
-            </div> -->
         </div>
     </div>
 </div>
