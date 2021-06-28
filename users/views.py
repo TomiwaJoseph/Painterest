@@ -17,6 +17,7 @@ from django.contrib.auth.decorators import login_required
 from actions.models import Action
 from actions.utils import create_action
 
+
 # Create your views here.
 def following_and_follower(request, painter):
     all_follower = UserFollowing.objects.filter(user_to=CustomUser.objects.filter(
@@ -48,7 +49,7 @@ def following_and_follower(request, painter):
     }
     if request.user.is_authenticated:
         context['notify'] = len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-            flat=True), read=False))
+                flat=True), action_for=request.user, read=False))
         context['unread_count'] = Message.objects.filter(recepient=request.user, 
             read=False).count()
 
@@ -74,7 +75,10 @@ def follow(request, to_follow):
         messages.info(request, "You can't follow yourself.")
     else:
         UserFollowing.objects.create(user_from=request.user, user_to=user_to_follow)
-        create_action(request.user, 'started following', user_to_follow)
+        all_followers = UserFollowing.objects.filter(user_to=CustomUser.objects.filter(
+            username=request.user.username).first())
+        for user in all_followers:
+            create_action(request.user, 'started following', user_to_follow, user.user_from)
     
     return redirect('painter_profile', painter=to_follow)
 
@@ -94,7 +98,7 @@ def unfollow(request, to_unfollow):
 def profile_view(request):
     context = {
         'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-            flat=True), read=False)),
+            flat=True), action_for=request.user, read=False)),
         'unread_count': Message.objects.filter(recepient=request.user, 
             read=False).count()
     }
@@ -106,7 +110,7 @@ def painter_profile_view(request, painter):
     }
     if request.user.is_authenticated:
         context['notify'] = len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-            flat=True), read=False))
+            flat=True), action_for=request.user, read=False))
         context['unread_count'] = Message.objects.filter(recepient=request.user, 
             read=False).count()
     return render(request, 'users/painter_profile.html', context)
@@ -143,7 +147,7 @@ def settings_view(request):
     
     context = {
         'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-            flat=True), read=False)),
+            flat=True), action_for=request.user, read=False)),
         'user_categories': user_categories,
         'cat_pictures': picture_for_each_category,
         'categories': Category.objects.all(),
