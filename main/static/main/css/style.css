@@ -14,6 +14,11 @@ button:active {
 
 /* <------- Navbar ---------> */
 
+
+.logo{
+    height: 54px;
+}
+
 .navbar .dropdown-menu {
     font-size: 14px;
     border-radius: 0px;
@@ -30,7 +35,7 @@ button:active {
 }
 
 nav .nav-item:last-child {
-    padding-right: 7em;
+    padding-right: 3em;
 }
 
 nav .nav-item {
@@ -38,16 +43,11 @@ nav .nav-item {
 }
 
 .navbar-brand {
-    font-size: 30px;
+    font-size: 25px;
     color: red !important;
-    padding-left: 5em;
+    padding-left: 3em;
 }
 
-@media (max-width: 995px) {
-    .navbar-brand {
-        padding-left: 0px;
-    }
-}
 
 .navbar-nav>.active>a,
 .nav-item>a:hover {
@@ -67,8 +67,6 @@ nav .nav-item {
     font-size: 15px;
     margin-left: -5px;
     margin-top: -10px;
-    /* background-color: red;
-    color: #fff; */
 }
 
 .profile_badge {
@@ -243,7 +241,7 @@ form .alert-block{
     background: rgb(22, 202, 202);
 }
 
-.details .active,
+/* .details .active, */
 .settings .active,
 .foll {
     background: rgb(12, 170, 170) !important;
@@ -270,15 +268,15 @@ form .alert-block{
     color: #fff;
     margin-right: 10px;
 }
-
-.details a i.fa {
+/* 
+.details a i.fa{
     color: #000;
-    font-size: 25px;
+    font-size: 55px;
 }
 
 .details a i.fa:hover {
     color: red;
-}
+} */
 
 .demarcate{
     background-color: red;
@@ -723,4 +721,87 @@ input.vis:checked + label{
 }
 .notif_read{
     background: rgb(237, 237, 237);
+}
+
+/* <------------- Media Queries ------> */
+
+@media (max-width: 320px) {
+    .logo{
+        display: none;
+    }
+    #slct_fld h4{
+        font-size: 20px;
+    }
+    #log_cat .category{
+        font-size: 10px;
+    }
+    #web_url{
+        font-size: 11px!important;
+    }
+    #send_button{
+        margin-top: 5px;
+    }
+    #view_que button{
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 995px) {
+    .navbar-nav{
+        align-items: center;
+    }
+}
+
+@media (max-width: 995px) {
+    .navbar-brand {
+        padding-left: 0px;
+    }
+}
+
+@media (min-width: 768px){
+    nav .nav-item:last-child {
+        padding-right: 0px;
+    }
+}
+
+@media (max-width: 460px){
+    #notif_justify{
+        display: block!important;
+    }
+    .each_message h3,
+    .each_message p{
+        margin-left: 0px!important;
+    }
+    #notif_justify button{
+        display: block!important;
+        width: 50%!important;
+    }
+    #gallery .card-columns{
+        margin: 0 16px;
+    }
+}
+@media (max-width: 425px){
+    .each_message .text-info{
+        display: none;
+    }
+    #single_msg .text-danger{
+        display: none;
+    }
+}
+
+@media (max-width: 768px){
+    .logo{
+        height: 44px;
+    }
+    #web_url{
+        font-size: 14px;
+    }
+}
+
+
+@media (max-width: 600px){
+    .settings button{
+        display: block;
+        width: 100%;
+    }
 }
