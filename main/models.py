@@ -15,7 +15,6 @@ class Paintings(models.Model):
         on_delete=models.CASCADE, related_name='painter')
     painting = models.ImageField(upload_to='paintings', blank=True)
     title = models.CharField(max_length=50, blank=False)
-    description = models.CharField(max_length=255, blank=True)
     slug = models.SlugField(default='slug', max_length=250)
     date_painted = models.DateTimeField(auto_now_add=True, db_index=True)
     tags = TaggableManager()
@@ -70,6 +69,7 @@ class Message(models.Model):
         on_delete=models.CASCADE, related_name='message_sender')
     recepient = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE, related_name='message_recepient')
+    subject = models.CharField(default='Some subject', max_length=100)
     message = models.TextField(blank=False)
     read = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
