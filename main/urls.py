@@ -2,13 +2,18 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.IndexListView.as_view(), name='index'),
+    path('', views.index, name='index'),
     path('notifications/', views.notifications, name='notifications'),
     path('messages/', views.view_messages, name='view_messages'),
     path('send_message/', views.send_message, name='send_message'),
     path('delete_message/<int:message_id>/', views.delete_message, name='delete_message'),
     path('view_message/<int:message_id>/', views.show_message, name='show_message'),
     path('paint/', views.paint, name='paint'),
+    path('fetch_category/', views.category_fetch, name='fetch_category'),
+    path('notifications/notification_fetch/', views.notification_fetch, name='notification_fetch'),
+    path('view_paint/<int:pk>/<slug:paint>/similar_fetch/', views.similar_fetch, name='similar_fetch'),
+    path('notifications/mark_single_as_read/', views.mark_single_as_read, name='mark_single_as_read'),
+    path('notifications/mark_all_as_read/', views.mark_all_as_read, name='mark_all_as_read'),
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
     path('add_comment/', views.add_comment, name='add_comment'),
@@ -23,5 +28,4 @@ urlpatterns = [
     path('download_painting/<int:paint_pk>/', views.download_painting, name='download_painting'),
     path('save_paint/<int:paint_pk>/', views.save_to_folder, name='save_paint'),
     path('create/', views.create_folder, name='create'),
-    path('mark_as_read/', views.mark_as_read, name='mark_as_read'),
 ]
