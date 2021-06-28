@@ -3,7 +3,7 @@ from .models import Action
 
 # Register your models here.
 class ActionAdmin(admin.ModelAdmin):
-    list_display = ('user', 'verb', 'target', 'created', 'read')
+    list_display = ('user', 'verb', 'target', 'action_for', 'read')
     list_filter = ('created',)
     search_fields = ('verb',)
 
@@ -15,7 +15,7 @@ class ActionAdmin(admin.ModelAdmin):
         queryset.update(read=False)
         messages.success(request, 'Actions marked as unread')
 
-    admin.site.add_action(make_read, "Make Read")
-    admin.site.add_action(make_unread, "Make Unread")
+    admin.site.add_action(make_read, "Mark as read")
+    admin.site.add_action(make_unread, "Mark as unread")
 
 admin.site.register(Action, ActionAdmin)
