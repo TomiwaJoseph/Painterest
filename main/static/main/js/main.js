@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    // AOS.init();
-
 
     $('li.active').removeClass('active');
     $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
@@ -25,11 +23,12 @@ $(document).ready(function () {
     });
 
 
-    $('#tried').addClass('active')
-    $('#tries').show()
+    $('#show_inp').addClass('active')
     $('#comments').hide()
-    $('#add_comment').hide()
+    $('#add_comment').show()
     $('#add_try').hide()
+    $('#tries').hide()
+
 
     $('#tried').click(function () {
         $('#tried').addClass('active')
