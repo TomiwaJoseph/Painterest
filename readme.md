@@ -1,6 +1,6 @@
 # Paint your Interest
 <p>This is absolutely inspired by pinterest. This app is created with the aim to help artist add, appreciate and study from artworks from all over the world.</p>
-<h2 style="color: red;">Features</h2>
+<h2>Features</h2>
 <ul>
     <li>Sign up, login page with email or username 😎😎</li>
     <li>Upload image and download image</li>
@@ -15,7 +15,7 @@
     <li>In short, this app WORKS!</li>
     <li>...and more</li>
 </ul>
-<h2 style="color: teal;">Fun facts...</h2>
+<h2>Fun facts...</h2>
 <ul>
     <li>The painterest logo is created by me</li>
     <li>I am also a digital artist 😎😎</li>
