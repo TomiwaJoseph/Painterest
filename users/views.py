@@ -60,11 +60,17 @@ class MyLoginView(auth_views.LoginView):
     template_name = 'registration/login.html'
 
 
-class RegisterView(generic.CreateView):
-    form_class = RegisterForm
-    template_name = 'registration/register.html'
-    success_url = reverse_lazy('login')
-
+def register(request):
+    if request.user.is_authenticated:
+        return redirect('profile')
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = RegisterForm()
+    return render(request, 'registration/register.html', {'form': form})
 
 @login_required
 def follow(request, to_follow):
