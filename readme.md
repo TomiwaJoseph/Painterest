@@ -1,6 +1,11 @@
 # Paint your Interest
 <p>This is absolutely inspired by pinterest. This app is created with the aim to help artist add, appreciate and study from artworks from all over the world.</p>
 
+## Demo
+Use the [Demo Website](https://tjpainterest.herokuapp.com)
+
+https://user-images.githubusercontent.com/67712127/167329059-47ea73e5-744e-44f3-bb7b-e2cced855c3a.mp4
+
 ## Technologies used
 
 **Front-end**
@@ -17,7 +22,7 @@
 ```
 - Python (Django)
 ```
-<h2>Features</h2>
+## Features
 <ul>
     <li>Sign up, login page with email or username</li>
     <li>Upload image and download image</li>
@@ -32,11 +37,6 @@
     <li>In short, this app WORKS!</li>
     <li>...and more</li>
 </ul>
-
-## Demo
-
-https://user-images.githubusercontent.com/67712127/167329059-47ea73e5-744e-44f3-bb7b-e2cced855c3a.mp4
-
 
 <h2>Fun facts...</h2>
 <ul>
