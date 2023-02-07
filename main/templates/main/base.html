@@ -6,8 +6,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main/css/aos.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/responsive.css' %}">
     <link rel="stylesheet" href="{% static 'main/fonts/fontawesome/css/font-awesome.min.css' %}">
     <title>
         {% block title %} Painterest {% endblock %}
@@ -15,23 +17,19 @@
 </head>
 
 <body>
-
     <!-- Navigation -->
-
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" data-aos="fade-down" data-aos-delay="200" data-aos-duration="1000">
+        <div class="container">
             <a class="navbar-brand" href="{% url 'index' %}">
                 <img src="/media/painterestLogo.png" class="logo img-fluid" alt=""> Painterest</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="mr-auto"></div>
+            <div class="collapse navbar-collapse align-items-center justify-content-end" id="navBar">                
                 <ul class="navbar-nav d-flex">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'index' %}">Home <span
+                        <a class="nav-link home" href="{% url 'index' %}">Home <span
                             class="sr-only">(current)</span></a>
                     </li>
                     {% if not user.is_authenticated %}
@@ -42,6 +40,11 @@
                             <a class="nav-link" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">Login</a>
                         </li>
                     {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'add_paint' %}">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'notifications' %}" tabindex="-1" aria-disabled="true">
                                 <i class="fa fa-bell">
@@ -65,7 +68,7 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown09"
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {% if user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
                                     <div class="profile_badge">{{ user.username.0 }}</div>
@@ -73,18 +76,18 @@
                                     <img class="rounded-circle badge-account-img" src="{{ user.profile.image.url }}">
                                 {% endif %}
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown09">
-                                <a class="dropdown-item drop" href="{% url 'profile' %}">Profile</a>
-                                <a class="dropdown-item drop" href="{% url 'settings' %}">Settings</a>
-                                <a class="dropdown-item drop" href="{% url 'view_folders' %}">Saved pins</a>
-                                <a class="dropdown-item drop" href="{% url 'logout' %}">Log out</a>
-                            </div>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown09">
+                                <li><a class="dropdown-item drop" href="{% url 'profile' %}">Profile</a></li>
+                                <li><a class="dropdown-item drop" href="{% url 'settings' %}">Settings</a></li>
+                                <li><a class="dropdown-item drop" href="{% url 'view_folders' %}">Saved paints</a></li>
+                                <li><a class="dropdown-item drop" href="{% url 'logout' %}">Log out</a></li>
+                            </ul>
                         </li>
                     {% endif %}
                 </ul>
             </div>
-        </nav>
-    </div>
+        </div>
+    </nav>
 
     <div class="container mt-5">
         <div class="col-md-5 mx-auto my-auto">
@@ -92,9 +95,7 @@
                 {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} alert-dismissible text-center">
                 {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                    <span aria-hidden="true" class="text-"><small>x</small></span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
                 </div>
                 {% endfor%}
             {% endif %}
@@ -117,6 +118,8 @@
         </div>
     </div>
 
+    <script src="{% static 'main/js/aos.js' %}"></script>
+    <script src="{% static 'main/js/masonry.pkgd.min.js' %}"></script>
     <script src="{% static 'main/js/my_jQuery.js' %}"></script>
     <script src="{% static 'main/js/main.js' %}"></script>
     <script src="{% static 'main/js/bootstrap.min.js' %}"></script>

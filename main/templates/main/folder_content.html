@@ -6,7 +6,7 @@
 
 <div class="d-flex justify-content-between" id="notif_justify">
     <h2>{{ folder_name }}</h2>
-    <button class="btn btn-danger w-25 my-2" data-toggle="modal" data-target="#modalDeleteFolder">Delete folder</button>
+    <button class="btn btn-danger w-25 my-2 del_fold_btn" data-toggle="modal" data-target="#modalDeleteFolder">Delete folder</button>
 </div>
 <hr>
 
@@ -40,10 +40,10 @@
                                     <img src="{{ pics.painting.url }}" alt="" class="img-fluid">
                                 </a>
                                 <hr>
-                                <div class="d-flex justify-content-around">
-                                    <a href="{% url 'delete_folder_paint' folder_id pics.id %}" class="btn btn-outline-danger w-25" 
+                                <div class="d-flex justify-content-around modal_utils">
+                                    <a href="{% url 'delete_folder_paint' folder_id pics.id %}" class="btn btn-outline-danger " 
                                         onclick="return confirm('Are you sure')">Delete</a>
-                                    <a href="{% url 'download_painting' pics.id %}" class="w-25 btn btn-outline-info">
+                                    <a href="{% url 'download_painting' pics.id %}" class="btn btn-outline-info">
                                         Download
                                     </a>
                                 </div>

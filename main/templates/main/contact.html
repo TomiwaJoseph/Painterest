@@ -4,16 +4,16 @@
 
 {% block content %}
 
-<div class="row">
-    <div class="col-md-4 mx-auto my-auto text-center">
+<div class="row" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">
+    <div class="col-md-4 mx-auto my-auto text-center contact_col">
         <h2>Contact us</h2>
         <hr>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-6 mx-auto">
-        <form action="{% url 'contact' %}" method="POST" class="mt-4 p-4 bg-light">
+    <div class="col-md-6 mx-auto" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000">
+        <form action="{% url 'contact' %}" onsubmit='disableButton()' method="POST" class="mt-4 p-4 bg-light">
             {% csrf_token %}
             <div class="form-group">
                 <p>Subject *</p>
@@ -27,9 +27,18 @@
                 <p>Message *</p>
                 <textarea required name="message" rows="8" class="form-control"></textarea>
             </div>
-            <button type="submit" class="btn btn-outline-info log my-3">Send message</button>
+            <button id="contact-submit-button" type="submit" class="btn btn-outline-info log my-3">Send message</button>
         </form>
     </div>
 </div>
 
+{% endblock %}
+{% block script %}
+<script>
+    function disableButton() {
+        var btn = document.getElementById('contact-submit-button')
+        btn.disabled = true;
+        btn.innerText = 'Sending...'
+    }
+</script>
 {% endblock %}

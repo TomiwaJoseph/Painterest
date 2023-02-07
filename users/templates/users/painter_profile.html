@@ -6,8 +6,8 @@
 
 
 <div class="row">
-    <div class="col-md-6 mx-auto my-auto text-center">
-        <div class="content-section bg-light p-5">
+    <div class="col-md-6 mx-auto my-auto text-center paint_profil_col">
+        <div class="content-section bg-light pt-4 pb-4 profile_bcg">
             {% if painter.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
                 <div class="change_badge mx-auto">{{ painter.username.0 }}</div>
             {% else %}
@@ -30,13 +30,11 @@
             <hr>
             {% if painter.profile.about != 'Write a little bit about yourself here' %}
                 <h4 class="text-danger">About</h4><hr>
-                <h5>{{ painter.profile.about }}</h5><hr>
+                <h5 id="prof_about">{{ painter.profile.about }}</h5><hr>
             {% endif %}
             {% if painter.profile.website_url %}
-                <h5 class="mb-5">
-                    <a href="{{ painter.profile.website_url }}" target="blank" 
-                    class="text-danger">{{ painter.profile.website_url }}</a>
-                </h5>
+            <a href="{{ user.profile.website_url }}" target="blank" id="web_url" 
+                class="text-danger">{{ user.profile.website_url }}</a>
             {% endif %}
             {% if user != painter %}
                 {% if user not in painter.followers.all %}
@@ -59,6 +57,7 @@
                 </form>
             </div>
         </div>
+        
     </div>
 </div>
 

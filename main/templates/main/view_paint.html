@@ -28,7 +28,7 @@
     
     <div class="col-md-6">
         <div class="row">
-            <div id="view_que" class="col-lg-8 col-md-12 col-sm-6 d-flex justify-content-around">
+            <div class="col d-flex justify-content-between">
                 {% with object.painted.all.count as total_tries %}
                     {% if total_tries == 1 %}
                         <button class="btn btn-info utils" id="tried">{{ total_tries }} Try</button>
@@ -39,15 +39,20 @@
                 {% with object.paint_comments.all.count as total_comments %}
                     <button class="btn btn-info utils" id="paint_comments">{{ total_comments }} Comment{{ total_comments|pluralize }}</button>
                 {% endwith %}
-                <button class="btn btn-info utils" id="show_inp">Add Comment</button>
+                <button class="btn btn-info utils" id="show_inp">Comment</button>
             </div>
-            <div class="col-lg-4 col-md-12 col-sm-6 d-flex justify-content-around">
-                <a href="{% url 'save_paint' object.id %}" class="btn btn-info utils">Save</a>
-                <a href="{% url 'download_painting' object.id %}" class="down_but">
-                    <i class="fa fa-download"></i>
+        </div>
+        <div class="row mt-2">
+            <div class="col d-flex justify-content-center">
+                <a href="{% url 'save_paint' object.id %}" class="btn btn-info utils w-100 mr-3">Save Image</a>
+                <a href="{% url 'download_painting' object.id %}" class="btn down_but">
+                    Download <i class="fa fa-download"></i>
                 </a>
             </div>
         </div>
+
+        <hr class="demarcate">
+
         <div id="tries">
             <div class="row">
                 {% for trial in object.painted.all %}
@@ -65,14 +70,14 @@
                         <div class="pna d-inline-block">{{ comment.commenter.username.0 }}</div>
                         <span class="author mr-2 text-secondary">
                         {{ comment.commenter.username }}</span>
-                        <span class="text-danger">{{ comment.created }}</span>
+                        <span class="date_created text-danger">{{ comment.created }}</span>
                         <p class="my-2 ml-5">{{ comment.body }}</p>
                     {% else %}
                         <span class="author mr-2 text-secondary">
                             <img src="{{ comment.commenter.profile.image.url }}" alt="" class="img-fluid">
                         {{ comment.commenter.username }}
                         </span>
-                        <span class="text-danger">{{ comment.created }}</span>
+                        <span class="date_created text-danger">{{ comment.created }}</span>
                         <p class="my-2 ml-5">{{ comment.body }}</p>
                     {% endif %}
                 </div>
@@ -116,6 +121,7 @@
             </div>
         </div>
     </div>
+
 </div>
 <hr class="demarcate">
 

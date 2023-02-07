@@ -3,7 +3,9 @@
 
 {% block content %}
 
-    <div class="card-columns" id="painting_container">
+    <div class="container">
+        <div class="js-masonry row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4" id="painting_container" data-masonry='{"percentPosition": true,  "itemSelector": ".col" }'>
+        </div>        
     </div>
 
 {% endblock %}
@@ -30,9 +32,19 @@
                     if (response == "") {
                         action = 'active';
                     } else {
-                        // $('#more-data').html("<i class='fa fa-cog fa-spin'></i>")
                         action = 'inactive';
                     }
+                    var msnry = new Masonry('.row', {
+                        itemSelector: '.col',
+                        percentPosition: true
+                    });
+                    var $grid = document.querySelector('.row');
+                    var $images = $grid.querySelectorAll('.card img');
+                    $images.forEach(function (el) {
+                        el.addEventListener('load', function () {
+                            msnry.layout();
+                        });
+                    });
                 }
             })
         }

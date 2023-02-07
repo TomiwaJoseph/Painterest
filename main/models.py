@@ -12,16 +12,17 @@ from django.db import models
 
 class Paintings(models.Model):
     adder = models.ForeignKey(settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, related_name='painter')
+                              on_delete=models.CASCADE, related_name='painter')
     painting = models.ImageField(upload_to='paintings', blank=True)
     title = models.CharField(max_length=50, blank=False)
-    slug = models.SlugField(default='slug', max_length=250)
+    slug = models.SlugField(max_length=50)
+    artist_name = models.CharField(max_length=50, blank=True)
     date_painted = models.DateTimeField(auto_now_add=True, db_index=True)
     tags = TaggableManager()
 
     def __str__(self):
         return "{}'s {}".format(self.adder, self.title)
-    
+
     class Meta:
         verbose_name_plural = 'Paintings'
         ordering = ('-date_painted',)
@@ -46,29 +47,17 @@ class Paintings(models.Model):
         the_hex = uuid4().hex
         self.slug = the_hex
         self.painting = InMemoryUploadedFile(output, "ImageField",
-                f'{the_hex}.jpg', 'image/jpeg',
-                sys.getsizeof(output), None)
-
+                                             f'{the_hex}.jpg', 'image/jpeg',
+                                             sys.getsizeof(output), None)
 
         super().save(*args, **kwargs)
-
-    #     super(Paintings, self).save(*args, **kwargs)
-
-    #     ext = self.painting.name.split('.')[-1]
-    #     the_hex = uuid4().hex
-    #     initial_path = self.painting.path
-    #     new_path = settings.MEDIA_ROOT + '\paintings\{}.{}'.format(the_hex, ext)
-    #     os.rename(initial_path, new_path)
-    #     self.painting = new_path
-    #     self.slug = the_hex
-    #     super(Paintings, self).save(*args, **kwargs)
 
 
 class Message(models.Model):
     sender = models.ForeignKey(settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, related_name='message_sender')
+                               on_delete=models.CASCADE, related_name='message_sender')
     recepient = models.ForeignKey(settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, related_name='message_recepient')
+                                  on_delete=models.CASCADE, related_name='message_recepient')
     subject = models.CharField(default='Some subject', max_length=100)
     message = models.TextField(blank=False)
     read = models.BooleanField(default=False)
@@ -83,10 +72,10 @@ class Message(models.Model):
 
 class Comment(models.Model):
     painting = models.ForeignKey(Paintings,
-        on_delete=models.CASCADE, related_name='paint_comments')
+                                 on_delete=models.CASCADE, related_name='paint_comments')
     body = models.CharField(max_length=255)
     commenter = models.ForeignKey(settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE)
+                                  on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -95,16 +84,16 @@ class Comment(models.Model):
 
 class PaintTries(models.Model):
     painting = models.ForeignKey(Paintings,
-        on_delete=models.CASCADE, related_name='painted')
+                                 on_delete=models.CASCADE, related_name='painted')
     tryer = models.ForeignKey(settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE)
+                              on_delete=models.CASCADE)
     tries = models.ImageField(upload_to='painting-tries')
     slug = models.SlugField(default='slug', max_length=250)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return '{} tried {}'.format(self.tryer, self.painting)
-    
+
     class Meta:
         verbose_name_plural = 'Paint Tries'
         verbose_name = 'Paint Try'
@@ -119,7 +108,8 @@ class PaintTries(models.Model):
         ext = self.tries.name.split('.')[-1]
         the_hex = uuid4().hex
         initial_path = self.tries.path
-        new_path = settings.MEDIA_ROOT + '\painting-tries\{}.{}'.format(the_hex, ext)
+        new_path = settings.MEDIA_ROOT + \
+            '\painting-tries\{}.{}'.format(the_hex, ext)
         os.rename(initial_path, new_path)
         self.tries = new_path
         self.slug = the_hex
@@ -129,8 +119,9 @@ class PaintTries(models.Model):
 class Folder(models.Model):
     name = models.CharField(max_length=50, blank=False, unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-        related_name='folder_owner', on_delete=models.CASCADE)
-    saved_painting = models.ManyToManyField(Paintings, through="FolderMember", blank=True)
+                             related_name='folder_owner', on_delete=models.CASCADE)
+    saved_painting = models.ManyToManyField(
+        Paintings, through="FolderMember", blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

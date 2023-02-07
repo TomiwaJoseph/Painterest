@@ -4,78 +4,51 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-md-8 mx-auto d-flex justify-content-between">
-        <button id="followers" class="btn btn-outline-info foll">Followers ({{ followers_count }})</button>
-        <button id="followings" class="btn btn-outline-info foll">Following ({{ following_count }})</button>
+    <div class="col-md-8 mx-auto d-flex justify-content-between follwi_follwe">
+        <button id="followers" class="btn btn-info">Followers ({{ followers_count }})</button>
+        <button id="followings" class="btn btn-info">Following ({{ following_count }})</button>
     </div>
 </div>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <hr class="setting_demar">
+    </div>
+</div>
+
 <div class="row">
-    <div class="col-md-6 pr-5">
-        <div id="flwr_div" class="my-2">
-            {% for user in users_follower %}
-                <a href="{% url 'painter_profile' user.user_from %}" class="red_to_profile">
-                    <div class="d-flex justify-content-end">
-                        <div class="chip-left mb-2">
-                            <img src="{{ user.user_from.profile.image.url }}" alt="">{{ user.user_from }}
-                        </div>
+    <div class="col-md-8 mx-auto">
+        <div class="content-section my-2"  id="flwr_div">
+            <div class="row">
+                {% for user in users_follower %}
+                    <div class="col-md-3 text-center follw_and_follwin_col">
+                        <a href="{% url 'painter_profile' user.user_from %}" class="red_to_profile">
+                            <div class="d-inline-block">
+                                <img class="img-fluid rounded-circle follower_img" src="{{ user.user_from.profile.image.url }}">
+                                <p class="red_to_profile">{{ user.user_from }}</p>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            {% endfor %}
-            {% if users_follower.has_other_pages %}
-    
-                <div class="text-right">
-                    {% if users_follower.has_previous %}
-                        <a class="btn btn-outline-info my-4" href="?page=1">First</a>
-                        <a class="btn btn-outline-info my-4" href="?page={{ users_follower.previous_page_number }}">Previous</a>
-                    {% endif %}
-                    {% for num in users_follower.paginator.page_range %}
-                        {% if users_follower.number == num %}
-                            <a class="btn btn-info my-4" href="?page={{ num }}">{{ num }}</a>
-                        {% elif num > users_follower.number|add:'-3' and num < users_follower.number|add:'3' %}
-                            <a class="btn btn-outline-info my-4" href="?page={{ num }}">{{ num }}</a>
-                        {% endif %}
-                    {% endfor %}
-                    {% if users_follower.has_next %}
-                        <a class="btn btn-outline-info my-4" href="?page={{ users_follower.next_page_number }}">Next</a>
-                        <a class="btn btn-outline-info my-4" href="?page={{ users_follower.paginator.num_pages }}">Last</a>
-                    {% endif %}
-                </div>
-    
-            {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
-    <div class="col-md-6 pl-5">
-        <div id="flwng_div" class="my-2">
-            {% for user in users_following %}
-                <a href="{% url 'painter_profile' user.user_to %}" class="red_to_profile">
-                    <div class="d-flex">
-                        <div class="chip-right mb-2">
-                            <img src="{{ user.user_to.profile.image.url }}" alt="">{{ user.user_to }}
-                        </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="content-section my-2" id="flwng_div">
+            <div class="row">
+                {% for user in users_following %}
+                    <div class="col-md-3 text-center follw_and_follwin_col">
+                        <a href="{% url 'painter_profile' user.user_to %}" class="red_to_profile">
+                            <div class="d-inline-block">
+                                <img class="img-fluid rounded-circle follower_img" src="{{ user.user_to.profile.image.url }}">
+                                <p class="red_to_profile">{{ user.user_to }}</p>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            {% endfor %}
-            {% if users_following.has_other_pages %}
-    
-                <div class="text-left">
-                    {% if users_following.has_previous %}
-                        <a class="btn btn-outline-info my-4" href="?page=1">First</a>
-                        <a class="btn btn-outline-info my-4" href="?page={{ users_following.previous_page_number }}">Previous</a>
-                    {% endif %}
-                    {% for num in users_following.paginator.page_range %}
-                        {% if users_following.number == num %}
-                            <a class="btn btn-info my-4" href="?page={{ num }}">{{ num }}</a>
-                        {% elif num > users_following.number|add:'-3' and num < users_following.number|add:'3' %}
-                            <a class="btn btn-outline-info my-4" href="?page={{ num }}">{{ num }}</a>
-                        {% endif %}
-                    {% endfor %}
-                    {% if users_following.has_next %}
-                        <a class="btn btn-outline-info my-4" href="?page={{ users_following.next_page_number }}">Next</a>
-                        <a class="btn btn-outline-info my-4" href="?page={{ users_following.paginator.num_pages }}">Last</a>
-                    {% endif %}
-                </div>
-    
-            {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

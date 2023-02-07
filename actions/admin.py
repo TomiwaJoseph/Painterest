@@ -1,7 +1,7 @@
 from django.contrib import admin, messages
 from .models import Action
 
-# Register your models here.
+
 class ActionAdmin(admin.ModelAdmin):
     list_display = ('user', 'verb', 'target', 'action_for', 'read')
     list_filter = ('created',)
@@ -17,5 +17,6 @@ class ActionAdmin(admin.ModelAdmin):
 
     admin.site.add_action(make_read, "Mark as read")
     admin.site.add_action(make_unread, "Mark as unread")
+
 
 admin.site.register(Action, ActionAdmin)

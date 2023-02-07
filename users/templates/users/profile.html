@@ -6,8 +6,8 @@
 
 
 <div class="row">
-    <div class="col-md-6 mx-auto my-auto text-center">
-        <div class="content-section bg-light p-5">
+    <div class="col-md-6 mx-auto my-auto text-center profil_col">
+        <div class="content-section bg-light pt-4 pb-4 profile_bcg">
             {% if user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
                 <div class="change_badge mx-auto">{{ user.username.0 }}</div>
             {% else %}
@@ -23,10 +23,10 @@
             </a>
             <hr>
             <h4 class="text-danger">About</h4><hr>
-            <h5 style="line-height: 40px;">{{ user.profile.about }}</h5><hr>
+            <h5 id="prof_about">{{ user.profile.about }}</h5><hr>
             <a href="{{ user.profile.website_url }}" target="blank" id="web_url" 
             class="text-danger">{{ user.profile.website_url }}</a>
-            <a href="{% url 'settings' %}" class="category mt-3">Edit your profile here</a>
+            <a href="{% url 'settings' %}" class="d-block category mt-3">Edit your profile here</a>
         </div>
     </div>
 </div>
