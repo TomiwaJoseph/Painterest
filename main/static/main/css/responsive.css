@@ -1,0 +1,179 @@
+
+@media (max-width: 768px) {
+    .logo{
+        height: 44px;
+    }
+    #web_url{
+        font-size: 16px;
+        text-align: center;
+    }
+    #unread_filter_section h3,
+    #read_filter_section h3,
+    #all_filter_section h3 {
+        font-size: 22px;
+    }
+    #unread_filter_section p,
+    #read_filter_section p,
+    #all_filter_section p {
+        margin-left: 0px !important;
+    }
+    #slct_fld {
+        margin-top: -70px !important;
+    }
+    #home-feed h3{
+        margin-top: -40px !important;
+    }
+    .profil_col,
+    .paint_profil_col,
+    .flex-column-reverse,
+    .add_paint_col,
+    #notif_justify,
+    .about_col,
+    .contact_col,
+    .register_col,
+    .all_folders_col,
+    .login_col {
+        margin-top: -25px !important;
+    }
+    .utils {
+        font-size: 12px;
+        width: 32%;
+    }
+    .down_but{
+        font-size: 12px;
+    }
+    #comments .pna,
+    #comments .author {
+        font-size: 15px;
+    }
+    #comments .date_created{
+        font-size: 12px;
+    }
+    #comments p {
+        margin-left: 0px !important;
+        font-size: 14px;
+    }
+
+}
+
+@media (max-width: 425px) {
+    #unread_filter_section h3,
+    #read_filter_section h3,
+    #all_filter_section h3 {
+        margin-top: 5px;
+    }
+    .setting_demar{
+        width: 100%;
+    }
+    .each_message .text-info{
+        display: none;
+    }
+    #single_msg .text-danger{
+        display: none;
+    }
+}
+
+@media (max-width: 460px) {
+    #notif_justify {
+        display: block;
+    }
+    #mark_all {
+        display: block;
+        padding-right: 95% !important;
+    }
+    #notif_justify{
+        display: block!important;
+    }
+    .each_message h3,
+    .each_message p{
+        margin-left: 0px!important;
+    }
+    #notif_justify button{
+        display: block!important;
+        width: 50%!important;
+    }
+    #gallery .card-columns{
+        margin: 0 16px;
+    }
+}
+
+@media (max-width: 559px) {
+    .del_fold_btn {
+        display: block;
+        width: 30% !important;
+    }
+}
+
+@media (max-width: 460px) {
+    .del_fold_btn {
+        display: block;
+        padding-right: 95% !important;
+    }
+    .modal_utils a{
+        width: 40% !important;
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    #painting_container {
+        margin-top: -25px;
+    }
+}
+
+@media (max-width: 320px) {
+    .logo{
+        display: none;
+    }
+    #slct_fld h4{
+        font-size: 20px;
+    }
+    #log_cat .category{
+        font-size: 10px;
+    }
+    #web_url{
+        font-size: 13px!important;
+        text-align: center;
+        margin-left: 0px !important;
+    }
+    #send_button{
+        margin-top: 5px;
+    }
+    #view_que button{
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 995px) {
+    .navbar-nav{
+        align-items: center;
+    }
+}
+
+@media (max-width: 995px) {
+    .navbar-brand {
+        padding-left: 0px;
+    }
+}
+
+@media (min-width: 768px){
+    nav .nav-item:last-child {
+        padding-right: 0px;
+    }
+}
+
+@media (max-width: 600px){
+    .settings button{
+        display: block;
+        width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .follw_and_follwin_col {
+        -webkit-box-flex: 0 !important;
+        -ms-flex: 0 0 33.33333% !important;
+        flex: 0 0 33.33333% !important;
+        max-width: 33.33333% !important;
+    }
+}
