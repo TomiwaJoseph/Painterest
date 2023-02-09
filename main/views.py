@@ -204,11 +204,15 @@ def send_message(request):
     receiver = request.POST.get('painter_name')
     message = request.POST.get('message')
     subject = request.POST.get('subject')
-    painter = CustomUser.objects.filter(username=receiver).first()
-    Message.objects.create(sender=request.user,
-                           recepient=painter, message=message, subject=subject)
-    django_messages.success(request, "Message sent successfully.")
-    return redirect('painter_profile', painter=receiver)
+    try:
+        painter = CustomUser.objects.filter(username=receiver).first()
+        Message.objects.create(sender=request.user,
+                               recepient=painter, message=message, subject=subject)
+        django_messages.success(request, "Message sent successfully.")
+        return redirect('painter_profile', painter=receiver)
+    except:
+        django_messages.error(request, "Message not sent successfully.")
+        return redirect('profile')
 
 
 @login_required
@@ -241,10 +245,6 @@ def view_messages(request):
     return render(request, 'main/messages.html', context)
 
 
-def paint(request):
-    return render(request, 'main/paint.html')
-
-
 @login_required
 def add_comment(request):
     get_painting = Paintings.objects.get(id=request.POST.get('painting_id'))
@@ -263,7 +263,7 @@ def add_comment(request):
 
 
 class PaintingDetailView(DetailView):
-    # model = Paintings
+    model = Paintings
     template_name = 'main/view_paint.html'
 
     def get_context_data(self, **kwargs):

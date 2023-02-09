@@ -10,7 +10,6 @@ class EmailBackend(ModelBackend):
         try:
             user = UserModel.objects.get(
                 Q(username=username) | Q(email=username))
-            # user = UserModel.objects.get(Q(username__iexact=username) | Q(email__iexact=username))
         except UserModel.DoesNotExist:
             UserModel().set_password(password)
         except UserModel.MultipleObjectsReturned:

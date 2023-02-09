@@ -6,20 +6,22 @@
 
 <div class="d-flex justify-content-between" id="notif_justify">
     <h2>{{ folder_name }}</h2>
-    <button class="btn btn-danger w-25 my-2 del_fold_btn" data-toggle="modal" data-target="#modalDeleteFolder">Delete folder</button>
+    <button class="btn btn-danger w-25 my-2 del_fold_btn" data-bs-toggle="modal" data-bs-target="#modalDeleteFolder">Delete folder</button>
 </div>
 <hr>
 
-<div class="row" id="gallery" data-toggle="modal" data-target="#exampleModal">
-    <div class="card-columns">
+<div class="js-masonry grid">
+    <div id="gallery" data-bs-toggle="modal" data-bs-target="#exampleModal" data-masonry='{"percentPosition": true,  "itemSelector": ".col" }' class='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4'>        
         {% for pics in folder_pics %}
-            <div class="card folder-img">
-                <img src="{{ pics.painting.url }}" 
-                    data-target="#carouselPics" data-slide-to="{{ forloop.counter0 }}" alt="" class="w-100 img-fluid card-img">
+            <div class="grid-item">
+                <div class="card folder-img">
+                    <img src="{{ pics.painting.url }}" 
+                        data-bs-target="#carouselPics" data-bs-slide-to="{{ forloop.counter0 }}" alt="{{ pics.title }}" class="w-100 img-fluid card-img">
+                </div>
             </div>
         {% endfor %}
-    </div>
-</div>
+    </div>        
+</div>  
 
 <!-- <--------- Modal and Carousel --------- -->
 
@@ -27,12 +29,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">x</span>
-                </button>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="carouselPics" data-ride="carousel" class="carousel slide" data-interval="false">
+                <div id="carouselPics" data-bs-ride="carousel" class="carousel slide" data-bs-interval="false">
                     <div class="carousel-inner">
                         {% for pics in folder_pics %}
                             <div class="carousel-item">
@@ -50,14 +50,14 @@
                             </div>
                         {% endfor %}
                     </div>
-                    <a href="#carouselPics" role="button" data-slide="prev" class="carousel-control-prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselPics" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a href="#carouselPics" role="button" data-slide="next" class="carousel-control-next">
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselPics" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -79,10 +79,30 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+    $(document).ready(function () {
+        var msnry = new Masonry('.row', {
+            itemSelector: '.grid-item',
+            percentPosition: true
+        });
+        var $grid = document.querySelector('.row');
+        var $images = $grid.querySelectorAll('.card img');
+        $images.forEach(function (el) {
+            el.addEventListener('load', function () {
+                msnry.layout();
+            });
+        });
+    })
+</script>
 
 {% endblock %}

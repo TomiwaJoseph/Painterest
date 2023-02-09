@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import (LoginForm, RegisterForm, UserUpdateForm,
                     ProfileUpdateForm)
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 from .models import CustomUser, UserFollowing, Category, Profile
 from django.contrib import messages
 from main.models import Message, Paintings
@@ -17,6 +17,7 @@ from taggit.models import Tag
 from django.contrib.auth.decorators import login_required
 from actions.models import Action
 from actions.utils import create_action
+from django.utils.http import url_has_allowed_host_and_scheme
 
 
 # Create your views here.
@@ -174,3 +175,18 @@ def feed_tuner(request):
         profile_obj.feed_tuner.add(category_obj)
 
     return redirect('profile')
+
+
+def login_demo_user(request):
+    user = CustomUser.objects.get(email='demouser@gmail.com')
+    next_url = request.GET.get('next_path', None)
+    login(request, user)
+    if next_url is None:
+        return redirect('profile')
+    elif not url_has_allowed_host_and_scheme(
+            url=next_url,
+            allowed_hosts={request.get_host()},
+            require_https=request.is_secure()):
+        return redirect('/profile')
+    else:
+        return redirect(next_url)

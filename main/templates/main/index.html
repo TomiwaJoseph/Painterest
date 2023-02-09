@@ -4,7 +4,9 @@
 {% block content %}
 
     <div class="container">
-        <div class="js-masonry row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4" id="painting_container" data-masonry='{"percentPosition": true,  "itemSelector": ".col" }'>
+        <div class="js-masonry grid">
+            <div data-masonry='{"percentPosition": true,  "itemSelector": ".col" }' class='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4'  id="painting_container">        
+            </div>        
         </div>        
     </div>
 
@@ -35,7 +37,7 @@
                         action = 'inactive';
                     }
                     var msnry = new Masonry('.row', {
-                        itemSelector: '.col',
+                        itemSelector: '.grid-item',
                         percentPosition: true
                     });
                     var $grid = document.querySelector('.row');

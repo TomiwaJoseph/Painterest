@@ -8,7 +8,7 @@
         <div class="paint_det">
             <img class="img-fluid" src="{{ object.painting.url }}" alt="">
         </div>
-        <div class="my-4">
+        <div class="mt-4">
             {% if object.adder.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
                 <a href="{% url 'painter_profile' object.adder %}">
                     <div class="pna d-inline-block mb-3">{{ object.adder.username.0 }}</div>
@@ -16,14 +16,20 @@
                     {{ object.adder }}</span>
                 </a>
             {% else %}
-                <a href="{% url 'painter_profile' object.adder %}"><span class="author mr-2 text-secondary"><img
-                    src="{{ object.adder.profile.image.url }}" alt="" class="img-fluid">
-                    {{ object.adder }}
-                </span></a>
-                
+                <a href="{% url 'painter_profile' object.adder %}">
+                    <span class="author mr-2 text-secondary">
+                    <img src="{{ object.adder.profile.image.url }}" alt="{{ object.adder.username.0}}" class="img-fluid">
+                        {{ object.adder }}
+                    </span>
+                </a>
             {% endif %}
         </div>
         <h4 class="text-danger">{{ object.title }}</h4>
+        {% if object.artist_name %}
+            <p class="artist-name">Artist name - <span>{{ object.artist_name }}</span></p>
+            {% else %}
+            <p class="artist-name">Artist Unknown</p>
+        {% endif %}
     </div>
     
     <div class="col-md-6">
@@ -31,20 +37,20 @@
             <div class="col d-flex justify-content-between">
                 {% with object.painted.all.count as total_tries %}
                     {% if total_tries == 1 %}
-                        <button class="btn btn-info utils" id="tried">{{ total_tries }} Try</button>
+                        <button class="btn utils" id="tried">{{ total_tries }} Try</button>
                     {% else %}
-                        <button class="btn btn-info utils" id="tried">{{ total_tries }} Tries</button>
+                        <button class="btn utils" id="tried">{{ total_tries }} Tries</button>
                     {% endif %}
                 {% endwith %}
                 {% with object.paint_comments.all.count as total_comments %}
-                    <button class="btn btn-info utils" id="paint_comments">{{ total_comments }} Comment{{ total_comments|pluralize }}</button>
+                    <button class="btn utils" id="paint_comments">{{ total_comments }} Comment{{ total_comments|pluralize }}</button>
                 {% endwith %}
-                <button class="btn btn-info utils" id="show_inp">Comment</button>
+                <button class="btn utils" id="show_inp">Comment</button>
             </div>
         </div>
         <div class="row mt-2">
             <div class="col d-flex justify-content-center">
-                <a href="{% url 'save_paint' object.id %}" class="btn btn-info utils w-100 mr-3">Save Image</a>
+                <a href="{% url 'save_paint' object.id %}" class="btn utils w-100 mr-3">Save Image</a>
                 <a href="{% url 'download_painting' object.id %}" class="btn down_but">
                     Download <i class="fa fa-download"></i>
                 </a>
@@ -92,7 +98,7 @@
                 <input type="hidden" name='painting_id' value="{{ object.id }}">
                 <label for="">Add comments...</label>
                 <input type="text" class="form-control" name="comment">
-                <button class="btn btn-info my-2">Comment</button>
+                <button class="btn smaller-utils my-2">Comment</button>
             </form>
             <hr>
         </div>
@@ -116,7 +122,7 @@
                     <h5 class="encourage">Add a photo to show how it went</h5>
                 </div>
                 <div class="d-inline-block">
-                    <button class="btn btn-outline-info add_pho">Add photo</button>
+                    <button class="btn smaller-utils add_pho">Add photo</button>
                 </div>
             </div>
         </div>
@@ -126,26 +132,22 @@
 <hr class="demarcate">
 
 {% if similar_paintings %}
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="my-4">More like this...</h3>
-
-            <div class="card-columns" id="similar_paintings">
-
-            </div>
+    <div class="container">
+        <h3 class="my-4">More like this...</h3>
+        <div class="js-masonry grid">
+            <div data-masonry='{"percentPosition": true,  "itemSelector": ".col" }' class='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4' id="similar_paintings">        
+            </div>        
         </div>
     </div>
 {% endif %}
-
+    
 {% endblock %}
-
-
-
+    
 {% block script %}
 
 <script>
     $(document).ready(function(){
-        var each_load = 10;
+        var each_load = 5;
         var start_from = 0;
         var action = 'inactive'
 
@@ -165,6 +167,17 @@
                     } else {
                         action = 'inactive';
                     }
+                    var msnry = new Masonry('.grid > .row', {
+                        itemSelector: '.grid-item',
+                        percentPosition: true
+                    });
+                    var $grid = document.querySelector('.grid > .row');
+                    var $images = $grid.querySelectorAll('.card img');
+                    $images.forEach(function (el) {
+                        el.addEventListener('load', function () {
+                            msnry.layout();
+                        });
+                    });
                 }
             })
         }

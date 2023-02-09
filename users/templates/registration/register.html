@@ -14,7 +14,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-5 mx-auto my-auto">
+    <div class="col-md-5 mx-auto my-auto" id="reg_cat">
         <div class="content-section mt-1 bg-light">
             <form method="POST">
                 {% csrf_token %}
@@ -25,7 +25,7 @@
             </form>
             <div class="mt-3 mb-2">
                 <small class="text-muted">
-                    Have An Account? <a class="ml-2 category" href="{% url 'login' %}">Sign In</a>
+                    Have An Account? <a class="category" href="{% url 'login' %}">Sign In</a>
                 </small>
             </div>
         </div>

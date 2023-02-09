@@ -88,7 +88,6 @@ class PaintTries(models.Model):
     tryer = models.ForeignKey(settings.AUTH_USER_MODEL,
                               on_delete=models.CASCADE)
     tries = models.ImageField(upload_to='painting-tries')
-    slug = models.SlugField(default='slug', max_length=250)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -108,7 +107,7 @@ class PaintTries(models.Model):
         ext = self.tries.name.split('.')[-1]
         the_hex = uuid4().hex
         initial_path = self.tries.path
-        new_path = settings.MEDIA_ROOT + \
+        new_path = str(settings.MEDIA_ROOT) + \
             '\painting-tries\{}.{}'.format(the_hex, ext)
         os.rename(initial_path, new_path)
         self.tries = new_path

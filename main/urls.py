@@ -10,7 +10,6 @@ urlpatterns = [
          views.delete_message, name='delete_message'),
     path('view_message/<int:message_id>/',
          views.show_message, name='show_message'),
-    path('paint/', views.paint, name='paint'),
     path('fetch_category/', views.category_fetch, name='fetch_category'),
     path('notifications/notification_fetch/',
          views.notification_fetch, name='notification_fetch'),

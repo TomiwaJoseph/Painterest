@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/responsive.css' %}">
     <link rel="stylesheet" href="{% static 'main/fonts/fontawesome/css/font-awesome.min.css' %}">
+    <script src="{% static 'main/js/aos.js' %}"></script>
     <title>
         {% block title %} Painterest {% endblock %}
     </title>
@@ -123,6 +124,9 @@
     <script src="{% static 'main/js/my_jQuery.js' %}"></script>
     <script src="{% static 'main/js/main.js' %}"></script>
     <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+    <script>
+        AOS.init();
+    </script>
     {% block script %} {% endblock %}
 </body>
 

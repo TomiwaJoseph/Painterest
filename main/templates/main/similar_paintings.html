@@ -1,10 +1,12 @@
 
 
 {% for paint in similar_paintings %}
-    <div class="card paint-img">
-        <a href="{{ paint.get_absolute_url }}">
-            <img class="card-img" src="{{ paint.painting.url }}" alt="Card image cap">
-        </a>
+    <div class="grid-item" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000">
+        <div class="card paint-img">
+            <a href="{{ paint.get_absolute_url }}">
+                <img class="card-img" src="{{ paint.painting.url }}" alt="Card image cap">
+            </a>
+        </div>
     </div>
 {% endfor %}
 

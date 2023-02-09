@@ -83,8 +83,7 @@ class Profile(models.Model):
         settings.AUTH_USER_MODEL, related_name='profile', on_delete=models.CASCADE)
     image = models.ImageField(
         default='90a70ab564f045a48488cd440f3b56e4-dp.jpg', upload_to='profile_pics', blank=True)
-    about = models.TextField(
-        default='Write a little bit about yourself here', blank=True)
+    about = models.TextField(blank=True)
     website_url = models.CharField(max_length=50, blank=True)
     feed_tuner = models.ManyToManyField(Category, blank=True)
 
