@@ -3,8 +3,12 @@
 <p>This is absolutely inspired by pinterest. This app is created with the aim to help artist add, appreciate and study from artworks from all over the world.</p>
 
 ## Demo
+<<<<<<< HEAD
 
 Use the [Demo Website](https://tjpainterest.onrender.com)
+=======
+Use the [Demo Website](https://tjpainterest.herokuapp.com)
+>>>>>>> 8c73735ee61482a811340a75868fcff465df0c4a
 
 https://user-images.githubusercontent.com/67712127/167329059-47ea73e5-744e-44f3-bb7b-e2cced855c3a.mp4
 
@@ -24,9 +28,13 @@ https://user-images.githubusercontent.com/67712127/167329059-47ea73e5-744e-44f3-
 ```
 - Python (Django)
 ```
+<<<<<<< HEAD
 
 ## Features
 
+=======
+## Features
+>>>>>>> 8c73735ee61482a811340a75868fcff465df0c4a
 <ul>
     <li>Sign up, login page with email or username</li>
     <li>Upload image and download image</li>
