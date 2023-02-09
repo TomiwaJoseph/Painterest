@@ -4,8 +4,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from users.models import CustomUser
 
-# Create your models here.
-
 
 class Action(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
