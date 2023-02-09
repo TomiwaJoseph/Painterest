@@ -171,7 +171,6 @@ nav .nav-item {
   border: 1px solid #dc3545;
   width: 100%;
 }
-
 .form-control:focus {
   -webkit-box-shadow: 0 3px 10px -2px #dc3545 !important;
   box-shadow: 0 3px 10px -2px #dc3545 !important;
@@ -181,10 +180,31 @@ nav .nav-item {
 form .alert-block {
   display: none;
 }
+#log_cat .text-muted a,
+#reg_cat .text-muted a {
+  margin-left: 10px;
+}
+.demo-button {
+  display: block;
+  background: teal;
+  width: 100%;
+  margin-top: 10px;
+}
+.demo-button a {
+  color: #fff;
+}
+.demo-button:hover {
+  color: #fff;
+  font-weight: 500;
+}
 
 /* <---------- General things -----------> */
 button:focus {
   box-shadow: none !important;
+}
+a,
+a:hover {
+  text-decoration: none;
 }
 .account-img {
   height: 100px;
@@ -194,7 +214,7 @@ button:focus {
 
 .category {
   display: inline-block;
-  background: #1072f2;
+  background: teal;
   padding: 2px 8px;
   line-height: 1.5;
   font-size: 12px;
@@ -212,7 +232,6 @@ button:focus {
   -webkit-border-radius: 3px 3px 0 0;
   border-radius: 1%;
 }
-
 .author img {
   width: 40px;
   border-radius: 50%;
@@ -228,6 +247,7 @@ button:focus {
   margin-bottom: 10px;
   display: inline-block;
   padding: 6px;
+  margin-left: 20px;
 }
 .down_but:hover .fa {
   color: #fff;
@@ -247,23 +267,40 @@ button:focus {
   background: none;
   color: #000;
   outline: none;
-  border: 2px solid #1072f2;
+  border: 2px solid teal;
   margin-bottom: 10px;
   display: inline-block;
   padding: 6px;
+}
+.utils.active {
+  background: teal;
+  color: #fff;
 }
 .utils:hover {
   color: #fff;
   border: 2px solid #05a7a7;
   background: #05a7a7;
 }
+.smaller-utils {
+  border: 1px solid #00b6b6;
+  color: #000;
+}
+.smaller-utils:hover {
+  background-color: teal;
+  color: #fff;
+}
+.date_created {
+  margin-left: 10px;
+}
+.artist-name {
+  color: teal;
+}
 
+/* <----------------- Settings ----------------->*/
 .settings button {
   display: inline-block;
   width: 30%;
 }
-
-/* .details .active, */
 .follwi_follwe .active,
 .settings .active,
 .foll {
@@ -291,23 +328,19 @@ button:focus {
   color: #fff;
   margin-right: 10px;
 }
-/* 
-.details a i.fa{
-    color: #000;
-    font-size: 55px;
-}
-
-.details a i.fa:hover {
-    color: #dc3545;
-} */
-
 .demarcate {
   background-color: #dc3545;
 }
 .setting_demar {
-  margin-top: -10px;
   width: 80%;
   background-color: #16caca;
+  margin: 0 auto !important;
+}
+#home-feed .w-50 {
+  margin: 0 auto !important;
+}
+#feed-saver-btn {
+  margin-top: 50px !important;
 }
 
 /* <---------- Profile stuff --------> */
@@ -360,6 +393,27 @@ button:focus {
 #flwng_div p,
 #flwr_div p {
   font-size: 14px;
+}
+
+.red_to_profile {
+  color: #000;
+  margin-top: 5px;
+  margin-bottom: 0 !important;
+}
+
+.red_to_profile:hover {
+  color: #dc3545;
+}
+.no-profile-pic {
+  height: 52px;
+  width: 52px;
+  text-align: center;
+  line-height: 250%;
+  border-radius: 50%;
+  font-size: 20px;
+  background: rgb(36, 36, 36);
+  color: #fff;
+  margin-right: 10px;
 }
 
 /* <-------------- Other CSS Tricks -------------> */
@@ -481,7 +535,7 @@ button:focus {
 
 .the_a {
   display: inline-block;
-  background: #1072f2;
+  background: teal;
   padding: 2px 8px;
   line-height: 1.5;
   font-size: 12px;
@@ -498,28 +552,21 @@ button:focus {
   color: #fff;
 }
 
-.red_to_profile {
-  color: #000;
-}
-
-.red_to_profile:hover {
-  color: #dc3545;
-}
-
 /* <------------ Messages ---------------> */
 .message_ {
   display: block;
-  /* margin-bottom: 20px; */
 }
-
+.each_message:hover {
+  background: #f0f0f0;
+}
 .each_message a {
-  color: #000;
+  color: #4b4b4b;
 }
-
-.each_message:hover a {
-  color: #00f;
+#single_msg .text-danger,
+.each_message .text-info {
+  color: teal !important;
+  margin-left: 8px !important;
 }
-
 .filter_buttons {
   display: block;
   margin-bottom: 10px;
@@ -529,18 +576,15 @@ button:focus {
   border: none;
   width: 100%;
 }
-
 .filter_buttons:hover {
   color: #fff;
   background: rgb(22, 202, 202);
 }
-
 .all_filter_but .active {
   background: rgb(255, 75, 75) !important;
   color: #fff !important;
   border: none;
 }
-
 .the_message {
   text-align: justify;
 }
@@ -640,12 +684,20 @@ input.vis:not(:checked) + label:hover {
 input.vis + label:active,
 input.vis:checked + label {
   box-shadow: 0px 0px 3px;
-  background: #17a2b8;
+  background: teal;
   color: #fff;
 }
 .vis + label {
   display: block;
   margin: 15px 0;
+}
+.create-submit-button {
+  background: transparent;
+  border: 1px solid teal;
+}
+.create-submit-button:hover {
+  background: teal;
+  color: #fff;
 }
 
 /* <--------- Folder Content Section ----------> */
