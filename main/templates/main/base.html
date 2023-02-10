@@ -47,24 +47,28 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'notifications' %}" tabindex="-1" aria-disabled="true">
+                            <a class="nav-link position-relative" href="{% url 'notifications' %}" tabindex="-1" aria-disabled="true">
                                 <i class="fa fa-bell">
                                     {% if notify %}
-                                        <span class="notificate badge-pill badge-info">{{ notify }}</span>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ notify }}
+                                            <span class="visually-hidden">unread notifications</span>
+                                        </span>
                                     {% endif %}
                                 </i>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'view_messages' %}" tabindex="-1" aria-disabled="true">
+                            <a class="nav-link position-relative" href="{% url 'view_messages' %}" tabindex="-1" aria-disabled="true">
                                 {% if unread_count %}
                                     <i class="fa fa-envelope">
-                                        <span class="notificate badge-pill badge-info">{{ unread_count }}</span>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ unread_count }}
+                                            <span class="visually-hidden">unread messages</span>
+                                        </span>
                                     </i>
                                 {% else %}
-                                    <i class="fa fa-envelope-open">
-                                        <span class="notificate badge-pill badge-info"></span>
-                                    </i>
+                                    <i class="fa fa-envelope-open"></i>
                                 {% endif %}
                             </a>
                         </li>
@@ -91,7 +95,7 @@
     </nav>
 
     <div class="container mt-5">
-        <div class="col-md-5 mx-auto my-auto">
+        <div class="col-md-5 mx-auto my-auto" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">
             {% if messages %}
                 {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} alert-dismissible text-center">

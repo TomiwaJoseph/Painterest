@@ -4,7 +4,7 @@
 
 <div class="row" id="slct_fld">
     
-    <div class="col-md-7 mx-auto">
+    <div class="col-md-7 mx-auto" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
         {% if folders_list %}
             <h4 class="mt-5">Select a folder & click Save</h4>
             <div class="content-section bg-light mt-2">
@@ -21,7 +21,7 @@
         {% endif %}
     </div>
 
-    <div class="col-md-7 mx-auto my-5">
+    <div class="col-md-7 mx-auto my-5" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
         <h4>Create a new folder</h4>
         <div class="content-section bg-light">
             <form method="POST" action="{% url 'create' %}">

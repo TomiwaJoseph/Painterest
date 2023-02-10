@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
         <div class="paint_det">
             <img class="img-fluid" src="{{ object.painting.url }}" alt="">
         </div>
@@ -24,7 +24,7 @@
                 </a>
             {% endif %}
         </div>
-        <h4 class="text-danger">{{ object.title }}</h4>
+        <h4 class="text-danger mt-2">{{ object.title }}</h4>
         {% if object.artist_name %}
             <p class="artist-name">Artist name - <span>{{ object.artist_name }}</span></p>
             {% else %}
@@ -32,7 +32,7 @@
         {% endif %}
     </div>
     
-    <div class="col-md-6">
+    <div class="col-md-6" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
         <div class="row">
             <div class="col d-flex justify-content-between">
                 {% with object.painted.all.count as total_tries %}
@@ -97,7 +97,7 @@
                 {% csrf_token %}
                 <input type="hidden" name='painting_id' value="{{ object.id }}">
                 <label for="">Add comments...</label>
-                <input type="text" class="form-control" name="comment">
+                <input type="text" class="form-control my-2" name="comment">
                 <button class="btn smaller-utils my-2">Comment</button>
             </form>
             <hr>
@@ -133,9 +133,9 @@
 
 {% if similar_paintings %}
     <div class="container">
-        <h3 class="my-4">More like this...</h3>
+        <h3 class="my-4" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">More like this...</h3>
         <div class="js-masonry grid">
-            <div data-masonry='{"percentPosition": true,  "itemSelector": ".col" }' class='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4' id="similar_paintings">        
+            <div data-masonry='{"percentPosition": true}' class='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4' id="similar_paintings">        
             </div>        
         </div>
     </div>

@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="row flex-column-reverse flex-md-row">
-    <div class="col-md-8">
+    <div class="col-md-8" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
         <div class="content-section bg-light">
             <div id="all_filter_section">
                 <h3 class="mb-3">All Messages</h3>
@@ -93,7 +93,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
         <div class="content-section">
             <h4>Messages Filter</h4>
             <p class='text-muted'>You can filter your messages here.</p>
@@ -105,5 +105,38 @@
         </div>
     </div>
 </div>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+    const filter = document.querySelector(".all_filter_but");
+    const all_filter_buttons = filter.querySelectorAll(".all_filter_but > button");
+    const totalButtons = all_filter_buttons.length;
+
+    for (let i = 0; i < totalButtons; i++) {
+        const a = all_filter_buttons[i];
+        a.addEventListener("click", function () {
+            for (let j = 0; j < totalButtons; j++) {
+                all_filter_buttons[j].classList.remove("active");
+                }
+            this.classList.add("active");
+            if (this.innerHTML == "Read") {
+                $("#read_filter_section").show();
+                $("#unread_filter_section").hide();
+                $("#all_filter_section").hide();
+            } else if (this.innerHTML == "Unread") {
+                $("#unread_filter_section").show();
+                $("#all_filter_section").hide();
+                $("#read_filter_section").hide();
+            } else {
+                $("#all_filter_section").show();
+                $("#unread_filter_section").hide();
+                $("#read_filter_section").hide();
+            }
+        });
+    }
+</script>
 
 {% endblock %}

@@ -5,15 +5,15 @@
 {% block content %}
 
 <div class="d-flex justify-content-between" id="notif_justify">
-    <h2>{{ folder_name }}</h2>
-    <button class="btn btn-danger w-25 my-2 del_fold_btn" data-bs-toggle="modal" data-bs-target="#modalDeleteFolder">Delete folder</button>
+    <h2 data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">{{ folder_name }}</h2>
+    <button data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000" class="btn btn-danger w-25 my-2 del_fold_btn" data-bs-toggle="modal" data-bs-target="#modalDeleteFolder">Delete folder</button>
 </div>
 <hr>
 
 <div class="js-masonry grid">
-    <div id="gallery" data-bs-toggle="modal" data-bs-target="#exampleModal" data-masonry='{"percentPosition": true,  "itemSelector": ".col" }' class='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4'>        
+    <div id="gallery" data-bs-toggle="modal" data-bs-target="#exampleModal" data-masonry='{"percentPosition": true}' class='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4'>        
         {% for pics in folder_pics %}
-            <div class="grid-item">
+            <div class="grid-item" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000">
                 <div class="card folder-img">
                     <img src="{{ pics.painting.url }}" 
                         data-bs-target="#carouselPics" data-bs-slide-to="{{ forloop.counter0 }}" alt="{{ pics.title }}" class="w-100 img-fluid card-img">

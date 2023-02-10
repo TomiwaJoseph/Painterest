@@ -5,9 +5,8 @@
 {% block content %}
 
 <div class="d-flex justify-content-between" id="notif_justify">
-    <h2>Notifications</h2>
-    <!-- Don't know how to implement this yet -->
-    {% if signify %}
+    <h2 data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">Notifications</h2>
+    {% if notify %}
         <button class="btn btn-danger my-2" id="mark_all">
             Mark all as read
         </button>
@@ -18,10 +17,7 @@
 <div id="notification-container">
 </div>
 
-
-
 {% endblock %}
-
 
 {% block script %}
 
@@ -41,13 +37,12 @@
                 },
                 caches: false,
                 success: function (response) {
-                    $('#notification-container').append(response);
                     if (response == "") {
                         action = 'active';
                     } else {
-                        // $('#more-data').html("<i class='fa fa-cog fa-spin'></i>")
                         action = 'inactive';
                     }
+                    $('#notification-container').append(response);
                 }
             })
         }
@@ -68,14 +63,13 @@
             }
         })
 
-
         $('#mark_all').click(function(){
             $.ajax({
                 url: 'mark_all_as_read/',
                 method: 'GET',
                 data: {},
                 success: function(response){
-                    console.log('marked all as read')
+                    document.location.reload()
                 }
             })
         })
