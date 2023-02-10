@@ -31,16 +31,7 @@ def notification_fetch(request):
     each_load = request.GET.get('each_load')
     start_from = request.GET.get('start_from')
 
-    # Display all followings
-    following_ids = request.user.following.values_list('id',
-                                                       flat=True)
-
-    if following_ids:
-        # If user is following others, retrieve only specified amount of actions
-        actions = all_actions[int(start_from):int(start_from) + int(each_load)]
-    else:
-        actions = None
-
+    actions = all_actions[int(start_from):int(start_from) + int(each_load)]
     context = {
         'actions': actions,
     }
@@ -105,7 +96,6 @@ def mark_all_as_read(request):
 
 def index(request):
     global no_category_selected, auth_all_painting
-    context = {}
 
     if request.user.is_authenticated:
         logged_user = Profile.objects.get(user=request.user).feed_tuner.all()
@@ -123,27 +113,14 @@ def index(request):
 
             # Shuffle all the user's feeds category paintings
             random.shuffle(auth_all_painting)
-
-        context = {
-            'unread_count': Message.objects.filter(recepient=request.user, read=False).count(),
-            'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                               flat=True), action_for=request.user, read=False))
-        }
     else:
         no_category_selected = list(Paintings.objects.all())
         random.shuffle(no_category_selected)
-    return render(request, 'main/index.html', context)
+    return render(request, 'main/index.html')
 
 
 def about(request):
-    context = {}
-    if request.user.is_authenticated:
-        context['notify'] = len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                                     flat=True), action_for=request.user, read=False))
-        context['unread_count'] = Message.objects.filter(recepient=request.user,
-                                                         read=False).count()
-
-    return render(request, 'main/about.html', context)
+    return render(request, 'main/about.html')
 
 
 def contact(request):
@@ -161,14 +138,7 @@ def contact(request):
 
         return redirect('contact')
 
-    context = {}
-    if request.user.is_authenticated:
-        context['notify'] = len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                                     flat=True), action_for=request.user, read=False))
-        context['unread_count'] = Message.objects.filter(recepient=request.user,
-                                                         read=False).count()
-
-    return render(request, 'main/contact.html', context)
+    return render(request, 'main/contact.html')
 
 
 @login_required
@@ -190,11 +160,7 @@ def show_message(request, message_id):
         raise PermissionDenied
 
     context = {
-        'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                           flat=True), action_for=request.user, read=False)),
         'single_message': get_message,
-        'unread_count': Message.objects.filter(recepient=request.user,
-                                               read=False).count()
     }
     return render(request, 'main/single_message.html', context)
 
@@ -218,29 +184,15 @@ def send_message(request):
 @login_required
 def notifications(request):
     global all_actions
-    all_actions = Action.objects.filter(action_for=request.user,
-                                        user_id__in=request.user.following.values_list('id',
-                                                                                       flat=True))
-    signify = len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                       flat=True), action_for=request.user, read=False))
-
-    context = {
-        'unread_count': Message.objects.filter(recepient=request.user,
-                                               read=False).count(),
-        'signify': signify,
-    }
-    return render(request, 'main/notifications.html', context)
+    all_actions = Action.objects.filter(action_for=request.user)
+    return render(request, 'main/notifications.html')
 
 
 @login_required
 def view_messages(request):
     all_messages = Message.objects.filter(recepient=request.user)
     context = {
-        'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                           flat=True), action_for=request.user, read=False)),
         'all_messages': all_messages,
-        'unread_count': Message.objects.filter(recepient=request.user,
-                                               read=False).count()
     }
     return render(request, 'main/messages.html', context)
 
@@ -284,12 +236,6 @@ class PaintingDetailView(DetailView):
         all_similar_paintings = list(similar_paintings)
         random.shuffle(all_similar_paintings)
 
-        if self.request.user.is_authenticated:
-            context['notify'] = len(Action.objects.filter(user_id__in=self.request.user.following.values_list('id',
-                                                                                                              flat=True), action_for=self.request.user, read=False))
-            context['unread_count'] = Message.objects.filter(recepient=self.request.user,
-                                                             read=False).count()
-
         context['similar_paintings'] = all_similar_paintings
         context['form'] = AddPaintingTry()
 
@@ -315,10 +261,6 @@ def add_paint_try(request):
 def view_folders(request):
     all_folders = Folder.objects.filter(user=request.user)
     context = {
-        'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                           flat=True), action_for=request.user, read=False)),
-        'unread_count': Message.objects.filter(recepient=request.user,
-                                               read=False).count(),
         'all_folders': all_folders,
     }
     return render(request, 'main/view_folders.html', context)
@@ -326,7 +268,6 @@ def view_folders(request):
 
 def download_painting(request, paint_pk):
     paint_image = Paintings.objects.get(id=paint_pk)
-    route_from = request.POST.get('route')
     file_path = paint_image.painting.path
 
     # To view image before download like artstation use this...
@@ -348,10 +289,6 @@ def download_painting(request, paint_pk):
 def folder_content(request, folder):
     folder_pics = Folder.objects.get(id=folder, user=request.user)
     context = {
-        'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                           flat=True), action_for=request.user, read=False)),
-        'unread_count': Message.objects.filter(recepient=request.user,
-                                               read=False).count(),
         'folder_pics': folder_pics.saved_painting.all().order_by('foldermember'),
         'folder_name': folder_pics.name,
         'folder_id': folder_pics.id,
@@ -390,10 +327,6 @@ def save_to_folder(request, paint_pk):
                         paint=redirect_to.slug)
 
     context = {
-        'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                           flat=True), action_for=request.user, read=False)),
-        'unread_count': Message.objects.filter(recepient=request.user,
-                                               read=False).count(),
         'folders_list': Folder.objects.filter(user=request.user),
         'paint_pk': paint_pk,
     }
@@ -427,10 +360,6 @@ def add_painting(request):
             return redirect(new_paint.get_absolute_url())
 
     context = {
-        'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                           flat=True), action_for=request.user, read=False)),
         'form': form,
-        'unread_count': Message.objects.filter(recepient=request.user,
-                                               read=False).count(),
     }
     return render(request, 'main/add_paint.html', context)

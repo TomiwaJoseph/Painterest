@@ -140,6 +140,3 @@ class FolderMember(models.Model):
 
     class Meta:
         ordering = ('-date_added',)
-
-
-# Delete paintings in db on delete

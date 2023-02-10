@@ -1,6 +1,4 @@
 from django.contrib.auth import views as auth_views
-from django.views import generic
-from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import (LoginForm, RegisterForm, UserUpdateForm,
                     ProfileUpdateForm)
@@ -8,12 +6,8 @@ from django.contrib.auth import logout, login
 from .models import CustomUser, UserFollowing, Category, Profile
 from django.contrib import messages
 from main.models import Message, Paintings
-# import os
 import random
-# from django.conf import settings
-# from uuid import uuid4
 from taggit.models import Tag
-# from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from actions.models import Action
 from actions.utils import create_action
@@ -33,11 +27,6 @@ def following_and_follower(request, painter):
         'followers_count': all_follower.count(),
         'following_count': all_following.count(),
     }
-    if request.user.is_authenticated:
-        context['notify'] = len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                                     flat=True), action_for=request.user, read=False))
-        context['unread_count'] = Message.objects.filter(recepient=request.user,
-                                                         read=False).count()
 
     return render(request, 'users/following_and_follower.html', context)
 
@@ -70,11 +59,8 @@ def follow(request, to_follow):
     else:
         UserFollowing.objects.create(
             user_from=request.user, user_to=user_to_follow)
-        all_followers = UserFollowing.objects.filter(user_to=CustomUser.objects.filter(
-            username=request.user.username).first())
-        for user in all_followers:
-            create_action(request.user, 'started following',
-                          user_to_follow, user.user_from)
+        create_action(request.user, 'started following',
+                      user_to_follow, user_to_follow)
 
     return redirect('painter_profile', painter=to_follow)
 
@@ -95,24 +81,13 @@ def unfollow(request, to_unfollow):
 
 @login_required
 def profile_view(request):
-    context = {
-        'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                           flat=True), action_for=request.user, read=False)),
-        'unread_count': Message.objects.filter(recepient=request.user,
-                                               read=False).count()
-    }
-    return render(request, 'users/profile.html', context)
+    return render(request, 'users/profile.html')
 
 
 def painter_profile_view(request, painter):
     context = {
         'painter': CustomUser.objects.filter(username=painter).first(),
     }
-    if request.user.is_authenticated:
-        context['notify'] = len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                                     flat=True), action_for=request.user, read=False))
-        context['unread_count'] = Message.objects.filter(recepient=request.user,
-                                                         read=False).count()
     return render(request, 'users/painter_profile.html', context)
 
 
@@ -145,19 +120,13 @@ def settings_view(request):
         picture_for_each_category.append(urls)
 
     user_categories = Profile.objects.get(user=request.user).feed_tuner.all()
-    all_feed = [i.name for i in user_categories]
-
     context = {
-        'notify': len(Action.objects.filter(user_id__in=request.user.following.values_list('id',
-                                                                                           flat=True), action_for=request.user, read=False)),
         'user_categories': user_categories,
         'cat_pictures': picture_for_each_category,
         'categories': Category.objects.all(),
         'cat_number': range(len(Category.objects.all())),
         'user_update_form': user_update_form,
         'profile_update_form': profile_update_form,
-        'unread_count': Message.objects.filter(recepient=request.user,
-                                               read=False).count()
     }
     return render(request, 'users/settings.html', context)
 

@@ -120,12 +120,6 @@ class UserFollowing(models.Model):
     user_to = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name='rel_to_set', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, db_index=True)
-    following = models.ManyToManyField(
-        'self',
-        # through='UserFollowing',
-        related_name='followers',
-        symmetrical=False
-    )
 
     class Meta:
         ordering = ('-created',)
