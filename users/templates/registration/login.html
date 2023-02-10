@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<div class="row">
+<div class="row" data-aos="zoom-out" data-aos-delay="200" data-aos-duration="1000">
     <div class="col-md-4 mx-auto my-auto text-center login_col">
         <h2>Log In</h2>
         <hr>
@@ -15,7 +15,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6 mx-auto my-auto" id="log_cat">
+    <div class="col-md-6 col-lg-4 mx-auto my-auto" id="log_cat" data-aos="zoom-out" data-aos-delay="200" data-aos-duration="1000">
         <div class="content-section mt-1 bg-light">
             {% if form.errors %}
                 {% for field in form %}

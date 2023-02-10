@@ -5,8 +5,8 @@
 
 <div class="row">
     <div class="col-md-8 mx-auto d-flex justify-content-between follwi_follwe">
-        <button id="followers" class="btn btn-info">Followers ({{ followers_count }})</button>
-        <button id="followings" class="btn btn-info">Following ({{ following_count }})</button>
+        <button id="followers" class="btn btn-info" data-aos="flip-right" data-aos-delay="200" data-aos-duration="1000">Followers ({{ followers_count }})</button>
+        <button id="followings" class="btn btn-info" data-aos="flip-left" data-aos-delay="200" data-aos-duration="1000">Following ({{ following_count }})</button>
     </div>
 </div>
 <div class="row mt-3">
@@ -15,12 +15,13 @@
     </div>
 </div>
 
+
 <div class="row">
     <div class="col-md-8 mx-auto">
-        <div class="content-section my-2"  id="flwr_div">
+        <div class="content-section my-2" data-aos="fade-in" data-aos-delay="200" data-aos-duration="1000"  id="flwr_div">
             <div class="row">
                 {% for user in users_follower %}
-                    <div class="col-md-3 text-center follw_and_follwin_col">
+                    <div class="col-md-3 text-center my-2 follw_and_follwin_col" data-aos="flip-left" data-aos-delay="200" data-aos-duration="1000">
                         {% if user.user_from.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
                             <a href="{% url 'painter_profile' user.user_from %}">
                                 <div class="no-profile-pic d-inline-block">{{ user.user_from.username.0 }}</div>
@@ -46,7 +47,7 @@
         <div class="content-section my-2" id="flwng_div">
             <div class="row">
                 {% for user in users_following %}
-                <div class="col-md-3 text-center follw_and_follwin_col">
+                <div class="col-md-3 text-center my-2 follw_and_follwin_col" data-aos="flip-left" data-aos-delay="200" data-aos-duration="1000">
                     {% if user.user_to.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
                         <a href="{% url 'painter_profile' user.user_to %}">
                             <div class="no-profile-pic d-inline-block">{{ user.user_to.username.0 }}</div>

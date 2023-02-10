@@ -10,8 +10,8 @@
 <div class="row">
     <div class="col-md-12 mb-4">
         <div class="settings mx-auto d-flex justify-content-around">
-            <button class="btn btn-info" id="profile">Edit profile</button>
-            <button class="btn btn-info" id="feed">Home feed tuner</button>
+            <button class="btn btn-info" id="profile" data-aos="flip-right" data-aos-delay="200" data-aos-duration="1000">Edit profile</button>
+            <button class="btn btn-info" id="feed" data-aos="flip-left" data-aos-delay="200" data-aos-duration="1000">Home feed tuner</button>
         </div>
     </div>
 </div>
@@ -21,9 +21,9 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-8 mx-auto my-4">
-        <div id="profile-edit">
+<div class="row" id="profile-edit">
+    <div class="col-md-8 mx-auto my-4" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
+        <div>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ user_update_form | crispy }}
@@ -36,58 +36,35 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <div id="home-feed">
-            <h3 class="text-center">Select your preferences...</h3>
-            <hr class="w-50">
+<div class="container">
+    <div class="row" id="home-feed">
+        <h3 class="text-center mt-3" >Select your preferences...</h3>
+        <hr class="w-50">
+        <div class="container">
+            <form action="{% url 'feed_tuner' %}" method="POST" class="mt-3">
+                {% csrf_token %}
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6">
+                    {% for i in cat_number %}
+                        <div class="col" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000">
+                            <div class="card img-check mb-3">
+                                <input type="checkbox" id="category{{i}}" value="{{ categories|lookup:i }}" 
+                                    name="category" {% if categories|lookup:i in user_categories %} checked {% endif %}>
+                                <label for="category{{i}}">
+                                    <img src="{{ cat_pictures|lookup:i }}" class="card-img img-fluid">
+                                </label>
+                                <p class="text-center">{{ categories|lookup:i }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div id='feed-saver-btn' class="form-group mb-5">
+                    <button class="btn btn-outline-info log" type="submit">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<div class="container">
-    <form action="{% url 'feed_tuner' %}" method="POST" class="mt-3">
-        {% csrf_token %}
-        <div class="js-masonry grid">
-            <div data-masonry='{"percentPosition": true }' class='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4'>
-                {% for i in cat_number %}
-                    <div class="grid-item">
-                        <div class="card img-check">
-                            <input type="checkbox" id="category{{i}}" value="{{ categories|lookup:i }}" 
-                                name="category" {% if categories|lookup:i in user_categories %} checked {% endif %}>
-                            <label for="category{{i}}">
-                                <img src="{{ cat_pictures|lookup:i }}" class="card-img img-fluid">
-                            </label>
-                            <p class="text-center">{{ categories|lookup:i }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-        <div id='feed-saver-btn' class="form-group mb-5">
-            <button class="btn btn-outline-info log" type="submit">Save</button>
-        </div>
-    </form>
-</div>
 
-{% endblock %}
-
-{% block script %}
-
-<script>
-    $(document).ready(function () {
-        var msnry = new Masonry('.grid > .row', {
-            itemSelector: '.grid-item',
-            percentPosition: true
-        });
-        var $grid = document.querySelector('.grid > .row');
-        var $images = $grid.querySelectorAll('.card img');
-        $images.forEach(function (el) {
-            el.addEventListener('load', function () {
-                msnry.layout();
-            });
-        });
-    });
-</script>
 
 {% endblock %}
