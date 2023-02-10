@@ -3,7 +3,6 @@ $(document).ready(function () {
     // Initialize AOS
     AOS.init();
   });
-  // window.addEventListener("load", AOS.refresh);
 
   $(document).click(function (e) {
     if (!$(e.target).closest("#navbarNav").length) {
@@ -36,13 +35,9 @@ $(document).ready(function () {
     $("#flwng_div").show();
   });
 
-  $("#feed").addClass("active");
-  $("#profile-edit").hide();
-  $("#home-feed").show();
-
-  // $("#profile").addClass("active");
-  // $("#profile-edit").show();
-  // $("#home-feed").hide();
+  $("#profile").addClass("active");
+  $("#profile-edit").show();
+  $("#home-feed").hide();
 
   $("#profile").click(function () {
     $("#profile").addClass("active");
@@ -107,7 +102,7 @@ $(document).ready(function () {
   $("#message_div").hide();
 
   $("#send_button").click(function () {
-    $("#message_div").toggle();
+    $("#message_div").fadeToggle();
   });
 
   $("#unread_but").addClass("active");
@@ -117,30 +112,3 @@ $(document).ready(function () {
 
   $(".carousel-item").eq(0).addClass("active");
 });
-
-const filter = document.querySelector(".all_filter_but"),
-  all_filter_buttons = filter.querySelectorAll("button"),
-  totalButtons = all_filter_buttons.length;
-
-for (let i = 0; i < totalButtons; i++) {
-  const a = all_filter_buttons[i];
-  a.addEventListener("click", function () {
-    for (let j = 0; j < totalButtons; j++) {
-      all_filter_buttons[j].classList.remove("active");
-    }
-    this.classList.add("active");
-    if (this.innerHTML == "Read") {
-      $("#read_filter_section").show();
-      $("#unread_filter_section").hide();
-      $("#all_filter_section").hide();
-    } else if (this.innerHTML == "Unread") {
-      $("#unread_filter_section").show();
-      $("#all_filter_section").hide();
-      $("#read_filter_section").hide();
-    } else {
-      $("#all_filter_section").show();
-      $("#unread_filter_section").hide();
-      $("#read_filter_section").hide();
-    }
-  });
-}
