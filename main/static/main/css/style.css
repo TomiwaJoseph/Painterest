@@ -1,11 +1,9 @@
 body {
   font-family: "poppins" !important;
 }
-
 a:hover {
   text-decoration: none;
 }
-
 button:focus,
 button:active {
   outline: none !important;
@@ -16,7 +14,9 @@ button:active {
 .logo {
   height: 34px;
 }
-
+.navbar {
+  z-index: 999999;
+}
 .navbar .dropdown-menu {
   font-size: 14px;
   border-radius: 0px;
@@ -26,58 +26,44 @@ button:active {
   min-width: 13em;
   margin-top: -10px;
 }
-
 .drop:hover {
   color: #fff;
   background: lightgray;
 }
-
 .nav-item .home {
   font-weight: 500;
 }
-
 nav .nav-item {
   padding: 0.5em;
 }
-
 .navbar-light .fa-bars {
   color: #dc3545;
   font-size: 24px !important;
 }
-
 .navbar-toggler {
   border: none !important;
 }
 .navbar-toggler:focus {
   outline: none !important;
 }
-
 .navbar-brand {
   font-size: 25px;
   color: #dc3545 !important;
   padding-left: 1em;
 }
-
 .navbar-nav > .active > a,
 .nav-item > a:hover {
   color: #dc3545 !important;
 }
-
 .nav-link i.fa {
   font-size: 20px;
 }
-
 .nav-link {
   margin-right: 20px;
 }
-
-.notificate {
-  position: absolute;
-  font-size: 15px;
-  margin-left: -5px;
-  margin-top: -10px;
+.nav-item .badge {
+  background: teal !important;
 }
-
 .dropdown .profile_badge {
   width: 30px;
   height: 30px;
@@ -89,7 +75,6 @@ nav .nav-item {
   color: #fff;
   display: inline-block;
 }
-
 .badge-account-img {
   height: 30px;
   width: 30px;
@@ -97,14 +82,6 @@ nav .nav-item {
 }
 
 /* <--------- Home -----------> */
-/* @media (min-width: 320px){
-    .card-columns{
-        -webkit-column-count: 2;
-        -moz-column-count: 2;
-        column-count: 2;
-        height: 320px;
-    }
-} */
 
 @media (min-width: 576px) {
   .card-columns {
@@ -130,40 +107,31 @@ nav .nav-item {
   }
 }
 
-/* @media (min-width: 1200px){
-    .card-columns{
-        -webkit-column-count: 5;
-        -moz-column-count: 5;
-        column-count: 5;
-    }
-} */
-
 .paint-img img {
   -moz-border-radius: 3px 3px 0 0;
   -webkit-border-radius: 3px 3px 0 0;
   border-radius: 2%;
   padding: 4px 4px;
 }
-
 .paint-img img:hover {
   cursor: zoom-in;
 }
 
 /* <--------- Register and Login Forms ----------> */
 .content-section {
+  position: relative !important;
   background: #ffffff;
   padding: 10px 20px;
   border: 1px solid #dddddd;
   border-radius: 3px;
   margin-bottom: 20px;
+  z-index: 9;
 }
-
 .log:hover {
   color: #fff;
   background: #dc3545;
   border: 1px solid #dc3545;
 }
-
 .log {
   background: none;
   color: #dc3545;
@@ -211,7 +179,6 @@ a:hover {
   width: 100px;
   margin-bottom: 16px;
 }
-
 .category {
   display: inline-block;
   background: teal;
@@ -308,15 +275,12 @@ a:hover {
   color: #fff !important;
   border: none;
 }
-
 .encourage {
   font-size: 13px;
 }
-
 .add_pho {
   font-size: 14px;
 }
-
 .pna {
   width: 40px;
   height: 40px;
@@ -332,7 +296,7 @@ a:hover {
   background-color: #dc3545;
 }
 .setting_demar {
-  width: 80%;
+  width: 70%;
   background-color: #16caca;
   margin: 0 auto !important;
 }
@@ -340,11 +304,10 @@ a:hover {
   margin: 0 auto !important;
 }
 #feed-saver-btn {
-  margin-top: 50px !important;
+  margin-top: 10px !important;
 }
 
 /* <---------- Profile stuff --------> */
-
 .change_badge {
   width: 100px;
   height: 100px;
@@ -357,11 +320,12 @@ a:hover {
   margin-bottom: 20px;
   font-weight: 700;
 }
-
 .follow {
   font-size: 14px;
 }
-
+.profile_bcg .badge {
+  margin-bottom: 2px;
+}
 .follows_you {
   background: #f78585;
   color: #fff;
@@ -383,7 +347,6 @@ a:hover {
   width: 45%;
   margin-bottom: 10px;
 }
-
 #flwng_div .follower_img,
 #flwr_div .follower_img {
   height: 52px;
@@ -394,13 +357,11 @@ a:hover {
 #flwr_div p {
   font-size: 14px;
 }
-
 .red_to_profile {
   color: #000;
   margin-top: 5px;
   margin-bottom: 0 !important;
 }
-
 .red_to_profile:hover {
   color: #dc3545;
 }
@@ -423,18 +384,15 @@ a:hover {
   height: 50px;
   border-radius: 50%;
 }
-
 .div_ava {
   text-align: center;
 }
-
 .first {
   margin-top: -40px;
   margin-left: 3px;
   font-size: 20px;
   color: #fff;
 }
-
 .chip {
   display: inline-block;
   padding: 0 25px;
@@ -444,7 +402,6 @@ a:hover {
   border-radius: 25px;
   background-color: #f1f1f1;
 }
-
 .chip img {
   float: left;
   margin: 0 15px 0 -25px;
@@ -452,7 +409,6 @@ a:hover {
   width: 50px;
   border-radius: 50%;
 }
-
 .closebtn {
   padding-left: 10px;
   color: #888;
@@ -461,19 +417,15 @@ a:hover {
   font-size: 20px;
   cursor: pointer;
 }
-
 .closebtn:hover {
   color: #000;
 }
-
 .container ul {
   display: none;
 }
-
 #checkbox {
   opacity: 0;
 }
-
 #checkbox:checked + ul {
   display: block;
 }
@@ -488,28 +440,26 @@ a:hover {
 .quest i {
   color: #000;
 }
-
 .add i:hover,
 .quest i:hover {
   color: rgb(99, 99, 99);
 }
-
 .add {
   position: fixed;
   bottom: 13%;
   right: 7%;
   font-size: 35px;
   cursor: pointer;
+  z-index: 99999;
 }
-
 .quest {
   position: fixed;
   bottom: 5%;
   right: 7%;
   font-size: 35px;
   cursor: pointer;
+  z-index: 99999;
 }
-
 .sub-quest {
   position: fixed;
   bottom: 5%;
@@ -517,22 +467,18 @@ a:hover {
   cursor: pointer;
   text-align: right;
 }
-
 .sub-quest li {
   display: block;
-  /* list-style: none; */
   margin-bottom: 10px;
 }
 
 #crazy {
-  /* opacity: 0; */
   display: none;
 }
 
 #crazy:checked + ul {
   display: block;
 }
-
 .the_a {
   display: inline-block;
   background: teal;
@@ -546,7 +492,6 @@ a:hover {
   letter-spacing: 0.2em;
   text-decoration: none;
 }
-
 .the_a:hover {
   background: rgb(22, 202, 202);
   color: #fff;
@@ -666,7 +611,6 @@ input[type="checkbox"][id^="category"] {
 }
 
 /* <------- Create or Save Section ------------> */
-
 input.vis {
   display: none;
 }
@@ -701,7 +645,6 @@ input.vis:checked + label {
 }
 
 /* <--------- Folder Content Section ----------> */
-
 .folder-img img {
   -moz-border-radius: 3px 3px 0 0;
   -webkit-border-radius: 3px 3px 0 0;
@@ -716,7 +659,6 @@ input.vis:checked + label {
 }
 
 /* <--------- About Section ----------> */
-
 .intro {
   color: #dc3545;
   font-size: 20px;
@@ -727,18 +669,15 @@ input.vis:checked + label {
 }
 
 /* <-------- Notifications ----------> */
-
 .notif:hover .content-section {
   background: rgb(230, 230, 230);
+}
+.notif .text-info {
+  color: teal !important;
 }
 .profile_bcg {
   background: #d8d8d8 !important;
 }
 .notif_read {
-  background: #ababab;
-}
-
-/* Masonry */
-.js-masonry {
-  z-index: -10 !important;
+  background: #ebebeb;
 }
