@@ -4,7 +4,7 @@
 
     {% for action in actions %}
         {% if action.verb == 'started following' %}
-            <a href="{% url 'painter_profile' action.user %}" class="notif" data-notif_id="{{ action.id }}" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000">
+            <a href="{% url 'painter_profile' action.user %}" class="notif" data-notif_id="{{ action.id }}">
                 {% if action.read %}
                     <div class="content-section notif_read">
                         {% if action.user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
@@ -42,7 +42,7 @@
                 {% endif %}
             </a>
         {% else %}
-            <a href="{{ action.target.get_absolute_url }}" class="notif" data-notif_id="{{ action.id }}" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000">
+            <a href="{{ action.target.get_absolute_url }}" class="notif" data-notif_id="{{ action.id }}">
                 {% if action.read %}
                     <div class="content-section notif_read">
                         {% if action.user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}

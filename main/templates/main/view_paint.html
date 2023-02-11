@@ -62,7 +62,7 @@
         <div id="tries">
             <div class="row">
                 {% for trial in object.painted.all %}
-                    <div class="col-md-3 mt-4">
+                    <div class="col-md-3 col-4 col-sm-4">
                         <img src="{{ trial.tries.url }}" alt="" class="img-fluid">
                     </div>
                 {% endfor %}
@@ -115,13 +115,13 @@
             </div>
             <hr>
         </div>
-        <div class="col-12 my-4">
-            <div class="d-flex justify-content-between">
-                <div class="d-inline-block">
+        <div class="col-12 my-4 tries-col">
+            <div class="tries-container">
+                <div class="tries-col-text">
                     <h5 class="encourage">Tried this painting?</h5>
                     <h5 class="encourage">Add a photo to show how it went</h5>
                 </div>
-                <div class="d-inline-block">
+                <div class="tries-col-btn">
                     <button class="btn smaller-utils add_pho">Add photo</button>
                 </div>
             </div>
@@ -135,7 +135,7 @@
     <div class="container">
         <h3 class="my-4" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">More like this...</h3>
         <div class="js-masonry grid">
-            <div data-masonry='{"percentPosition": true}' class='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4' id="similar_paintings">        
+            <div data-masonry='{"percentPosition": true}' class='row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4' id="similar_paintings">        
             </div>        
         </div>
     </div>

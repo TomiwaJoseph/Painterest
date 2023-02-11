@@ -17,11 +17,11 @@
 
 
 <div class="row">
-    <div class="col-md-8 mx-auto">
-        <div class="content-section my-2" data-aos="fade-in" data-aos-delay="200" data-aos-duration="1000"  id="flwr_div">
+    <div class="col-md-9 mx-auto">
+        <div class="content-section my-2" data-aos="fade-in" data-aos-delay="200" data-aos-duration="1000" id="flwr_div">
             <div class="row">
                 {% for user in users_follower %}
-                    <div class="col-md-3 text-center my-2 follw_and_follwin_col" data-aos="flip-left" data-aos-delay="200" data-aos-duration="1000">
+                    <div class="col-lg-3 col-md-4 col-4 text-center my-2 follw_and_follwin_col">
                         {% if user.user_from.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
                             <a href="{% url 'painter_profile' user.user_from %}">
                                 <div class="no-profile-pic d-inline-block">{{ user.user_from.username.0 }}</div>
@@ -43,25 +43,25 @@
 </div>
 
 <div class="row">
-    <div class="col-md-8 mx-auto">
+    <div class="col-md-9 mx-auto">
         <div class="content-section my-2" id="flwng_div">
             <div class="row">
                 {% for user in users_following %}
-                <div class="col-md-3 text-center my-2 follw_and_follwin_col" data-aos="flip-left" data-aos-delay="200" data-aos-duration="1000">
-                    {% if user.user_to.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-                        <a href="{% url 'painter_profile' user.user_to %}">
-                            <div class="no-profile-pic d-inline-block">{{ user.user_to.username.0 }}</div>
-                            <p class="red_to_profile">{{ user.user_to }}</p>
-                        </a>
-                    {% else %}
-                        <a href="{% url 'painter_profile' user.user_to %}" class="red_to_profile">
-                            <div class="d-inline-block">
-                                <img class="img-fluid rounded-circle follower_img" src="{{ user.user_to.profile.image.url }}">
+                    <div class="col-lg-3 col-md-4 col-4 text-center my-2 follw_and_follwin_col">
+                        {% if user.user_to.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+                            <a href="{% url 'painter_profile' user.user_to %}">
+                                <div class="no-profile-pic d-inline-block">{{ user.user_to.username.0 }}</div>
                                 <p class="red_to_profile">{{ user.user_to }}</p>
-                            </div>
-                        </a>
-                    {% endif %}
-                </div>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'painter_profile' user.user_to %}" class="red_to_profile">
+                                <div class="d-inline-block">
+                                    <img class="img-fluid rounded-circle follower_img" src="{{ user.user_to.profile.image.url }}">
+                                    <p class="red_to_profile">{{ user.user_to }}</p>
+                                </div>
+                            </a>
+                        {% endif %}
+                    </div>
                 {% endfor %}
             </div>
         </div>
