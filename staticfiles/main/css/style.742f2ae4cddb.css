@@ -1,0 +1,735 @@
+body {
+  font-family: "poppins" !important;
+}
+a:hover {
+  text-decoration: none;
+}
+button:focus,
+button:active {
+  outline: none !important;
+  border: none !important;
+}
+.modal {
+  z-index: 99999;
+}
+
+/* <------- Navbar ---------> */
+.logo {
+  height: 30px;
+}
+nav .mobile-links,
+nav .mobile-icons {
+  display: none;
+}
+nav {
+  background: #f8f9fa;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 80px;
+  z-index: 99999;
+}
+.navbar-brand {
+  font-size: 25px;
+  color: #dc3545 !important;
+}
+.nav-menu {
+  display: flex;
+  align-items: center;
+}
+.navbar-brand span {
+  margin-left: 5px;
+}
+.desktop-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-link {
+  color: #000000a2;
+}
+.nav-link:hover {
+  color: teal !important;
+}
+.nav-link.active {
+  color: #dc3545;
+}
+nav .dropdown .profile_badge {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 180%;
+  border-radius: 50%;
+  font-size: 16px;
+  background: rgb(36, 36, 36);
+  color: #fff;
+  display: inline-block;
+}
+.badge-account-img {
+  height: 30px;
+  width: 30px;
+  margin-bottom: 10px;
+}
+.nav-link i.fa {
+  font-size: 20px;
+}
+nav .nav-link .badge {
+  font-size: 0.7em;
+  padding: 0.3em 0.6em;
+  background: teal !important;
+}
+nav .dropdown {
+  position: relative;
+  display: inline-block;
+}
+nav .dropdown-content {
+  display: none;
+  position: absolute;
+  background: #f1f1f1;
+  min-width: 140px;
+  -webkit-box-shadow: 0 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 0;
+}
+nav .dropdown-content a {
+  color: #000;
+  padding: 5px 10px;
+  display: block;
+}
+nav .dropdown .drop:hover {
+  color: #fff;
+  background: lightgray;
+}
+nav .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* <--------- Home -----------> */
+
+@media (min-width: 576px) {
+  .card-columns {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-columns {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-columns {
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+    column-count: 4;
+  }
+}
+
+.paint-img img {
+  -moz-border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px 3px 0 0;
+  border-radius: 2%;
+  padding: 4px 4px;
+}
+.paint-img img:hover {
+  cursor: zoom-in;
+}
+
+/* <--------- Register and Login Forms ----------> */
+.content-section {
+  position: relative !important;
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  z-index: 9;
+}
+.log:hover {
+  color: #fff;
+  background: #dc3545;
+  border: 1px solid #dc3545;
+}
+.log {
+  background: none;
+  color: #dc3545;
+  outline: none;
+  border: 1px solid #dc3545;
+  width: 100%;
+}
+.form-control:focus {
+  -webkit-box-shadow: 0 3px 10px -2px #dc3545 !important;
+  box-shadow: 0 3px 10px -2px #dc3545 !important;
+  color: #000;
+  border: 1px none;
+}
+form .alert-block {
+  display: none;
+}
+#log_cat .text-muted a,
+#reg_cat .text-muted a {
+  margin-left: 10px;
+}
+#reg_cat .content-section {
+  margin-bottom: 150px;
+}
+.demo-button {
+  display: block;
+  background: teal;
+  width: 100%;
+  margin-top: 10px;
+}
+.demo-button a {
+  color: #fff;
+}
+.demo-button:hover {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* <---------- General things -----------> */
+button:focus {
+  box-shadow: none !important;
+}
+a,
+a:hover {
+  text-decoration: none;
+}
+.account-img {
+  height: 100px;
+  width: 100px;
+  margin-bottom: 16px;
+}
+.category {
+  display: inline-block;
+  background: teal;
+  padding: 2px 8px;
+  line-height: 1.5;
+  font-size: 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  color: #fff !important;
+  margin-right: 10px;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+}
+
+/* <----------------- Detail View -----------> */
+.paint_det img {
+  -moz-border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px 3px 0 0;
+  border-radius: 1%;
+}
+.author img {
+  width: 40px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+}
+.down_but {
+  width: 70%;
+  background: none;
+  color: #f00;
+  outline: none;
+  border: 2px solid #f00;
+  margin-bottom: 10px;
+  display: inline-block;
+  padding: 6px;
+  margin-left: 20px;
+}
+.down_but:hover .fa {
+  color: #fff;
+}
+.down_but:hover {
+  background: red;
+  color: #fff;
+}
+.down_but .fa {
+  color: #f00;
+  display: inline-block;
+  font-size: 20px;
+  padding-left: 2px;
+}
+.utils {
+  width: 30%;
+  background: none;
+  color: #000;
+  outline: none;
+  border: 2px solid teal;
+  margin-bottom: 10px;
+  display: inline-block;
+  padding: 6px;
+}
+.utils.active {
+  background: teal;
+  color: #fff;
+}
+.utils:hover {
+  color: #fff;
+  border: 2px solid #05a7a7;
+  background: #05a7a7;
+}
+.tries-container {
+  display: flex;
+  justify-content: space-between;
+}
+.tries-col-text,
+.tries-col-btn {
+  display: inline-block;
+}
+.smaller-utils {
+  border: 1px solid #00b6b6;
+  color: #000;
+}
+.smaller-utils:hover {
+  background-color: teal;
+  color: #fff;
+}
+.date_created {
+  margin-left: 10px;
+}
+.artist-name {
+  color: teal;
+}
+
+/* <----------------- Settings ----------------->*/
+.settings button {
+  display: inline-block;
+  width: 30%;
+}
+.follwi_follwe .active,
+.settings .active,
+.foll {
+  background: #0caaaa !important;
+  color: #fff !important;
+  border: none;
+}
+.encourage {
+  font-size: 13px;
+}
+.add_pho {
+  font-size: 14px;
+}
+.pna {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 200%;
+  border-radius: 50%;
+  font-size: 20px;
+  background: rgb(36, 36, 36);
+  color: #fff;
+  margin-right: 10px;
+}
+.demarcate {
+  background-color: #dc3545;
+}
+.setting_demar {
+  width: 70%;
+  background-color: #16caca;
+  margin: 0 auto !important;
+}
+#home-feed .w-50 {
+  margin: 0 auto !important;
+}
+#feed-saver-btn {
+  margin-top: 10px !important;
+}
+
+/* <---------- Profile stuff --------> */
+#message_div button {
+  background: transparent;
+  color: teal;
+  border: 1px solid teal;
+}
+#message_div button:hover {
+  background: teal;
+  color: #fff;
+}
+.change_badge {
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  line-height: 200%;
+  border-radius: 50%;
+  font-size: 50px;
+  background: rgb(36, 36, 36);
+  color: #fff;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.follow {
+  font-size: 14px;
+}
+.profile_bcg .badge {
+  margin-bottom: 2px;
+}
+.follows_you {
+  background: #f78585;
+  color: #fff;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  display: block;
+}
+#prof_about {
+  line-height: 1.3;
+}
+.paint_profil_col {
+  margin-bottom: 10% !important;
+}
+
+/* <---------- Follower and Following -----------> */
+#followers,
+#followings {
+  color: #dc3545;
+  background: none;
+  border: 1px solid #16caca;
+  width: 45%;
+  margin-bottom: 10px;
+}
+#flwng_div .follower_img,
+#flwr_div .follower_img {
+  height: 52px;
+  width: 52px;
+  border-radius: 50%;
+}
+#flwng_div p,
+#flwr_div p {
+  font-size: 14px;
+}
+.red_to_profile {
+  color: #000;
+  margin-top: 5px;
+  margin-bottom: 0 !important;
+}
+.red_to_profile:hover {
+  color: #dc3545;
+}
+.no-profile-pic {
+  height: 52px;
+  width: 52px;
+  text-align: center;
+  line-height: 250%;
+  border-radius: 50%;
+  font-size: 20px;
+  background: rgb(36, 36, 36);
+  color: #fff;
+  margin-right: 10px;
+}
+#flwr_div,
+#flwng_div {
+  margin-bottom: 25% !important;
+}
+
+/* <-------------- Other CSS Tricks -------------> */
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.div_ava {
+  text-align: center;
+}
+.first {
+  margin-top: -40px;
+  margin-left: 3px;
+  font-size: 20px;
+  color: #fff;
+}
+.chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+}
+.chip img {
+  float: left;
+  margin: 0 15px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.closebtn {
+  padding-left: 10px;
+  color: #888;
+  font-weight: bold;
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+.closebtn:hover {
+  color: #000;
+}
+.container ul {
+  display: none;
+}
+#checkbox {
+  opacity: 0;
+}
+#checkbox:checked + ul {
+  display: block;
+}
+
+/* <------------- Base Stuff --------------> */
+.alert-error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+.add i,
+.quest i {
+  color: #000;
+}
+.add i:hover,
+.quest i:hover {
+  color: rgb(99, 99, 99);
+}
+.add {
+  position: fixed;
+  bottom: 13%;
+  right: 7%;
+  font-size: 35px;
+  cursor: pointer;
+  z-index: 99999;
+}
+.quest {
+  position: fixed;
+  bottom: 5%;
+  right: 7%;
+  font-size: 35px;
+  cursor: pointer;
+  z-index: 99999;
+}
+.sub-quest {
+  position: fixed;
+  bottom: 5%;
+  right: 10%;
+  cursor: pointer;
+  text-align: right;
+}
+.sub-quest li {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#crazy {
+  display: none;
+}
+
+#crazy:checked + ul {
+  display: block;
+}
+.the_a {
+  display: inline-block;
+  background: teal;
+  padding: 2px 8px;
+  line-height: 1.5;
+  font-size: 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  color: #fff;
+  margin-right: 10px;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+}
+.the_a:hover {
+  background: rgb(22, 202, 202);
+  color: #fff;
+}
+
+/* <------------ Messages ---------------> */
+.message_ {
+  display: block;
+}
+.each_message:hover {
+  background: #f0f0f0;
+}
+.each_message a {
+  color: #4b4b4b;
+}
+#single_msg .text-danger,
+.each_message .text-info {
+  color: teal !important;
+  margin-left: 8px !important;
+}
+.filter_buttons {
+  display: block;
+  margin-bottom: 10px;
+  background: #858585;
+  color: #fff;
+  outline: none;
+  border: none;
+  width: 100%;
+}
+.filter_buttons:hover {
+  color: #fff;
+  background: rgb(22, 202, 202);
+}
+.all_filter_but .active {
+  background: rgb(255, 75, 75) !important;
+  color: #fff !important;
+  border: none;
+}
+.the_message {
+  text-align: justify;
+}
+
+/* <------------ Home Feed Settings Section ------> */
+#feed,
+#profile {
+  color: #16caca;
+  background: none;
+  border: 1px solid #16caca;
+}
+input[type="checkbox"][id^="category"] {
+  display: none;
+}
+.img-check label {
+  border: 1px solid #fff;
+  padding: 10px;
+  display: block;
+  position: relative;
+  margin: 10px;
+  cursor: pointer;
+}
+.img-check label:before {
+  background-color: #fff;
+  color: #fff;
+  content: " ";
+  display: block;
+  border-radius: 50px;
+  border: 1px solid grey;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 28px;
+  transition-duration: 0.4s;
+  transform: scale(0);
+}
+.img-check label img {
+  transition-duration: 0.2s;
+  transform-origin: 50% 50%;
+  opacity: 0.7;
+}
+.img-check:hover label img {
+  opacity: 1;
+}
+.img-check :checked + label {
+  border-color: teal;
+}
+.img-check :checked + label:before {
+  content: "✔";
+  background-color: #fff;
+  transform: scale(1);
+  color: teal;
+}
+.img-check :checked + label img {
+  transform: scale(0.9);
+  box-shadow: 0 0 5px #333;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* <-------------- View folders -----------> */
+.open_folder {
+  color: #303030;
+}
+.open_folder:hover {
+  color: #dc3545;
+}
+.folder {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+}
+.folder:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+/* <------- Create or Save Section ------------> */
+input.vis {
+  display: none;
+}
+input.vis + label {
+  border: 1px solid grey;
+  background: ghostwhite;
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+input.vis:not(:checked) + label:hover {
+  box-shadow: 0px 1px 3px;
+}
+input.vis + label:active,
+input.vis:checked + label {
+  box-shadow: 0px 0px 3px;
+  background: teal;
+  color: #fff;
+}
+.vis + label {
+  display: block;
+  margin: 15px 0;
+}
+.create-submit-button {
+  background: transparent;
+  border: 1px solid teal;
+}
+.create-submit-button:hover {
+  background: teal;
+  color: #fff;
+}
+
+/* <--------- Folder Content Section ----------> */
+.folder-img img {
+  -moz-border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px 3px 0 0;
+  border-radius: 2%;
+  padding: 4px 4px;
+}
+.folder-img img:hover {
+  cursor: zoom-in;
+}
+.folder-img:hover img {
+  opacity: 0.8;
+}
+
+/* <--------- About Section ----------> */
+.intro {
+  color: #dc3545;
+  font-size: 20px;
+}
+.intro-body {
+  font-size: 18px;
+  line-height: 35px;
+}
+
+/* <-------- Notifications ----------> */
+.notif:hover .content-section {
+  background: rgb(230, 230, 230);
+}
+.notif .text-info {
+  color: teal !important;
+}
+.profile_bcg {
+  background: #d8d8d8 !important;
+}
+.notif_read {
+  background: #ebebeb;
+}
