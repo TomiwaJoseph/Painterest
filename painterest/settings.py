@@ -81,10 +81,6 @@ DATABASES = {
     }
 }
 
-# # Render Postgresql Database (Live)
-# DATABASES = {
-#     'default': dj_database_url.parse(config('DATABASE_URL'))
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -148,5 +144,3 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-
-PASSWORD_RESET_TIMEOUT = 3600
