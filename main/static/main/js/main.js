@@ -4,18 +4,44 @@ $(document).ready(function () {
     AOS.init();
   });
 
-  $(document).click(function (e) {
-    if (!$(e.target).closest("#navbarNav").length) {
-      $("#navbarNav").removeClass("show");
+  const openIcon = document.getElementById("openOrClose");
+  const navMenu = document.getElementById("the-nav-menu");
+
+  const allNavbarLinks = document.querySelectorAll("nav a");
+  let navbarLinksTotalCount = allNavbarLinks.length;
+
+  openIcon.addEventListener("click", function () {
+    currentIcon = this.className;
+    if (currentIcon == "fa fa-bars") {
+      this.classList = "fa fa-times";
+      navMenu.classList.add("active");
+      document.body.style["overflow-y"] = "hidden";
+    } else {
+      this.classList = "fa fa-bars";
+      navMenu.classList.remove("active");
+      document.body.style["overflow-y"] = "auto";
     }
+  });
+
+  for (let i = 0; i < navbarLinksTotalCount; i++) {
+    allNavbarLinks[i].classList.remove("active");
+    const link = allNavbarLinks[i];
+    link.addEventListener("click", function () {
+      openIcon.className = "fa fa-bars";
+      navMenu.classList.remove("active");
+      document.body.style["overflow-y"] = "auto";
+    });
+  }
+
+  $(document).click(function (e) {
     if (!$(e.target).closest("#crazy").length) {
       $("#crazy").prop("checked", false);
     }
   });
 
-  $("li.active").removeClass("active");
+  $("a.active").removeClass("active");
   $('a[href="' + location.pathname + '"]')
-    .closest("li")
+    .closest("a")
     .addClass("active");
 
   $("#followers").addClass("active");

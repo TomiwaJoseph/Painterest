@@ -15,59 +15,47 @@ button:active {
 
 /* <------- Navbar ---------> */
 .logo {
-  height: 34px;
+  height: 30px;
 }
-.navbar {
-  z-index: 9999;
+nav .mobile-links,
+nav .mobile-icons {
+  display: none;
 }
-.navbar .dropdown-menu {
-  font-size: 14px;
-  border-radius: 0px;
-  border: none;
-  -webkit-box-shadow: 0 2px 30px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 2px 30px 0px rgba(0, 0, 0, 0.2);
-  min-width: 13em;
-  margin-top: -10px;
-}
-.drop:hover {
-  color: #fff;
-  background: lightgray;
-}
-.nav-item .home {
-  font-weight: 500;
-}
-nav .nav-item {
-  padding: 0.5em;
-}
-.navbar-light .fa-bars {
-  color: #dc3545;
-  font-size: 24px !important;
-}
-.navbar-toggler {
-  border: none !important;
-}
-.navbar-toggler:focus {
-  outline: none !important;
+nav {
+  background: #f8f9fa;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 80px;
+  z-index: 99999;
 }
 .navbar-brand {
   font-size: 25px;
   color: #dc3545 !important;
-  padding-left: 1em;
 }
-.navbar-nav > .active > a,
-.nav-item > a:hover {
-  color: #dc3545 !important;
+.nav-menu {
+  display: flex;
+  align-items: center;
 }
-.nav-link i.fa {
-  font-size: 20px;
+.navbar-brand span {
+  margin-left: 5px;
+}
+.desktop-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .nav-link {
-  margin-right: 20px;
+  color: #000000a2;
 }
-.nav-item .badge {
-  background: teal !important;
+.nav-link:hover {
+  color: teal !important;
 }
-.dropdown .profile_badge {
+.nav-link.active {
+  color: #dc3545;
+}
+nav .dropdown .profile_badge {
   width: 30px;
   height: 30px;
   text-align: center;
@@ -81,7 +69,41 @@ nav .nav-item {
 .badge-account-img {
   height: 30px;
   width: 30px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+}
+.nav-link i.fa {
+  font-size: 20px;
+}
+nav .nav-link .badge {
+  font-size: 0.7em;
+  padding: 0.3em 0.6em;
+  background: teal !important;
+}
+nav .dropdown {
+  position: relative;
+  display: inline-block;
+}
+nav .dropdown-content {
+  display: none;
+  position: absolute;
+  background: #f1f1f1;
+  min-width: 140px;
+  -webkit-box-shadow: 0 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 0;
+}
+nav .dropdown-content a {
+  color: #000;
+  padding: 5px 10px;
+  display: block;
+}
+nav .dropdown .drop:hover {
+  color: #fff;
+  background: lightgray;
+}
+nav .dropdown:hover .dropdown-content {
+  display: block;
 }
 
 /* <--------- Home -----------> */
@@ -322,6 +344,15 @@ a:hover {
 }
 
 /* <---------- Profile stuff --------> */
+#message_div button {
+  background: transparent;
+  color: teal;
+  border: 1px solid teal;
+}
+#message_div button:hover {
+  background: teal;
+  color: #fff;
+}
 .change_badge {
   width: 100px;
   height: 100px;

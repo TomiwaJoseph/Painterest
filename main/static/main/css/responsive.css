@@ -1,7 +1,58 @@
-@media (max-width: 768px) {
-  .logo {
-    height: 34px;
+@media only screen and (max-width: 950px) {
+  nav {
+    padding: 0.5rem 40px;
   }
+}
+@media only screen and (max-width: 480px) {
+  nav {
+    padding: 0.5rem 20px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 10vh;
+    height: 90vh;
+    left: 0;
+    position: absolute;
+    background: #e6e6e6;
+    text-align: center;
+    z-index: 10 !important;
+  }
+  nav .nav-menu {
+    display: none;
+  }
+  .nav-menu.active .mobile-links {
+    display: block;
+  }
+  nav .mobile-icons {
+    display: block;
+  }
+  nav .mobile-icons .fa {
+    font-size: 24px;
+    color: #dc3545;
+  }
+  nav .mobile-links a {
+    font-size: 24px;
+    color: #dc3545;
+    padding: 30px 20px;
+  }
+  .desktop-links {
+    display: block;
+  }
+  .nav-menu.active .nav-link {
+    display: block;
+    margin: 0;
+    height: 12vh;
+  }
+}
+
+@media (max-width: 768px) {
   #web_url {
     font-size: 16px;
     text-align: center;
@@ -113,9 +164,6 @@
     width: 50% !important;
     padding-right: 0 !important;
   }
-  .navbar-brand {
-    margin-left: 10px;
-  }
   #notif_justify {
     justify-content: center;
     display: flex;
@@ -170,28 +218,6 @@
   .login-switch a {
     margin-right: 0;
     margin-left: 13px !important;
-  }
-}
-
-@media (min-width: 995px) {
-  .navbar-nav {
-    align-items: center;
-  }
-}
-
-@media (max-width: 995px) {
-  .navbar-nav {
-    justify-content: center;
-    align-items: center;
-  }
-  .navbar-brand {
-    padding-left: 0px;
-  }
-}
-
-@media (min-width: 768px) {
-  nav .nav-item:last-child {
-    padding-right: 0px;
   }
 }
 
