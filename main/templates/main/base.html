@@ -19,78 +19,67 @@
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" data-aos="fade-down" data-aos-delay="200" data-aos-duration="1000">
-        <div class="container">
+    <nav class="the-navbar" id="navbar">
+        <div class="nav-left">
             <a class="navbar-brand" href="{% url 'index' %}">
-                <img src="/media/painterestLogo.png" class="logo img-fluid" alt=""> Painterest</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-            <div class="collapse navbar-collapse align-items-center justify-content-end" id="navBar">                
-                <ul class="navbar-nav d-flex">
-                    <li class="nav-item">
-                        <a class="nav-link home" href="{% url 'index' %}">Home <span
-                            class="sr-only">(current)</span></a>
-                    </li>
-                    {% if not user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'register' %}" tabindex="-1" aria-disabled="true">Sign Up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">Login</a>
-                        </li>
+                <img src="/media/painterestLogo.png" class="logo img-fluid" alt="" />
+                <span>Painterest</span>
+            </a>
+        </div>
+        <div class="mobile-icons">
+            <i class="fa fa-bars" id="openOrClose"></i>
+        </div>
+        <div class="nav-menu" id="the-nav-menu">
+          <div class="desktop-links">
+            <a href="{% url 'index' %}" class="nav-link">Home</a>
+            {% if not user.is_authenticated %}
+                <a href="{% url 'register' %}" class="nav-link">Sign Up</a>
+                <a href="{% url 'login' %}" class="nav-link">Login</a>
+            {% else %}
+                <a href="{% url 'add_paint' %}" class="nav-link">Add Paint</a>
+                <a href="{% url 'notifications' %}" class="nav-link">
+                    <i class="fa fa-bell">
+                        {% if notify %}
+                            <span class="translate-middle badge rounded-pill bg-danger">
+                                {{ notify }}
+                                <span class="visually-hidden">unread notifications</span>
+                            </span>
+                        {% endif %}
+                    </i>
+                </a>
+                <a href="{% url 'view_messages' %}" class="nav-link">
+                    {% if unread_count %}
+                        <i class="fa fa-envelope">
+                            <span class="translate-middle badge rounded-pill bg-danger">
+                                {{ unread_count }}
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </i>
                     {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'add_paint' %}">
-                                <i class="fa fa-plus"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link position-relative" href="{% url 'notifications' %}" tabindex="-1" aria-disabled="true">
-                                <i class="fa fa-bell">
-                                    {% if notify %}
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                            {{ notify }}
-                                            <span class="visually-hidden">unread notifications</span>
-                                        </span>
-                                    {% endif %}
-                                </i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link position-relative" href="{% url 'view_messages' %}" tabindex="-1" aria-disabled="true">
-                                {% if unread_count %}
-                                    <i class="fa fa-envelope">
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                            {{ unread_count }}
-                                            <span class="visually-hidden">unread messages</span>
-                                        </span>
-                                    </i>
-                                {% else %}
-                                    <i class="fa fa-envelope-open"></i>
-                                {% endif %}
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {% if user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-                                    <div class="profile_badge">{{ user.username.0 }}</div>
-                                {% else %}
-                                    <img class="rounded-circle badge-account-img" src="{{ user.profile.image.url }}">
-                                {% endif %}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown09">
-                                <li><a class="dropdown-item drop" href="{% url 'profile' %}">Profile</a></li>
-                                <li><a class="dropdown-item drop" href="{% url 'settings' %}">Settings</a></li>
-                                <li><a class="dropdown-item drop" href="{% url 'view_folders' %}">Saved paints</a></li>
-                                <li><a class="dropdown-item drop" href="{% url 'logout' %}">Log out</a></li>
-                            </ul>
-                        </li>
+                        <i class="fa fa-envelope-open"></i>
                     {% endif %}
-                </ul>
-            </div>
+                </a>
+                <div class="nav-link dropdown">
+                    {% if user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+                        <div class="profile_badge">{{ user.username.0 }}</div>
+                    {% else %}
+                        <img class="rounded-circle badge-account-img" src="{{ user.profile.image.url }}">
+                    {% endif %}
+                    <span class="fa fa-caret-down"></span>
+                    <div class="dropdown-content" aria-labelledby="dropdown09">
+                        <a class="drop" href="{% url 'profile' %}">Profile</a>
+                        <a class="drop" href="{% url 'settings' %}">Settings</a>
+                        <a class="drop" href="{% url 'view_folders' %}">Saved paints</a>
+                        <a class="drop" href="{% url 'logout' %}">Log out</a>
+                    </div>
+                </div>
+            {% endif %}
+          </div>
+          <div class="mobile-links">
+            <a target="_blank" href="https://github.com/TomiwaJoseph"><i class="fa fa-github"></i></a>
+            <a target="_blank" href="https://linkedin.com/in/tomiwa-joseph-a2b024203"><i class="fa fa-linkedin"></i></a>
+            <a target="_blank" href="https://twitter.com/tomiwajoseph10"><i class="fa fa-twitter"></i></a>
+          </div>
         </div>
     </nav>
 
