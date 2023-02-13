@@ -43,12 +43,15 @@
     padding: 30px 20px;
   }
   .desktop-links {
-    display: block;
+    gap: 3px;
+    row-gap: 10px;
+    flex-wrap: wrap;
   }
-  .nav-menu.active .nav-link {
-    display: block;
-    margin: 0;
-    height: 12vh;
+  .desktop-links .nav-link {
+    padding: 0.5rem 20px;
+  }
+  .mobile-links {
+    margin-top: 10px;
   }
 }
 
