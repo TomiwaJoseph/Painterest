@@ -1,8 +1,8 @@
 $(document).ready(function () {
-  window.addEventListener("load", function () {
-    // Initialize AOS
-    AOS.init();
-  });
+  // window.addEventListener("load", function () {
+  //   // Initialize AOS
+  //   AOS.init();
+  // });
 
   const openIcon = document.getElementById("openOrClose");
   const navMenu = document.getElementById("the-nav-menu");
