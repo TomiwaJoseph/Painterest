@@ -1,39 +1,44 @@
-{% extends 'main/base.html' %}
-{% block title %}Painterest | Paint Folders{% endblock %}
+{% extends 'main/base.html' %} {% block title %}Painterest | Paint Folders{%
+endblock %} {% load crispy_forms_tags %} {% load users_tags %} {% block content
+%}
 
-{% load crispy_forms_tags %}
-{% load users_tags %}
+<h2
+  class="all_folders_col"
+  data-aos="fade-up"
+  data-aos-delay="200"
+  data-aos-duration="1000"
+>
+  All Folders
+</h2>
+<hr />
 
-{% block content %}
-
-
-<h2 class="all_folders_col" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">All Folders</h2>
-<hr>
-
-<div class="row" >
-    {% for folder in all_folders %}
-        <div class="col-md-4 col-sm-6 mt-3 col-lg-4 col-xl-3 mb-3" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
-            <a href="{% url 'folder_content' folder.id %}" class="open_folder">
-                <div class="folder">
-                    {% if folder.saved_painting.all.count > 2 %}
-                        {% for paint in folder.saved_painting.all|sort_it|slice_it %}
-                            <div>
-                                <img src="{{ paint.painting.url }}" alt="" class="img-fluid">
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% for paint in folder.saved_painting.all|sort_it %}
-                            <div>
-                                <img src="{{ paint.painting.url }}" alt="" class="img-fluid">
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                <h6 class="text-center my-2 text-danger">{{ folder.name }}</h6>
-            </a>
+<div class="row">
+  {% for folder in all_folders %}
+  <div
+    class="col-md-4 col-sm-6 mt-3 col-lg-4 col-xl-3 mb-3"
+    data-aos="fade-down"
+    data-aos-delay="200"
+    data-aos-duration="1000"
+  >
+    <a href="{% url 'folder_content' folder.id %}" class="open_folder">
+      <div class="folder">
+        {% if folder.saved_painting.all.count > 2 %} {% for paint in
+        folder.saved_painting.all|sort_it|slice_it %}
+        <div>
+          <img src="{{ paint.painting.url }}" alt="" class="img-fluid" />
         </div>
-    {% endfor %}
+        {% endfor %} {% else %} {% for paint in
+        folder.saved_painting.all|sort_it %}
+        <div>
+          <img src="{{ paint.painting.url }}" alt="" class="img-fluid" />
+        </div>
+        {% endfor %} {% endif %}
+      </div>
+      <h6 class="text-center my-2 text-danger">{{ folder.name }}</h6>
+    </a>
+  </div>
+  {% endfor %}
 </div>
-<hr>
+<hr />
 
 {% endblock %}

@@ -1,201 +1,232 @@
-{% extends 'main/base.html' %}
-{% load crispy_forms_tags %}
-
-{% block content %}
+{% extends 'main/base.html' %} {% load crispy_forms_tags %} {% block content %}
 
 <div class="row">
-    <div class="col-md-6" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
-        <div class="paint_det">
-            <img class="img-fluid" src="{{ object.painting.url }}" alt="">
+  <div
+    class="col-md-6"
+    data-aos="fade-up"
+    data-aos-delay="200"
+    data-aos-duration="1000"
+  >
+    <div class="paint_det">
+      <img class="img-fluid" src="{{ object.painting.url }}" alt="" />
+    </div>
+    <div class="mt-4">
+      {% if object.adder.profile.image.name ==
+      '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+      <a href="{% url 'painter_profile' object.adder %}">
+        <div class="pna d-inline-block mb-3">{{ object.adder.username.0 }}</div>
+        <span class="author mr-2 text-secondary"> {{ object.adder }}</span>
+      </a>
+      {% else %}
+      <a href="{% url 'painter_profile' object.adder %}">
+        <span class="author mr-2 text-secondary">
+          <img
+            src="{{ object.adder.profile.image.url }}"
+            alt="{{ object.adder.username.0}}"
+            class="img-fluid"
+          />
+          {{ object.adder }}
+        </span>
+      </a>
+      {% endif %}
+    </div>
+    <h4 class="text-danger mt-2">{{ object.title }}</h4>
+    {% if object.artist_name %}
+    <p class="artist-name">
+      Artist name - <span>{{ object.artist_name }}</span>
+    </p>
+    {% else %}
+    <p class="artist-name">Artist Unknown</p>
+    {% endif %}
+  </div>
+
+  <div
+    class="col-md-6"
+    data-aos="fade-down"
+    data-aos-delay="200"
+    data-aos-duration="1000"
+  >
+    <div class="row">
+      <div class="col d-flex justify-content-between">
+        {% with object.painted.all.count as total_tries %} {% if total_tries ==
+        1 %}
+        <button class="btn utils" id="tried">{{ total_tries }} Try</button>
+        {% else %}
+        <button class="btn utils" id="tried">{{ total_tries }} Tries</button>
+        {% endif %} {% endwith %} {% with object.paint_comments.all.count as
+        total_comments %}
+        <button class="btn utils" id="paint_comments">
+          {{ total_comments }} Comment{{ total_comments|pluralize }}
+        </button>
+        {% endwith %}
+        <button class="btn utils" id="show_inp">Comment</button>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col d-flex justify-content-center">
+        <a href="{% url 'save_paint' object.id %}" class="btn utils w-100 mr-3"
+          >Save Image</a
+        >
+        <a href="{% url 'download_painting' object.id %}" class="btn down_but">
+          Download <i class="fa fa-download"></i>
+        </a>
+      </div>
+    </div>
+
+    <hr class="demarcate" />
+
+    <div id="tries">
+      <div class="row">
+        {% for trial in object.painted.all %}
+        <div class="col-md-3 col-4 col-sm-4">
+          <img src="{{ trial.tries.url }}" alt="" class="img-fluid" />
         </div>
-        <div class="mt-4">
-            {% if object.adder.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-                <a href="{% url 'painter_profile' object.adder %}">
-                    <div class="pna d-inline-block mb-3">{{ object.adder.username.0 }}</div>
-                    <span class="author mr-2 text-secondary">
-                    {{ object.adder }}</span>
-                </a>
-            {% else %}
-                <a href="{% url 'painter_profile' object.adder %}">
-                    <span class="author mr-2 text-secondary">
-                    <img src="{{ object.adder.profile.image.url }}" alt="{{ object.adder.username.0}}" class="img-fluid">
-                        {{ object.adder }}
-                    </span>
-                </a>
-            {% endif %}
-        </div>
-        <h4 class="text-danger mt-2">{{ object.title }}</h4>
-        {% if object.artist_name %}
-            <p class="artist-name">Artist name - <span>{{ object.artist_name }}</span></p>
-            {% else %}
-            <p class="artist-name">Artist Unknown</p>
+        {% endfor %}
+      </div>
+      <hr />
+    </div>
+    <div class="mt-4" id="comments">
+      {% for comment in object.paint_comments.all %}
+      <div class="each_message content-section mb-3">
+        {% if comment.commenter.profile.image.name == 'dp.jpg' %}
+        <div class="pna d-inline-block">{{ comment.commenter.username.0 }}</div>
+        <span class="author mr-2 text-secondary">
+          {{ comment.commenter.username }}</span
+        >
+        <span class="date_created text-danger">{{ comment.created }}</span>
+        <p class="my-2 ml-5">{{ comment.body }}</p>
+        {% else %}
+        <span class="author mr-2 text-secondary">
+          <img
+            src="{{ comment.commenter.profile.image.url }}"
+            alt=""
+            class="img-fluid"
+          />
+          {{ comment.commenter.username }}
+        </span>
+        <span class="date_created text-danger">{{ comment.created }}</span>
+        <p class="my-2 ml-5">{{ comment.body }}</p>
         {% endif %}
+      </div>
+      {% empty %}
+      <h4>No comments yet.</h4>
+      {% endfor %}
+      <hr />
     </div>
-    
-    <div class="col-md-6" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
-        <div class="row">
-            <div class="col d-flex justify-content-between">
-                {% with object.painted.all.count as total_tries %}
-                    {% if total_tries == 1 %}
-                        <button class="btn utils" id="tried">{{ total_tries }} Try</button>
-                    {% else %}
-                        <button class="btn utils" id="tried">{{ total_tries }} Tries</button>
-                    {% endif %}
-                {% endwith %}
-                {% with object.paint_comments.all.count as total_comments %}
-                    <button class="btn utils" id="paint_comments">{{ total_comments }} Comment{{ total_comments|pluralize }}</button>
-                {% endwith %}
-                <button class="btn utils" id="show_inp">Comment</button>
-            </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col d-flex justify-content-center">
-                <a href="{% url 'save_paint' object.id %}" class="btn utils w-100 mr-3">Save Image</a>
-                <a href="{% url 'download_painting' object.id %}" class="btn down_but">
-                    Download <i class="fa fa-download"></i>
-                </a>
-            </div>
-        </div>
-
-        <hr class="demarcate">
-
-        <div id="tries">
-            <div class="row">
-                {% for trial in object.painted.all %}
-                    <div class="col-md-3 col-4 col-sm-4">
-                        <img src="{{ trial.tries.url }}" alt="" class="img-fluid">
-                    </div>
-                {% endfor %}
-            </div>
-            <hr>
-        </div>
-        <div class="mt-4" id="comments">
-            {% for comment in object.paint_comments.all %}
-                <div class="each_message content-section mb-3">
-                    {% if comment.commenter.profile.image.name == 'dp.jpg' %}
-                        <div class="pna d-inline-block">{{ comment.commenter.username.0 }}</div>
-                        <span class="author mr-2 text-secondary">
-                        {{ comment.commenter.username }}</span>
-                        <span class="date_created text-danger">{{ comment.created }}</span>
-                        <p class="my-2 ml-5">{{ comment.body }}</p>
-                    {% else %}
-                        <span class="author mr-2 text-secondary">
-                            <img src="{{ comment.commenter.profile.image.url }}" alt="" class="img-fluid">
-                        {{ comment.commenter.username }}
-                        </span>
-                        <span class="date_created text-danger">{{ comment.created }}</span>
-                        <p class="my-2 ml-5">{{ comment.body }}</p>
-                    {% endif %}
-                </div>
-            {% empty %}
-                <h4>No comments yet.</h4>
-            {% endfor %}
-            <hr>
-        </div>
-        <div class="mt-4" id="add_comment">
-            <form method="POST" action="{% url 'add_comment' %}">
-                {% csrf_token %}
-                <input type="hidden" name='painting_id' value="{{ object.id }}">
-                <label for="">Add comments...</label>
-                <input type="text" class="form-control my-2" name="comment">
-                <button class="btn smaller-utils my-2">Comment</button>
-            </form>
-            <hr>
-        </div>
-        <div class="col-md-12 my-4" id="add_try">
-            <div class="content-section">
-                <form method="POST" enctype="multipart/form-data" action="{% url 'add_paint_try' %}">
-                    {% csrf_token %}
-                    {{ form | crispy }}
-                    <input type="hidden" name="redir" value="{{ object.id }}">
-                    <div class="form-group">
-                        <button class="btn btn-outline-info log" type="submit">Add</button>
-                    </div>
-                </form>
-            </div>
-            <hr>
-        </div>
-        <div class="col-12 my-4 tries-col">
-            <div class="tries-container">
-                <div class="tries-col-text">
-                    <h5 class="encourage">Tried this painting?</h5>
-                    <h5 class="encourage">Add a photo to show how it went</h5>
-                </div>
-                <div class="tries-col-btn">
-                    <button class="btn smaller-utils add_pho">Add photo</button>
-                </div>
-            </div>
-        </div>
+    <div class="mt-4" id="add_comment">
+      <form method="POST" action="{% url 'add_comment' %}">
+        {% csrf_token %}
+        <input type="hidden" name="painting_id" value="{{ object.id }}" />
+        <label for="">Add comments...</label>
+        <input type="text" class="form-control my-2" name="comment" />
+        <button class="btn smaller-utils my-2">Comment</button>
+      </form>
+      <hr />
     </div>
-
+    <div class="col-md-12 my-4" id="add_try">
+      <div class="content-section">
+        <form
+          method="POST"
+          enctype="multipart/form-data"
+          action="{% url 'add_paint_try' %}"
+        >
+          {% csrf_token %} {{ form | crispy }}
+          <input type="hidden" name="redir" value="{{ object.id }}" />
+          <div class="form-group">
+            <button class="btn btn-outline-info log" type="submit">Add</button>
+          </div>
+        </form>
+      </div>
+      <hr />
+    </div>
+    <div class="col-12 my-4 tries-col">
+      <div class="tries-container">
+        <div class="tries-col-text">
+          <h5 class="encourage">Tried this painting?</h5>
+          <h5 class="encourage">Add a photo to show how it went</h5>
+        </div>
+        <div class="tries-col-btn">
+          <button class="btn smaller-utils add_pho">Add photo</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<hr class="demarcate">
+<hr class="demarcate" />
 
 {% if similar_paintings %}
-    <div class="container">
-        <h3 class="my-4" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">More like this...</h3>
-        <div class="js-masonry grid">
-            <div data-masonry='{"percentPosition": true}' class='row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4' id="similar_paintings">        
-            </div>        
-        </div>
-    </div>
-{% endif %}
-    
-{% endblock %}
-    
-{% block script %}
+<div class="container">
+  <h3
+    class="my-4"
+    data-aos="flip-up"
+    data-aos-delay="200"
+    data-aos-duration="1000"
+  >
+    More like this...
+  </h3>
+  <div class="js-masonry grid">
+    <div
+      data-masonry='{"percentPosition": true}'
+      class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4"
+      id="similar_paintings"
+    ></div>
+  </div>
+</div>
+{% endif %} {% endblock %} {% block script %}
 
 <script>
-    $(document).ready(function(){
-        var each_load = 5;
-        var start_from = 0;
-        var action = 'inactive'
+  $(document).ready(function () {
+    var each_load = 5;
+    var start_from = 0;
+    var action = "inactive";
 
-        function load_post_data(each_load, start_from) {
-            $.ajax({
-                url: 'similar_fetch/',
-                method: 'GET',
-                data: {
-                    each_load: each_load,
-                    start_from: start_from
-                },
-                caches: false,
-                success: function (response) {
-                    $('#similar_paintings').append(response);
-                    if (response == "") {
-                        action = 'active';
-                    } else {
-                        action = 'inactive';
-                    }
-                    var msnry = new Masonry('.grid > .row', {
-                        itemSelector: '.grid-item',
-                        percentPosition: true
-                    });
-                    var $grid = document.querySelector('.grid > .row');
-                    var $images = $grid.querySelectorAll('.card img');
-                    $images.forEach(function (el) {
-                        el.addEventListener('load', function () {
-                            msnry.layout();
-                        });
-                    });
-                }
-            })
-        }
-        if (action == 'inactive') {
-            action = 'active',
-                load_post_data(each_load, start_from)
-        }
-        $(window).scroll(function () {
-            if ($(window).scrollTop() + $(window).height() > $('#similar_paintings').height() && action ==
-                'inactive') {
-                action = 'active';
-                start_from = start_from + each_load;
-                setTimeout(function () {
-                    load_post_data(each_load, start_from);
-                }, 1000)
-            }
-        })
-    })
+    function load_post_data(each_load, start_from) {
+      $.ajax({
+        url: "similar_fetch/",
+        method: "GET",
+        data: {
+          each_load: each_load,
+          start_from: start_from,
+        },
+        caches: false,
+        success: function (response) {
+          $("#similar_paintings").append(response);
+          if (response == "") {
+            action = "active";
+          } else {
+            action = "inactive";
+          }
+          var msnry = new Masonry(".grid > .row", {
+            itemSelector: ".grid-item",
+            percentPosition: true,
+          });
+          var $grid = document.querySelector(".grid > .row");
+          var $images = $grid.querySelectorAll(".card img");
+          $images.forEach(function (el) {
+            el.addEventListener("load", function () {
+              msnry.layout();
+            });
+          });
+        },
+      });
+    }
+    if (action == "inactive") {
+      (action = "active"), load_post_data(each_load, start_from);
+    }
+    $(window).scroll(function () {
+      if (
+        $(window).scrollTop() + $(window).height() >
+          $("#similar_paintings").height() &&
+        action == "inactive"
+      ) {
+        action = "active";
+        start_from = start_from + each_load;
+        setTimeout(function () {
+          load_post_data(each_load, start_from);
+        }, 1000);
+      }
+    });
+  });
 </script>
 
 {% endblock %}

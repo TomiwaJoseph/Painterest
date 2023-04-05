@@ -1,67 +1,97 @@
-{% extends 'main/base.html' %}
-
-{% block title %}Painterest | {{ painter.username }}'s Profile{% endblock %}
-
-{% block content %}
-
+{% extends 'main/base.html' %} {% block title %}Painterest | {{ painter.username
+}}'s Profile{% endblock %} {% block content %}
 
 <div class="row">
-    <div class="col-md-7 col-lg-5 mx-auto my-auto text-center paint_profil_col" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
-        <div class="content-section bg-light pt-4 pb-4 profile_bcg">
-            {% if painter.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-                <div class="change_badge mx-auto">{{ painter.username.0 }}</div>
-            {% else %}
-                <img class="rounded-circle account-img" src="{{ painter.profile.image.url }}">
-            {% endif %}
+  <div
+    class="col-md-7 col-lg-5 mx-auto my-auto text-center paint_profil_col"
+    data-aos="fade-up"
+    data-aos-delay="200"
+    data-aos-duration="1000"
+  >
+    <div class="content-section bg-light pt-4 pb-4 profile_bcg">
+      {% if painter.profile.image.name ==
+      '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+      <div class="change_badge mx-auto">{{ painter.username.0 }}</div>
+      {% else %}
+      <img
+        class="rounded-circle account-img"
+        src="{{ painter.profile.image.url }}"
+      />
+      {% endif %}
 
-            <h1>{{ painter.username }}</h1>
+      <h1>{{ painter.username }}</h1>
 
-            <a href="{% url 'following_and_follower' painter%}" class="category follow mt-2">Followers
-                <span class="badge bg-dark text-light">{{ painter.followers.all.count }}</span>
-            </a>
-            <a href="{% url 'following_and_follower' painter%}" class="category follow mt-2">Following
-                <span class="badge bg-dark text-light">{{ painter.following.all.count }}</span>
-            </a>
+      <a
+        href="{% url 'following_and_follower' painter%}"
+        class="category follow mt-2"
+        >Followers
+        <span class="badge bg-dark text-light"
+          >{{ painter.followers.all.count }}</span
+        >
+      </a>
+      <a
+        href="{% url 'following_and_follower' painter%}"
+        class="category follow mt-2"
+        >Following
+        <span class="badge bg-dark text-light"
+          >{{ painter.following.all.count }}</span
+        >
+      </a>
 
-            {% if painter in user.followers.all %}
-                <span class="follows_you mt-4">Follows you</span>
-            {% endif %}
-            <hr>
+      {% if painter in user.followers.all %}
+      <span class="follows_you mt-4">Follows you</span>
+      {% endif %}
+      <hr />
 
-            {% if painter.profile.about != '' %}
-                <h4 class="text-danger">About</h4><hr>
-                <h5 id="prof_about">{{ painter.profile.about }}</h5><hr>
-            {% endif %}
+      {% if painter.profile.about != '' %}
+      <h4 class="text-danger">About</h4>
+      <hr />
+      <h5 id="prof_about">{{ painter.profile.about }}</h5>
+      <hr />
+      {% endif %} {% if painter.profile.website_url %}
+      <a
+        href="{{ user.profile.website_url }}"
+        target="blank"
+        id="web_url"
+        class="text-danger"
+        >{{ user.profile.website_url }}</a
+      >
+      {% endif %} {% if user != painter %} {% if user not in
+      painter.followers.all %}
+      <a href="{% url 'follow' painter %}" class="category">Follow</a>
+      {% else %}
+      <a href="{% url 'unfollow' painter %}" class="category">Unfollow</a>
+      {% endif %}
+      <button id="send_button" class="category btn">Message</button>
+      {% endif %}
 
-            {% if painter.profile.website_url %}
-            <a href="{{ user.profile.website_url }}" target="blank" id="web_url" 
-                class="text-danger">{{ user.profile.website_url }}</a>
-            {% endif %}
-
-            {% if user != painter %}
-                {% if user not in painter.followers.all %}
-                    <a href="{% url 'follow' painter %}" class="category">Follow</a>
-                {% else %}
-                    <a href="{% url 'unfollow' painter %}" class="category">Unfollow</a>
-                {% endif %}
-                <button id="send_button" class="category btn">Message</button>
-            {% endif %}
-
-            <div id="message_div" class="mt-4">
-                <hr>
-                <form method="POST" action="{% url 'send_message' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="painter_name" value="{{ painter }}">
-                    <input required type="text" class="form-control mb-2" name="subject" placeholder="Enter subject here...">
-                    <textarea class="form-control" name="message" cols="10" rows="8" placeholder="Enter message here...short and sweet😉😂🤣"></textarea>
-                    <button class="btn btn-outline-info mt-3" type="submit">Send message 
-                        <i class="fa fa-arrow-right"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
+      <div id="message_div" class="mt-4">
+        <hr />
+        <form method="POST" action="{% url 'send_message' %}">
+          {% csrf_token %}
+          <input type="hidden" name="painter_name" value="{{ painter }}" />
+          <input
+            required
+            type="text"
+            class="form-control mb-2"
+            name="subject"
+            placeholder="Enter subject here..."
+          />
+          <textarea
+            class="form-control"
+            name="message"
+            cols="10"
+            rows="8"
+            placeholder="Enter message here...short and sweet😉😂🤣"
+          ></textarea>
+          <button class="btn btn-outline-info mt-3" type="submit">
+            Send message
+            <i class="fa fa-arrow-right"></i>
+          </button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
 
 {% endblock %}
-

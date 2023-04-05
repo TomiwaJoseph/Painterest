@@ -1,44 +1,66 @@
-{% extends 'main/base.html' %}
-{% block title %}Painterest | Contact Us{% endblock %}
+{% extends 'main/base.html' %} {% block title %}Painterest | Contact Us{%
+endblock %} {% block content %}
 
-
-{% block content %}
-
-<div class="row" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">
-    <div class="col-md-4 mx-auto my-auto text-center contact_col">
-        <h2>Contact us</h2>
-        <hr>
-    </div>
+<div
+  class="row"
+  data-aos="flip-up"
+  data-aos-delay="200"
+  data-aos-duration="1000"
+>
+  <div class="col-md-4 mx-auto my-auto text-center contact_col">
+    <h2>Contact us</h2>
+    <hr />
+  </div>
 </div>
 
 <div class="row">
-    <div class="col-md-6 mx-auto" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
-        <form action="{% url 'contact' %}" onsubmit='disableButton()' method="POST" class="mt-4 p-4 bg-light">
-            {% csrf_token %}
-            <div class="form-group">
-                <p>Subject *</p>
-                <input required type="text" class="form-control" name="subject">
-            </div>
-            <div class="form-group">
-                <p>Email *</p>
-                <input required type="email" class="form-control" name="email">
-            </div>
-            <div class="form-group">
-                <p>Message *</p>
-                <textarea required name="message" rows="8" class="form-control"></textarea>
-            </div>
-            <button id="contact-submit-button" type="submit" class="btn btn-outline-info log my-3">Send message</button>
-        </form>
-    </div>
+  <div
+    class="col-md-6 mx-auto"
+    data-aos="fade-up"
+    data-aos-delay="200"
+    data-aos-duration="1000"
+  >
+    <form
+      action="{% url 'contact' %}"
+      onsubmit="disableButton()"
+      method="POST"
+      class="mt-4 p-4 bg-light"
+    >
+      {% csrf_token %}
+      <div class="form-group">
+        <p>Subject *</p>
+        <input required type="text" class="form-control" name="subject" />
+      </div>
+      <div class="form-group">
+        <p>Email *</p>
+        <input required type="email" class="form-control" name="email" />
+      </div>
+      <div class="form-group">
+        <p>Message *</p>
+        <textarea
+          required
+          name="message"
+          rows="8"
+          class="form-control"
+        ></textarea>
+      </div>
+      <button
+        id="contact-submit-button"
+        type="submit"
+        class="btn btn-outline-info log my-3"
+      >
+        Send message
+      </button>
+    </form>
+  </div>
 </div>
 
-{% endblock %}
-{% block script %}
+{% endblock %} {% block script %}
 <script>
-    function disableButton() {
-        var btn = document.getElementById('contact-submit-button')
-        btn.disabled = true;
-        btn.innerText = 'Sending...'
-    }
+  function disableButton() {
+    var btn = document.getElementById("contact-submit-button");
+    btn.disabled = true;
+    btn.innerText = "Sending...";
+  }
 </script>
 {% endblock %}
