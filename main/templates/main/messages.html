@@ -9,86 +9,89 @@
             <div id="all_filter_section">
                 <h3 class="mb-3">All Messages</h3>
                 {% for message in all_messages %}
-                    <div class="each_message content-section mb-3">
-                        {% if message.sender.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-                            <a href="{% url 'show_message' message.id %}" class="message_">
-                                <div class="pna d-inline-block">{{ message.sender.username.0 }}</div>
-                                <span class="author text-secondary">
-                                {{ message.sender.username }}</span>
-                                <span class="text-info">{{ message.timestamp }}</span>
-                                <h4 class="mt-2 ml-5 text-danger">{{ message.subject }}</h4>
-                                <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
-                            </a>
-                        {% else %}
-                            <a href="{% url 'show_message' message.id %}" class="message_">
-                                <span class="author text-secondary">
-                                    <img src="{{ message.sender.profile.image.url }}" alt="{{ message.sender.username.0 }}" class="img-fluid">
-                                {{ message.sender.username }}
-                                </span>
-                                <span class="text-info">{{ message.timestamp }}</span>
-                                <h4 class="mt-2 ml-5 text-danger">{{ message.subject }}</h4>
-                                <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
-                            </a>
-                        {% endif %}
-                    </div>
+                <div class="each_message content-section mb-3">
+                    {% if message.sender.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+                    <a href="{% url 'show_message' message.id %}" class="message_">
+                        <div class="pna d-inline-block">{{ message.sender.username.0 }}</div>
+                        <span class="author text-secondary">
+                            {{ message.sender.username }}</span>
+                        <span class="text-info">{{ message.timestamp }}</span>
+                        <h4 class="mt-2 ml-5 text-danger">{{ message.subject }}</h4>
+                        <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'show_message' message.id %}" class="message_">
+                        <span class="author text-secondary">
+                            <img src="{{ message.sender.profile.image.url }}" alt="{{ message.sender.username.0 }}"
+                                class="img-fluid">
+                            {{ message.sender.username }}
+                        </span>
+                        <span class="text-info">{{ message.timestamp }}</span>
+                        <h4 class="mt-2 ml-5 text-danger">{{ message.subject }}</h4>
+                        <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
+                    </a>
+                    {% endif %}
+                </div>
                 {% endfor %}
             </div>
             <div id="unread_filter_section">
                 <h3 class="mb-3">Unread Messages</h3>
                 {% for message in all_messages %}
-                    {% if not message.read %}
-                    <div class="each_message content-section mb-3">
-                        {% if message.sender.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-                            <a href="{% url 'show_message' message.id %}" class="message_">
-                                <div class="pna d-inline-block">{{ message.sender.username.0 }}</div>
-                                <span class="author mr-2 text-secondary">
-                                {{ message.sender.username }}</span>
-                                <span class="text-info">{{ message.timestamp }}</span>
-                                <h4 class="mt-2 ml-5 text-danger">{{ message.subject }}</h3>
-                                <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
-                            </a>
-                        {% else %}
-                            <a href="{% url 'show_message' message.id %}" class="message_">
-                                <span class="author mr-2 text-secondary">
-                                    <img src="{{ message.sender.profile.image.url }}" alt="{{ message.sender.username.0 }}" class="img-fluid">
-                                {{ message.sender.username }}
-                                </span>
-                                <span class="text-info">{{ message.timestamp }}</span>
-                                <h4 class="mt-2 ml-5 text-danger">{{ message.subject }}</h4>
-                                <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
-                            </a>
-                        {% endif %}
-                    </div>
+                {% if not message.read %}
+                <div class="each_message content-section mb-3">
+                    {% if message.sender.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+                    <a href="{% url 'show_message' message.id %}" class="message_">
+                        <div class="pna d-inline-block">{{ message.sender.username.0 }}</div>
+                        <span class="author mr-2 text-secondary">
+                            {{ message.sender.username }}</span>
+                        <span class="text-info">{{ message.timestamp }}</span>
+                        <h4 class="mt-2 ml-5 text-danger">{{ message.subject }}</h3>
+                            <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'show_message' message.id %}" class="message_">
+                        <span class="author mr-2 text-secondary">
+                            <img src="{{ message.sender.profile.image.url }}" alt="{{ message.sender.username.0 }}"
+                                class="img-fluid">
+                            {{ message.sender.username }}
+                        </span>
+                        <span class="text-info">{{ message.timestamp }}</span>
+                        <h4 class="mt-2 ml-5 text-danger">{{ message.subject }}</h4>
+                        <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
+                    </a>
                     {% endif %}
+                </div>
+                {% endif %}
                 {% endfor %}
             </div>
             <div id="read_filter_section">
                 <h3 class="mb-3">Read Messages</h3>
                 {% for message in all_messages %}
-                    {% if message.read %}
-                    <div class="each_message content-section mb-3">
-                        {% if message.sender.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-                            <a href="{% url 'show_message' message.id %}" class="message_">
-                                <div class="pna d-inline-block">{{ message.sender.username.0 }}</div>
-                                <span class="author mr-2 text-secondary">
-                                {{ message.sender.username }}</span>
-                                <span class="text-info">{{ message.timestamp }}</span>
-                                <h4 class="mt-2 ml-5 text-danger">{{ message.subject }}</h4>
-                                <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
-                            </a>
-                        {% else %}
-                            <a href="{% url 'show_message' message.id %}" class="message_">
-                                <span class="author mr-2 text-secondary">
-                                    <img src="{{ message.sender.profile.image.url }}" alt="{{ message.sender.username.0 }}" class="img-fluid">
-                                {{ message.sender.username }}
-                                </span>
-                                <span class="text-info">{{ message.timestamp }}</span>
-                                <h4 class="mt-2 ml-5 text-danger">{{ message.subject }}</h4>
-                                <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
-                            </a>
-                        {% endif %}
-                    </div>
+                {% if message.read %}
+                <div class="each_message content-section mb-3">
+                    {% if message.sender.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+                    <a href="{% url 'show_message' message.id %}" class="message_">
+                        <div class="pna d-inline-block">{{ message.sender.username.0 }}</div>
+                        <span class="author mr-2 text-secondary">
+                            {{ message.sender.username }}</span>
+                        <span class="text-info">{{ message.timestamp }}</span>
+                        <h4 class="mt-2 ml-5 text-danger">{{ message.subject }}</h4>
+                        <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'show_message' message.id %}" class="message_">
+                        <span class="author mr-2 text-secondary">
+                            <img src="{{ message.sender.profile.image.url }}" alt="{{ message.sender.username.0 }}"
+                                class="img-fluid">
+                            {{ message.sender.username }}
+                        </span>
+                        <span class="text-info">{{ message.timestamp }}</span>
+                        <h4 class="mt-2 ml-5 text-danger">{{ message.subject }}</h4>
+                        <p class="my-2 ml-5">{{ message.message | truncatechars:70 }}</p>
+                    </a>
                     {% endif %}
+                </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
@@ -120,7 +123,7 @@
         a.addEventListener("click", function () {
             for (let j = 0; j < totalButtons; j++) {
                 all_filter_buttons[j].classList.remove("active");
-                }
+            }
             this.classList.add("active");
             if (this.innerHTML == "Read") {
                 $("#read_filter_section").show();

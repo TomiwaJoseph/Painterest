@@ -1,107 +1,105 @@
-
-
 {% if actions %}
 
-    {% for action in actions %}
-        {% if action.verb == 'started following' %}
-            <a href="{% url 'painter_profile' action.user %}" class="notif" data-notif_id="{{ action.id }}">
-                {% if action.read %}
-                    <div class="content-section notif_read">
-                        {% if action.user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-                            <div class="pna d-inline-block">{{ action.user.username.0 }}</div>
-                            <span class="author text-secondary">
-                            {{ action.user.username }}</span>
-                            <span class="text-danger">{{ action.verb }}</span>
-                            <span class="text-info">you</span>
-                        {% else %}
-                            <span class="author text-secondary">
-                                <img src="{{ action.user.profile.image.url }}" alt="action.user.username" class="img-fluid">
-                            {{ action.user.username }}
-                            </span>
-                            <span class="text-danger">{{ action.verb }}</span>
-                            <span class="text-info">you</span>
-                        {% endif %}
-                    </div>
-                {% else %}
-                    <div class="content-section">
-                        {% if action.user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-                            <div class="pna d-inline-block">{{ action.user.username.0 }}</div>
-                            <span class="author text-secondary">
-                            {{ action.user.username }}</span>
-                            <span class="text-danger">{{ action.verb }}</span>
-                            <span class="text-info">you</span>
-                        {% else %}
-                            <span class="author text-secondary">
-                                <img src="{{ action.user.profile.image.url }}" alt="action.user.username" class="img-fluid">
-                            {{ action.user.username }}
-                            </span>
-                            <span class="text-danger">{{ action.verb }}</span>
-                            <span class="text-info">you</span>
-                        {% endif %}
-                    </div>
-                {% endif %}
-            </a>
+{% for action in actions %}
+{% if action.verb == 'started following' %}
+<a href="{% url 'painter_profile' action.user %}" class="notif" data-notif_id="{{ action.id }}">
+    {% if action.read %}
+    <div class="content-section notif_read">
+        {% if action.user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+        <div class="pna d-inline-block">{{ action.user.username.0 }}</div>
+        <span class="author text-secondary">
+            {{ action.user.username }}</span>
+        <span class="text-danger">{{ action.verb }}</span>
+        <span class="text-info">you</span>
         {% else %}
-            <a href="{{ action.target.get_absolute_url }}" class="notif" data-notif_id="{{ action.id }}">
-                {% if action.read %}
-                    <div class="content-section notif_read">
-                        {% if action.user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-                            <div class="pna d-inline-block">{{ action.user.username.0 }}</div>
-                            <span class="author text-secondary">
-                            {{ action.user.username }}</span>
-                            <span class="text-danger">{{ action.verb }}</span>
-                            <span class="text-info">{{ action.target.title }}</span>
-                        {% else %}
-                            <span class="author text-secondary">
-                                <img src="{{ action.user.profile.image.url }}" alt="" class="img-fluid">
-                            {{ action.user.username }}
-                            </span>
-                            <span class="text-danger">{{ action.verb }}</span>
-                            <span class="text-info">{{ action.target.title }}</span>
-                        {% endif %}
-                    </div>
-                {% else %}
-                    <div class="content-section">
-                        {% if action.user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-                            <div class="pna d-inline-block">{{ action.user.username.0 }}</div>
-                            <span class="author text-secondary">
-                            {{ action.user.username }}</span>
-                            <span class="text-danger">{{ action.verb }}</span>
-                            <span class="text-info">{{ action.target.title }}</span>
-                        {% else %}
-                            <span class="author text-secondary">
-                                <img src="{{ action.user.profile.image.url }}" alt="" class="img-fluid">
-                            {{ action.user.username }}
-                            </span>
-                            <span class="text-danger">{{ action.verb }}</span>
-                            <span class="text-info">{{ action.target.title }}</span>
-                        {% endif %}
-                    </div>
-                {% endif %}
-            </a>
+        <span class="author text-secondary">
+            <img src="{{ action.user.profile.image.url }}" alt="action.user.username" class="img-fluid">
+            {{ action.user.username }}
+        </span>
+        <span class="text-danger">{{ action.verb }}</span>
+        <span class="text-info">you</span>
         {% endif %}
-    {% endfor %}
-    
+    </div>
+    {% else %}
+    <div class="content-section">
+        {% if action.user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+        <div class="pna d-inline-block">{{ action.user.username.0 }}</div>
+        <span class="author text-secondary">
+            {{ action.user.username }}</span>
+        <span class="text-danger">{{ action.verb }}</span>
+        <span class="text-info">you</span>
+        {% else %}
+        <span class="author text-secondary">
+            <img src="{{ action.user.profile.image.url }}" alt="action.user.username" class="img-fluid">
+            {{ action.user.username }}
+        </span>
+        <span class="text-danger">{{ action.verb }}</span>
+        <span class="text-info">you</span>
+        {% endif %}
+    </div>
+    {% endif %}
+</a>
+{% else %}
+<a href="{{ action.target.get_absolute_url }}" class="notif" data-notif_id="{{ action.id }}">
+    {% if action.read %}
+    <div class="content-section notif_read">
+        {% if action.user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+        <div class="pna d-inline-block">{{ action.user.username.0 }}</div>
+        <span class="author text-secondary">
+            {{ action.user.username }}</span>
+        <span class="text-danger">{{ action.verb }}</span>
+        <span class="text-info">{{ action.target.title }}</span>
+        {% else %}
+        <span class="author text-secondary">
+            <img src="{{ action.user.profile.image.url }}" alt="" class="img-fluid">
+            {{ action.user.username }}
+        </span>
+        <span class="text-danger">{{ action.verb }}</span>
+        <span class="text-info">{{ action.target.title }}</span>
+        {% endif %}
+    </div>
+    {% else %}
+    <div class="content-section">
+        {% if action.user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+        <div class="pna d-inline-block">{{ action.user.username.0 }}</div>
+        <span class="author text-secondary">
+            {{ action.user.username }}</span>
+        <span class="text-danger">{{ action.verb }}</span>
+        <span class="text-info">{{ action.target.title }}</span>
+        {% else %}
+        <span class="author text-secondary">
+            <img src="{{ action.user.profile.image.url }}" alt="" class="img-fluid">
+            {{ action.user.username }}
+        </span>
+        <span class="text-danger">{{ action.verb }}</span>
+        <span class="text-info">{{ action.target.title }}</span>
+        {% endif %}
+    </div>
+    {% endif %}
+</a>
+{% endif %}
+{% endfor %}
+
 {% endif %}
 
 
 {% block script %}
 
 <script>
-    $(document).ready(function(){
-        $('.notif').click(function(){
-        var notif_id = $(this).attr('data-notif_id');
+    $(document).ready(function () {
+        $('.notif').click(function () {
+            var notif_id = $(this).attr('data-notif_id');
 
-        $.ajax({
-            url: 'mark_single_as_read/',
-            method: "GET",
-            data: {
-                notif_id: notif_id,
-            },
-            success: function(response){
-                console.log('message is masrked as read in server side.');
-            }
-        })
+            $.ajax({
+                url: 'mark_single_as_read/',
+                method: "GET",
+                data: {
+                    notif_id: notif_id,
+                },
+                success: function (response) {
+                    console.log('message is masrked as read in server side.');
+                }
+            })
         })
     })
 </script>

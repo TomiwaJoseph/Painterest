@@ -1,25 +1,17 @@
-{% extends 'main/base.html' %} {% load crispy_forms_tags %} {% load users_tags
-%} {% block title %}Painterest | Settings{% endblock %} {% block content %}
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% load users_tags %}
+{% block title %}Painterest | Settings{% endblock %}
+
+{% block content %}
 
 <div class="row">
   <div class="col-md-12 mb-4">
     <div class="settings mx-auto d-flex justify-content-around">
-      <button
-        class="btn btn-info"
-        id="profile"
-        data-aos="flip-right"
-        data-aos-delay="200"
-        data-aos-duration="1000"
-      >
+      <button class="btn btn-info" id="profile" data-aos="flip-right" data-aos-delay="200" data-aos-duration="1000">
         Edit profile
       </button>
-      <button
-        class="btn btn-info"
-        id="feed"
-        data-aos="flip-left"
-        data-aos-delay="200"
-        data-aos-duration="1000"
-      >
+      <button class="btn btn-info" id="feed" data-aos="flip-left" data-aos-delay="200" data-aos-duration="1000">
         Home feed tuner
       </button>
     </div>
@@ -32,12 +24,7 @@
 </div>
 
 <div class="row" id="profile-edit">
-  <div
-    class="col-md-8 mx-auto my-4"
-    data-aos="fade-up"
-    data-aos-delay="200"
-    data-aos-duration="1000"
-  >
+  <div class="col-md-8 mx-auto my-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
     <div>
       <form method="post" enctype="multipart/form-data">
         {% csrf_token %} {{ user_update_form | crispy }} {{ profile_update_form
@@ -59,34 +46,18 @@
         {% csrf_token %}
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6">
           {% for i in cat_number %}
-          <div
-            class="col"
-            data-aos="zoom-in"
-            data-aos-delay="200"
-            data-aos-duration="1000"
-          >
+          <div class="col" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000">
             <div class="card img-check mb-3">
-              <input
-                type="checkbox"
-                id="category{{i}}"
-                value="{{ categories|lookup:i }}"
-                name="category"
-                {%
+              <input type="checkbox" id="category{{i}}" value="{{ categories|lookup:i }}" name="category" {%
                 if
                 categories|lookup:i
                 in
                 user_categories
-                %}
-                checked
-                {%
+                %} checked {%
                 endif
-                %}
-              />
+                %} />
               <label for="category{{i}}">
-                <img
-                  src="{{ cat_pictures|lookup:i }}"
-                  class="card-img img-fluid"
-                />
+                <img src="{{ cat_pictures|lookup:i }}" class="card-img img-fluid" />
               </label>
               <p class="text-center">{{ categories|lookup:i }}</p>
             </div>

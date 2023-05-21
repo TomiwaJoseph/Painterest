@@ -1,46 +1,26 @@
-{% extends 'main/base.html' %} {% block title %}Painterest | Saved Paints{%
-endblock %} {% load crispy_forms_tags %} {% block content %}
+{% extends 'main/base.html' %}
+{% block title %}Painterest | Saved Paints{% endblock %}
+{% load crispy_forms_tags %} {% block content %}
 
 <div class="d-flex justify-content-between" id="notif_justify">
   <h2 data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
     {{ folder_name }}
   </h2>
-  <button
-    data-aos="fade-down"
-    data-aos-delay="200"
-    data-aos-duration="1000"
-    class="btn btn-danger w-25 my-2 del_fold_btn"
-    data-bs-toggle="modal"
-    data-bs-target="#modalDeleteFolder"
-  >
+  <button data-aos="fade-down" data-aos-delay="200" data-aos-duration="1000"
+    class="btn btn-danger w-25 my-2 del_fold_btn" data-bs-toggle="modal" data-bs-target="#modalDeleteFolder">
     Delete folder
   </button>
 </div>
 <hr />
 
 <div class="js-masonry grid">
-  <div
-    id="gallery"
-    data-bs-toggle="modal"
-    data-bs-target="#exampleModal"
-    data-masonry='{"percentPosition": true}'
-    class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4"
-  >
+  <div id="gallery" data-bs-toggle="modal" data-bs-target="#exampleModal" data-masonry='{"percentPosition": true}'
+    class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
     {% for pics in folder_pics %}
-    <div
-      class="grid-item"
-      data-aos="zoom-in"
-      data-aos-delay="200"
-      data-aos-duration="1000"
-    >
+    <div class="grid-item" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000">
       <div class="card folder-img">
-        <img
-          src="{{ pics.painting.url }}"
-          data-bs-target="#carouselPics"
-          data-bs-slide-to="{{ forloop.counter0 }}"
-          alt="{{ pics.title }}"
-          class="w-100 img-fluid card-img"
-        />
+        <img src="{{ pics.painting.url }}" data-bs-target="#carouselPics" data-bs-slide-to="{{ forloop.counter0 }}"
+          alt="{{ pics.title }}" class="w-100 img-fluid card-img" />
       </div>
     </div>
     {% endfor %}
@@ -53,20 +33,10 @@ endblock %} {% load crispy_forms_tags %} {% block content %}
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button
-          class="btn-close"
-          type="button"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div
-          id="carouselPics"
-          data-bs-ride="carousel"
-          class="carousel slide"
-          data-bs-interval="false"
-        >
+        <div id="carouselPics" data-bs-ride="carousel" class="carousel slide" data-bs-interval="false">
           <div class="carousel-inner">
             {% for pics in folder_pics %}
             <div class="carousel-item">
@@ -75,37 +45,20 @@ endblock %} {% load crispy_forms_tags %} {% block content %}
               </a>
               <hr />
               <div class="d-flex justify-content-around modal_utils">
-                <a
-                  href="{% url 'delete_folder_paint' folder_id pics.id %}"
-                  class="btn btn-outline-danger"
-                  onclick="return confirm('Are you sure')"
-                  >Delete</a
-                >
-                <a
-                  href="{% url 'download_painting' pics.id %}"
-                  class="btn btn-outline-info"
-                >
+                <a href="{% url 'delete_folder_paint' folder_id pics.id %}" class="btn btn-outline-danger"
+                  onclick="return confirm('Are you sure')">Delete</a>
+                <a href="{% url 'download_painting' pics.id %}" class="btn btn-outline-info">
                   Download
                 </a>
               </div>
             </div>
             {% endfor %}
           </div>
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselPics"
-            data-bs-slide="prev"
-          >
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselPics" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselPics"
-            data-bs-slide="next"
-          >
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselPics" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>

@@ -1,5 +1,7 @@
-{% extends 'main/base.html' %} {% block title %}Painterest | Notifications{%
-endblock %} {% block content %}
+{% extends 'main/base.html' %}
+{% block title %}Painterest | Notifications{% endblock %}
+
+{% block content %}
 
 <div class="d-flex justify-content-between" id="notif_justify">
   <h2 data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
@@ -47,7 +49,7 @@ endblock %} {% block content %}
     $(window).scroll(function () {
       if (
         $(window).scrollTop() + $(window).height() >
-          $("#notification-container").height() &&
+        $("#notification-container").height() &&
         action == "inactive"
       ) {
         action = "active";

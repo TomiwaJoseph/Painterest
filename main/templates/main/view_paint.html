@@ -1,12 +1,9 @@
-{% extends 'main/base.html' %} {% load crispy_forms_tags %} {% block content %}
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
 
 <div class="row">
-  <div
-    class="col-md-6"
-    data-aos="fade-up"
-    data-aos-delay="200"
-    data-aos-duration="1000"
-  >
+  <div class="col-md-6" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
     <div class="paint_det">
       <img class="img-fluid" src="{{ object.painting.url }}" alt="" />
     </div>
@@ -20,11 +17,7 @@
       {% else %}
       <a href="{% url 'painter_profile' object.adder %}">
         <span class="author mr-2 text-secondary">
-          <img
-            src="{{ object.adder.profile.image.url }}"
-            alt="{{ object.adder.username.0}}"
-            class="img-fluid"
-          />
+          <img src="{{ object.adder.profile.image.url }}" alt="{{ object.adder.username.0}}" class="img-fluid" />
           {{ object.adder }}
         </span>
       </a>
@@ -40,12 +33,7 @@
     {% endif %}
   </div>
 
-  <div
-    class="col-md-6"
-    data-aos="fade-down"
-    data-aos-delay="200"
-    data-aos-duration="1000"
-  >
+  <div class="col-md-6" data-aos="fade-down" data-aos-delay="200" data-aos-duration="1000">
     <div class="row">
       <div class="col d-flex justify-content-between">
         {% with object.painted.all.count as total_tries %} {% if total_tries ==
@@ -64,9 +52,7 @@
     </div>
     <div class="row mt-2">
       <div class="col d-flex justify-content-center">
-        <a href="{% url 'save_paint' object.id %}" class="btn utils w-100 mr-3"
-          >Save Image</a
-        >
+        <a href="{% url 'save_paint' object.id %}" class="btn utils w-100 mr-3">Save Image</a>
         <a href="{% url 'download_painting' object.id %}" class="btn down_but">
           Download <i class="fa fa-download"></i>
         </a>
@@ -91,17 +77,12 @@
         {% if comment.commenter.profile.image.name == 'dp.jpg' %}
         <div class="pna d-inline-block">{{ comment.commenter.username.0 }}</div>
         <span class="author mr-2 text-secondary">
-          {{ comment.commenter.username }}</span
-        >
+          {{ comment.commenter.username }}</span>
         <span class="date_created text-danger">{{ comment.created }}</span>
         <p class="my-2 ml-5">{{ comment.body }}</p>
         {% else %}
         <span class="author mr-2 text-secondary">
-          <img
-            src="{{ comment.commenter.profile.image.url }}"
-            alt=""
-            class="img-fluid"
-          />
+          <img src="{{ comment.commenter.profile.image.url }}" alt="" class="img-fluid" />
           {{ comment.commenter.username }}
         </span>
         <span class="date_created text-danger">{{ comment.created }}</span>
@@ -125,11 +106,7 @@
     </div>
     <div class="col-md-12 my-4" id="add_try">
       <div class="content-section">
-        <form
-          method="POST"
-          enctype="multipart/form-data"
-          action="{% url 'add_paint_try' %}"
-        >
+        <form method="POST" enctype="multipart/form-data" action="{% url 'add_paint_try' %}">
           {% csrf_token %} {{ form | crispy }}
           <input type="hidden" name="redir" value="{{ object.id }}" />
           <div class="form-group">
@@ -156,20 +133,12 @@
 
 {% if similar_paintings %}
 <div class="container">
-  <h3
-    class="my-4"
-    data-aos="flip-up"
-    data-aos-delay="200"
-    data-aos-duration="1000"
-  >
+  <h3 class="my-4" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">
     More like this...
   </h3>
   <div class="js-masonry grid">
-    <div
-      data-masonry='{"percentPosition": true}'
-      class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4"
-      id="similar_paintings"
-    ></div>
+    <div data-masonry='{"percentPosition": true}' class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4"
+      id="similar_paintings"></div>
   </div>
 </div>
 {% endif %} {% endblock %} {% block script %}
@@ -216,7 +185,7 @@
     $(window).scroll(function () {
       if (
         $(window).scrollTop() + $(window).height() >
-          $("#similar_paintings").height() &&
+        $("#similar_paintings").height() &&
         action == "inactive"
       ) {
         action = "active";

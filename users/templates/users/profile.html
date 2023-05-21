@@ -1,42 +1,26 @@
-{% extends 'main/base.html' %} {% block title %}Painterest | Profile{% endblock
-%} {% block content %}
+{% extends 'main/base.html' %}
+{% block title %}Painterest | Profile{% endblock %}
+{% block content %}
 
 <div class="row mb-5">
-  <div
-    class="col-md-7 col-lg-5 mx-auto my-auto text-center profil_col"
-    data-aos="fade-up"
-    data-aos-delay="200"
-    data-aos-duration="1000"
-  >
+  <div class="col-md-7 col-lg-5 mx-auto my-auto text-center profil_col" data-aos="fade-up" data-aos-delay="200"
+    data-aos-duration="1000">
     <div class="content-section bg-light pt-4 pb-4 profile_bcg">
       {% if user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg'
       %}
       <div class="change_badge mx-auto">{{ user.username.0 }}</div>
       {% else %}
-      <img
-        class="rounded-circle account-img"
-        src="{{ user.profile.image.url }}"
-      />
+      <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" />
       {% endif %}
 
       <h1>{{ user.username }}</h1>
       <h5>{{ user.email }}</h5>
 
-      <a
-        href="{% url 'following_and_follower' user %}"
-        class="category follow mt-2"
-        >Followers
-        <span class="badge bg-dark text-light"
-          >{{ user.followers.all.count }}</span
-        >
+      <a href="{% url 'following_and_follower' user %}" class="category follow mt-2">Followers
+        <span class="badge bg-dark text-light">{{ user.followers.all.count }}</span>
       </a>
-      <a
-        href="{% url 'following_and_follower' user %}"
-        class="category follow mt-2"
-        >Following
-        <span class="badge bg-dark text-light"
-          >{{ user.following.all.count }}</span
-        >
+      <a href="{% url 'following_and_follower' user %}" class="category follow mt-2">Following
+        <span class="badge bg-dark text-light">{{ user.following.all.count }}</span>
       </a>
       <hr />
 
@@ -46,17 +30,10 @@
       <h5 id="prof_about">{{ user.profile.about }}</h5>
       <hr />
       {% endif%} {% if user.profile.website_url %}
-      <a
-        href="{{ user.profile.website_url }}"
-        target="blank"
-        id="web_url"
-        class="text-danger"
-        >{{ user.profile.website_url }}</a
-      >
+      <a href="{{ user.profile.website_url }}" target="blank" id="web_url"
+        class="text-danger">{{ user.profile.website_url }}</a>
       {% endif%}
-      <a href="{% url 'settings' %}" class="d-block category mt-3"
-        >Edit your profile here</a
-      >
+      <a href="{% url 'settings' %}" class="d-block category mt-3">Edit your profile here</a>
     </div>
   </div>
 </div>

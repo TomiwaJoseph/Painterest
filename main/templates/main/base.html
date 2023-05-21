@@ -2,161 +2,127 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
-    />
-    <link rel="stylesheet" href="{% static 'main/css/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'main/css/responsive.css' %}" />
-    <title>{% block title %} Painterest {% endblock %}</title>
-  </head>
 
-  <body>
-    <!-- Navigation -->
-    <nav class="the-navbar" id="navbar">
-      <div class="nav-left">
-        <a class="navbar-brand" href="{% url 'index' %}">
-          <img src="/media/painterestLogo.png" class="logo img-fluid" alt="" />
-          <span>Painterest</span>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+  <link rel="stylesheet" href="{% static 'main/css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'main/css/responsive.css' %}" />
+  <title>{% block title %} Painterest {% endblock %}</title>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="the-navbar" id="navbar">
+    <div class="nav-left">
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <img src="/media/painterestLogo.png" class="logo img-fluid" alt="" />
+        <span>Painterest</span>
+      </a>
+    </div>
+    <div class="mobile-icons">
+      <i class="fa fa-bars" id="openOrClose"></i>
+    </div>
+    <div class="nav-menu" id="the-nav-menu">
+      <div class="desktop-links">
+        <a href="{% url 'index' %}" class="nav-link">Home</a>
+        {% if not user.is_authenticated %}
+        <a href="{% url 'register' %}" class="nav-link">Sign Up</a>
+        <a href="{% url 'login' %}" class="nav-link">Login</a>
+        {% else %}
+        <a href="{% url 'add_paint' %}" class="nav-link">Add Paint</a>
+        <a href="{% url 'notifications' %}" class="nav-link">
+          <i class="fa fa-bell">
+            {% if notify %}
+            <span class="translate-middle badge rounded-pill bg-danger">
+              {{ notify }}
+              <span class="visually-hidden">unread notifications</span>
+            </span>
+            {% endif %}
+          </i>
         </a>
-      </div>
-      <div class="mobile-icons">
-        <i class="fa fa-bars" id="openOrClose"></i>
-      </div>
-      <div class="nav-menu" id="the-nav-menu">
-        <div class="desktop-links">
-          <a href="{% url 'index' %}" class="nav-link">Home</a>
-          {% if not user.is_authenticated %}
-          <a href="{% url 'register' %}" class="nav-link">Sign Up</a>
-          <a href="{% url 'login' %}" class="nav-link">Login</a>
+        <a href="{% url 'view_messages' %}" class="nav-link">
+          {% if unread_count %}
+          <i class="fa fa-envelope">
+            <span class="translate-middle badge rounded-pill bg-danger">
+              {{ unread_count }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          </i>
           {% else %}
-          <a href="{% url 'add_paint' %}" class="nav-link">Add Paint</a>
-          <a href="{% url 'notifications' %}" class="nav-link">
-            <i class="fa fa-bell">
-              {% if notify %}
-              <span class="translate-middle badge rounded-pill bg-danger">
-                {{ notify }}
-                <span class="visually-hidden">unread notifications</span>
-              </span>
-              {% endif %}
-            </i>
-          </a>
-          <a href="{% url 'view_messages' %}" class="nav-link">
-            {% if unread_count %}
-            <i class="fa fa-envelope">
-              <span class="translate-middle badge rounded-pill bg-danger">
-                {{ unread_count }}
-                <span class="visually-hidden">unread messages</span>
-              </span>
-            </i>
-            {% else %}
-            <i class="fa fa-envelope-open"></i>
-            {% endif %}
-          </a>
-          <div class="nav-link dropdown">
-            {% if user.profile.image.name ==
-            '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
-            <div class="profile_badge">{{ user.username.0 }}</div>
-            {% else %}
-            <img
-              class="rounded-circle badge-account-img"
-              src="{{ user.profile.image.url }}"
-            />
-            {% endif %}
-            <span class="fa fa-caret-down"></span>
-            <div class="dropdown-content" aria-labelledby="dropdown09">
-              <a class="drop" href="{% url 'profile' %}">Profile</a>
-              <a class="drop" href="{% url 'settings' %}">Settings</a>
-              <a class="drop" href="{% url 'view_folders' %}">Saved paints</a>
-              <a class="drop" href="{% url 'logout' %}">Log out</a>
-            </div>
-          </div>
+          <i class="fa fa-envelope-open"></i>
           {% endif %}
+        </a>
+        <div class="nav-link dropdown">
+          {% if user.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+          <div class="profile_badge">{{ user.username.0 }}</div>
+          {% else %}
+          <img class="rounded-circle badge-account-img" src="{{ user.profile.image.url }}" />
+          {% endif %}
+          <span class="fa fa-caret-down"></span>
+          <div class="dropdown-content" aria-labelledby="dropdown09">
+            <a class="drop" href="{% url 'profile' %}">Profile</a>
+            <a class="drop" href="{% url 'settings' %}">Settings</a>
+            <a class="drop" href="{% url 'view_folders' %}">Saved paints</a>
+            <a class="drop" href="{% url 'logout' %}">Log out</a>
+          </div>
         </div>
-        <div class="mobile-links">
-          <a target="_blank" href="https://github.com/TomiwaJoseph"
-            ><i class="fa fa-github"></i
-          ></a>
-          <a
-            target="_blank"
-            href="https://linkedin.com/in/tomiwa-joseph-a2b024203"
-            ><i class="fa fa-linkedin"></i
-          ></a>
-          <a target="_blank" href="https://twitter.com/tomiwajoseph10"
-            ><i class="fa fa-twitter"></i
-          ></a>
-        </div>
+        {% endif %}
       </div>
-    </nav>
-
-    <div class="container mt-5">
-      <div
-        class="col-md-5 mx-auto my-auto"
-        data-aos="flip-up"
-        data-aos-delay="200"
-        data-aos-duration="1000"
-      >
-        {% if messages %} {% for message in messages %}
-        <div
-          class="alert alert-{{ message.tags }} alert-dismissible text-center"
-        >
-          {{ message }}
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="close"
-          ></button>
-        </div>
-        {% endfor%} {% endif %}
-      </div>
-      {% block content %} {% endblock %} {% if user.is_authenticated %}
-      <div class="add">
-        <a href="{% url 'add_paint' %}"><i class="fa fa-plus-circle"></i></a>
-      </div>
-      {% endif %}
-      <div>
-        <label for="crazy" class="quest">
-          <i class="fa fa-question-circle"></i>
-        </label>
-        <input type="checkbox" id="crazy" />
-        <ul class="sub-quest">
-          <li><a href="{% url 'about' %}" class="the_a">About</a></li>
-          <li><a href="{% url 'contact' %}" class="the_a">Contact us</a></li>
-        </ul>
+      <div class="mobile-links">
+        <a target="_blank" href="https://github.com/TomiwaJoseph"><i class="fa fa-github"></i></a>
+        <a target="_blank" href="https://linkedin.com/in/tomiwa-joseph-a2b024203"><i class="fa fa-linkedin"></i></a>
+        <a target="_blank" href="https://twitter.com/tomiwajoseph10"><i class="fa fa-twitter"></i></a>
       </div>
     </div>
+  </nav>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="{% static 'main/js/masonry.pkgd.min.js' %}"></script>
-    <script src="{% static 'main/js/main.js' %}"></script>
-    <script>
-      window.addEventListener("load", function () {
-        AOS.init();
-      });
-    </script>
-    {% block script %} {% endblock %}
-  </body>
+  <div class="container mt-5">
+    <div class="col-md-5 mx-auto my-auto" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible text-center">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+      </div>
+      {% endfor%} {% endif %}
+    </div>
+    {% block content %} {% endblock %} {% if user.is_authenticated %}
+    <div class="add">
+      <a href="{% url 'add_paint' %}"><i class="fa fa-plus-circle"></i></a>
+    </div>
+    {% endif %}
+    <div>
+      <label for="crazy" class="quest">
+        <i class="fa fa-question-circle"></i>
+      </label>
+      <input type="checkbox" id="crazy" />
+      <ul class="sub-quest">
+        <li><a href="{% url 'about' %}" class="the_a">About</a></li>
+        <li><a href="{% url 'contact' %}" class="the_a">Contact us</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="{% static 'main/js/masonry.pkgd.min.js' %}"></script>
+  <script src="{% static 'main/js/main.js' %}"></script>
+  <script>
+    window.addEventListener("load", function () {
+      AOS.init();
+    });
+  </script>
+  {% block script %} {% endblock %}
+</body>
+
 </html>

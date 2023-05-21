@@ -1,12 +1,8 @@
-{% extends 'main/base.html' %} {% block title %}Painterest | Contact Us{%
-endblock %} {% block content %}
+{% extends 'main/base.html' %}
+{% block title %}Painterest | Contact Us{% endblock %}
+{% block content %}
 
-<div
-  class="row"
-  data-aos="flip-up"
-  data-aos-delay="200"
-  data-aos-duration="1000"
->
+<div class="row" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">
   <div class="col-md-4 mx-auto my-auto text-center contact_col">
     <h2>Contact us</h2>
     <hr />
@@ -14,18 +10,8 @@ endblock %} {% block content %}
 </div>
 
 <div class="row">
-  <div
-    class="col-md-6 mx-auto"
-    data-aos="fade-up"
-    data-aos-delay="200"
-    data-aos-duration="1000"
-  >
-    <form
-      action="{% url 'contact' %}"
-      onsubmit="disableButton()"
-      method="POST"
-      class="mt-4 p-4 bg-light"
-    >
+  <div class="col-md-6 mx-auto" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+    <form action="{% url 'contact' %}" onsubmit="disableButton()" method="POST" class="mt-4 p-4 bg-light">
       {% csrf_token %}
       <div class="form-group">
         <p>Subject *</p>
@@ -37,18 +23,9 @@ endblock %} {% block content %}
       </div>
       <div class="form-group">
         <p>Message *</p>
-        <textarea
-          required
-          name="message"
-          rows="8"
-          class="form-control"
-        ></textarea>
+        <textarea required name="message" rows="8" class="form-control"></textarea>
       </div>
-      <button
-        id="contact-submit-button"
-        type="submit"
-        class="btn btn-outline-info log my-3"
-      >
+      <button id="contact-submit-button" type="submit" class="btn btn-outline-info log my-3">
         Send message
       </button>
     </form>
