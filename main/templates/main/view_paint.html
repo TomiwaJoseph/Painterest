@@ -1,15 +1,15 @@
 {% extends 'main/base.html' %}
 {% load crispy_forms_tags %}
-{% block content %}
 
+
+{% block content %}
 <div class="row">
   <div class="col-md-6" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
     <div class="paint_det">
       <img class="img-fluid" src="{{ object.painting.url }}" alt="" />
     </div>
     <div class="mt-4">
-      {% if object.adder.profile.image.name ==
-      '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+      {% if object.adder.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
       <a href="{% url 'painter_profile' object.adder %}">
         <div class="pna d-inline-block mb-3">{{ object.adder.username.0 }}</div>
         <span class="author mr-2 text-secondary"> {{ object.adder }}</span>
@@ -36,13 +36,14 @@
   <div class="col-md-6" data-aos="fade-down" data-aos-delay="200" data-aos-duration="1000">
     <div class="row">
       <div class="col d-flex justify-content-between">
-        {% with object.painted.all.count as total_tries %} {% if total_tries ==
-        1 %}
+        {% with object.painted.all.count as total_tries %}
+        {% if total_tries == 1 %}
         <button class="btn utils" id="tried">{{ total_tries }} Try</button>
         {% else %}
         <button class="btn utils" id="tried">{{ total_tries }} Tries</button>
-        {% endif %} {% endwith %} {% with object.paint_comments.all.count as
-        total_comments %}
+        {% endif %}
+        {% endwith %}
+        {% with object.paint_comments.all.count as total_comments %}
         <button class="btn utils" id="paint_comments">
           {{ total_comments }} Comment{{ total_comments|pluralize }}
         </button>

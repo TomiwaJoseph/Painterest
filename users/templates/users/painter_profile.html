@@ -6,8 +6,7 @@
   <div class="col-md-7 col-lg-5 mx-auto my-auto text-center paint_profil_col" data-aos="fade-up" data-aos-delay="200"
     data-aos-duration="1000">
     <div class="content-section bg-light pt-4 pb-4 profile_bcg">
-      {% if painter.profile.image.name ==
-      '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
+      {% if painter.profile.image.name == '90a70ab564f045a48488cd440f3b56e4-dp.jpg' %}
       <div class="change_badge mx-auto">{{ painter.username.0 }}</div>
       {% else %}
       <img class="rounded-circle account-img" src="{{ painter.profile.image.url }}" />
@@ -32,11 +31,15 @@
       <hr />
       <h5 id="prof_about">{{ painter.profile.about }}</h5>
       <hr />
-      {% endif %} {% if painter.profile.website_url %}
+      {% endif %}
+
+      {% if painter.profile.website_url %}
       <a href="{{ user.profile.website_url }}" target="blank" id="web_url"
         class="text-danger">{{ user.profile.website_url }}</a>
-      {% endif %} {% if user != painter %} {% if user not in
-      painter.followers.all %}
+      {% endif %}
+
+      {% if user != painter %}
+      {% if user not in painter.followers.all %}
       <a href="{% url 'follow' painter %}" class="category">Follow</a>
       {% else %}
       <a href="{% url 'unfollow' painter %}" class="category">Unfollow</a>

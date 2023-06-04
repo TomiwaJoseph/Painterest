@@ -14,17 +14,19 @@
     data-aos-duration="1000">
     <a href="{% url 'folder_content' folder.id %}" class="open_folder">
       <div class="folder">
-        {% if folder.saved_painting.all.count > 2 %} {% for paint in
-        folder.saved_painting.all|sort_it|slice_it %}
+        {% if folder.saved_painting.all.count > 2 %}
+        {% for paint in folder.saved_painting.all|sort_it|slice_it %}
         <div>
           <img src="{{ paint.painting.url }}" alt="" class="img-fluid" />
         </div>
-        {% endfor %} {% else %} {% for paint in
-        folder.saved_painting.all|sort_it %}
+        {% endfor %}
+        {% else %}
+        {% for paint in folder.saved_painting.all|sort_it %}
         <div>
           <img src="{{ paint.painting.url }}" alt="" class="img-fluid" />
         </div>
-        {% endfor %} {% endif %}
+        {% endfor %}
+        {% endif %}
       </div>
       <h6 class="text-center my-2 text-danger">{{ folder.name }}</h6>
     </a>

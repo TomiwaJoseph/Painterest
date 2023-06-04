@@ -4,10 +4,11 @@
 <div class="row" id="slct_fld">
   <div class="col-md-7 mx-auto" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
     {% if folders_list %}
-    <h4 class="mt-5">Select a folder & click Save</h4>
+    <h4 class="mt-5">Select a folder &amp; click Save</h4>
     <div class="content-section bg-light mt-2">
       <form method="POST" action=".">
-        {% csrf_token %} {% for folder in folders_list %}
+        {% csrf_token %}
+        {% for folder in folders_list %}
         <input type="radio" name="folder" value="{{ folder.name }}" class="vis" id="{{ folder.name }}" />
         <label for="{{ folder.name }}">{{ folder.name }}</label>
         {% endfor %}

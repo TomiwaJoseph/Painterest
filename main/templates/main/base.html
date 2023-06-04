@@ -86,17 +86,19 @@
       </div>
     </div>
   </nav>
-
   <div class="container mt-5">
     <div class="col-md-5 mx-auto my-auto" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">
-      {% if messages %} {% for message in messages %}
+      {% if messages %}
+      {% for message in messages %}
       <div class="alert alert-{{ message.tags }} alert-dismissible text-center">
         {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
       </div>
-      {% endfor%} {% endif %}
+      {% endfor %}
+      {% endif %}
     </div>
-    {% block content %} {% endblock %} {% if user.is_authenticated %}
+    {% block content %}{% endblock %}
+    {% if user.is_authenticated %}
     <div class="add">
       <a href="{% url 'add_paint' %}"><i class="fa fa-plus-circle"></i></a>
     </div>
@@ -107,12 +109,15 @@
       </label>
       <input type="checkbox" id="crazy" />
       <ul class="sub-quest">
-        <li><a href="{% url 'about' %}" class="the_a">About</a></li>
-        <li><a href="{% url 'contact' %}" class="the_a">Contact us</a></li>
+        <li>
+          <a href="{% url 'about' %}" class="the_a">About</a>
+        </li>
+        <li>
+          <a href="{% url 'contact' %}" class="the_a">Contact us</a>
+        </li>
       </ul>
     </div>
   </div>
-
   <script src="{% static 'main/js/jquery.min.js' %}"></script>
   <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'main/js/masonry.pkgd.min.js' %}"></script>
@@ -123,7 +128,8 @@
       AOS.init();
     });
   </script>
-  {% block script %} {% endblock %}
+  {% block script %}
+  {% endblock %}
 </body>
 
 </html>
