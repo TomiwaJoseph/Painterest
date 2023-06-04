@@ -1,4 +1,4 @@
 .env
-/painterest_env
+/env
 __pycache__
 migrations
