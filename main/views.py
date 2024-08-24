@@ -129,8 +129,11 @@ def contact(request):
         email = request.POST.get('email')
         message = request.POST.get('message')
 
+        intro_and_message = f"Hello!\n\n {message}\n\n" + \
+            f"Reach me here: {email}"
+
         try:
-            send_mail(subject, message, email,
+            send_mail(subject, intro_and_message, email,
                       [settings.EMAIL_HOST_USER], fail_silently=False)
             django_messages.success(request, 'Message sent successfully')
         except Exception as e:
